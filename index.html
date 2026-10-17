@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Erfan Khadiv — Computer Engineer</title>
+<meta name="description" content="Erfan Khadiv, computer engineering graduate: HBALS research on the Traveling Salesman Problem, projects, skills, education and contact.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0F1626">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<script>
+(function(){var d=document.documentElement,t='dark',l='en';
+try{t=localStorage.getItem('theme')||t;l=localStorage.getItem('lang')||l}catch(e){}
+d.setAttribute('data-theme',t==='light'?'light':'dark');
+window.loadFaFont=function(){if(document.getElementById('fafont'))return;var k=document.createElement('link');k.id='fafont';k.rel='stylesheet';k.href='https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap';document.head.appendChild(k)};
+if(l==='fa'){d.lang='fa';d.dir='rtl';loadFaFont()}})();
+</script>
+<style>
+:root{
+  --bg:#0F1626;--panel:#161F33;--ink:#E8EDF7;--muted:#9FACC4;--line:#2A3650;--accent:#F2B632;--link:#7DB3F0;--route:#C9D6EE;--ok:#5FD39B;
+  color-scheme:dark;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --display:'Bricolage Grotesque','Segoe UI',Helvetica,Arial,sans-serif;
+  --body:'Newsreader',Georgia,'Times New Roman',serif;
+}
+:root[data-theme="light"]{--bg:#EDF1F6;--panel:#F8FAFC;--ink:#12203A;--muted:#47566F;--line:#C6D0DF;--accent:#E8A200;--link:#1B5FA8;--route:#12203A;--ok:#0B6B3A;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.15rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,canvas:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
+nav{display:flex;gap:22px;flex-wrap:wrap;padding:22px 0;font-family:var(--display);font-weight:500;font-size:.98rem}
+nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent}
+nav a:hover{border-color:var(--accent)}
+nav .me{margin-inline-end:auto;font-weight:800}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(28px,6vw,72px) 0 clamp(40px,7vw,88px)}
+.hero h1{font-size:clamp(3.2rem,9vw,6.6rem);font-weight:800;letter-spacing:-.045em}
+.hero h1 span{display:block}
+.lede{font-size:clamp(1.2rem,2.4vw,1.45rem);max-width:30ch;margin:22px 0 28px;color:var(--muted)}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--display);font-weight:700;font-size:1rem;padding:12px 20px;border-radius:999px;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer}
+.btn.fill{background:var(--ink);color:var(--bg)}
+.btn:hover{border-color:var(--accent)}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px}
+canvas{display:block;width:100%;height:clamp(280px,42vw,430px);border-radius:10px;cursor:crosshair;touch-action:manipulation}
+.maphead{display:flex;justify-content:space-between;gap:12px;align-items:center;font-family:var(--display);font-size:.9rem;padding:2px 6px 10px;flex-wrap:wrap}
+.maphead b{font-variant-numeric:tabular-nums}
+.mapnote{font-size:.95rem;color:var(--muted);margin:10px 6px 2px;line-height:1.45}
+.mapnote button{font:inherit;background:none;border:0;padding:0;color:var(--link);text-decoration:underline;cursor:pointer;text-underline-offset:3px}
+
+/* sections */
+section{padding:clamp(40px,7vw,84px) 0;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:minmax(170px,1fr) 3fr;gap:clamp(20px,4vw,56px)}
+h2{font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:700}
+.side p{color:var(--muted);font-size:1rem;margin:10px 0 0;max-width:24ch}
+.about p{margin:0 0 1em;max-width:62ch}
+.about p:first-child{font-size:1.35rem;line-height:1.5}
+
+/* projects as ledger */
+.proj{display:grid;grid-template-columns:250px 1fr auto;gap:12px 28px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.thumb{width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:10px;border:1px solid var(--line);display:block;background:var(--panel)}
+.thumb.fb{display:flex;flex-direction:column;justify-content:center;padding:14px 16px;background:#F7F1E3;color:#1d2a44;font-family:var(--display)}
+.thumb.fb b{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.thumb.fb span{font-size:.8rem;margin-top:6px;color:#4a5870}
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.certs figure{margin:0}
+.certs button{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel);cursor:zoom-in;display:block;width:100%}
+.certs img{display:block;width:100%;height:auto}
+.certs figcaption{font-size:.95rem;margin-top:8px;line-height:1.35}
+.certs figcaption strong{font-family:var(--display);display:block}
+dialog{border:0;padding:0;background:transparent;max-width:min(92vw,900px)}
+dialog::backdrop{background:rgba(8,12,22,.75)}
+dialog img{width:100%;height:auto;border-radius:10px;display:block}
+.proj:first-child{padding-top:0}
+.proj h3{font-size:1.55rem;font-weight:700}
+.proj .kind{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:6px 0 10px}
+.proj p{margin:0;max-width:60ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding:0;list-style:none}
+.tags li{font-family:var(--display);font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:3px 11px;background:var(--panel)}
+.links{display:flex;flex-direction:column;gap:6px;align-items:flex-end;font-family:var(--display);font-weight:700;font-size:.98rem;white-space:nowrap}
+.flag{background:var(--accent);color:#1b1500;font-family:var(--display);font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:999px;margin-inline-start:8px;vertical-align:middle}
+
+/* skills */
+.skill{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;padding:14px 0;border-bottom:1px solid var(--line)}
+.skill:first-child{padding-top:0}
+.skill dt{font-family:var(--display);font-weight:700}
+.skill dd{margin:0}
+.learn dt::after{content:" (learning)";font-weight:500;color:var(--muted)}
+
+/* education */
+.edu h3{font-size:1.5rem;font-weight:700}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 0}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.fact b{display:block;font-family:var(--display);font-size:1.7rem;letter-spacing:-.03em}
+.fact span{font-size:.95rem;color:var(--muted)}
+.cred{list-style:none;padding:0;margin:0}
+.cred li{padding:12px 0;border-bottom:1px solid var(--line)}
+.cred strong{font-family:var(--display)}
+.cred small{display:block;color:var(--muted);font-size:.98rem}
+.sub{font-family:var(--display);font-size:1.15rem;font-weight:700;margin:36px 0 6px}
+
+/* contact */
+.contact h2{font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.035em;max-width:14ch}
+#contactlinks{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+footer{padding:28px 0 40px;color:var(--muted);font-size:.95rem;border-top:1px solid var(--line)}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .side p{max-width:none}
+  .proj{grid-template-columns:1fr}
+  .thumb{max-width:420px}
+  .links{flex-direction:row;align-items:flex-start;gap:18px}
+  .skill{grid-template-columns:1fr}
+}
+
+/* project cards */
+.sechead p{color:var(--muted);font-size:1rem;margin:8px 0 0}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:32px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.card .thumb{border:0;border-radius:0;border-bottom:1px solid var(--line);aspect-ratio:2/1}
+.card .body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px}
+.card h3{font-size:1.5rem;font-weight:700}
+.card .kind{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:6px 0 10px}
+.card p{margin:0;font-size:1.05rem;line-height:1.55}
+.card .tags{margin-top:14px}
+.card .links{flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;margin-top:auto;padding-top:18px;white-space:normal}
+.card .links a{border:2px solid var(--ink);color:var(--ink);text-decoration:none;border-radius:999px;padding:7px 16px;font-size:.92rem}
+.card .links a:first-child{background:var(--ink);color:var(--bg)}
+.card .links a:hover{border-color:var(--accent)}
+.card.feat{grid-column:1/-1;display:grid;grid-template-columns:1.15fr 1fr}
+.card.feat .thumb{height:auto;aspect-ratio:2/1;align-self:center;border-bottom:0;border-right:1px solid var(--line)}
+@media (max-width:820px){.cards{grid-template-columns:1fr}.card.feat{display:flex}.card.feat .thumb{height:auto;aspect-ratio:2/1;border-right:0;border-bottom:1px solid var(--line)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* v3 additions */
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:10px 6px 0;padding:0;font-family:var(--display);font-size:.85rem}
+.legend li{display:flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%}
+.legend .city{background:#fff;border:2px solid var(--ink)}
+.legend .bee{background:var(--accent);border:1.5px solid var(--ink)}
+.legend .ln{width:20px;height:3px;border-radius:2px;background:var(--route);opacity:.6}
+.rlede{font-size:1.3rem;max-width:60ch;margin:14px 0 22px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);margin-top:36px}
+.two h3,.rsub{font-size:1.35rem;font-weight:700;margin:0 0 10px}
+.two p{margin:0 0 .9em}
+.key{list-style:none;padding:0;margin:0 0 .9em}
+.key li{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.key i{flex:none;width:16px;height:16px;border-radius:50%}
+.key .city{background:#fff;border:2px solid var(--ink)}
+.key .bee{background:var(--accent);border:1.5px solid var(--ink)}
+.key .ln{height:3px;border-radius:2px;width:16px;background:var(--route);opacity:.6}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:1.02rem;line-height:1.5;counter-increment:s}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#1b1500;font-family:var(--display);font-weight:800;margin-bottom:8px}
+.steps b{display:block;font-family:var(--display);font-size:1.05rem;margin-bottom:2px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:12px 0 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.stat b{display:block;font-family:var(--display);font-size:2.1rem;letter-spacing:-.03em;line-height:1.1}
+.stat span{font-size:.98rem;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+.tw{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:1rem;min-width:520px}
+th,td{padding:10px 14px;text-align:end;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:start}
+th{font-family:var(--display);font-size:.88rem;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.ok{font-family:var(--display);font-weight:700}
+.note{font-size:1rem;color:var(--muted);max-width:70ch;margin:14px 0 0}
+.fig{margin:32px 0 0}
+.fig img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.fig figcaption,.cap{font-size:.95rem;color:var(--muted);margin-top:8px;line-height:1.4}
+.also{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:center;margin-top:40px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.also img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+.also h3{font-size:1.3rem}
+.also p{margin:6px 0 12px;font-size:1.02rem}
+.interests{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:18px 0 0}
+.interests li{font-family:var(--display);font-size:.9rem;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 14px}
+.degree{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(20px,3vw,36px);align-items:center}
+.degree img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 32px;margin:0;padding:0;list-style:none}
+.courses li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:1.02rem}
+.courses b{font-family:var(--display);font-variant-numeric:tabular-nums}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pair figure{margin:0}
+.pair img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
+.exp{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:clamp(22px,4vw,48px);align-items:start}
+.exp figure{margin:0}
+.exp img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 40%;border-radius:16px;border:1px solid var(--line);display:block}
+.exp h3{font-size:1.6rem;font-weight:700}
+.exp .meta{font-family:var(--display);color:var(--muted);margin:6px 0 14px}
+.exp ul{margin:0;padding-inline-start:1.2em;max-width:60ch}
+.exp li{margin-bottom:6px}
+.loc{color:var(--muted);margin:18px 0 0;font-size:1rem}
+@media (max-width:820px){
+  .two,.degree,.exp,.also{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.pair{grid-template-columns:1fr}
+  .exp figure{max-width:420px}
+}
+
+/* v4 additions */
+.fact b small.of{font-size:.55em;color:var(--muted);font-weight:700;margin-inline-start:2px;letter-spacing:0}
+.picker{display:flex;flex-wrap:wrap;gap:6px;padding:0 6px 10px}
+.picker button{font-family:var(--display);font-weight:600;font-size:.82rem;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:4px 11px;cursor:pointer}
+.picker button small{color:var(--muted);font-weight:500;margin-inline-start:5px;font-size:.92em}
+.picker button:hover{border-color:var(--accent)}
+.picker button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.picker button[aria-pressed="true"] small{color:inherit;opacity:.75}
+.runstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:2px 6px 6px}
+.rs{font-family:var(--display);font-size:.78rem;color:var(--muted);line-height:1.25}
+.rs b{display:block;font-size:1.25rem;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.status{font-family:var(--display);font-size:.88rem;line-height:1.4;margin:6px 6px 0;min-height:2.8em}
+.status.ok{color:var(--ok);font-weight:700}
+.legend .city.add{border-color:var(--accent)}
+.mapbtns{display:flex;gap:14px;flex-wrap:wrap;margin:10px 6px 0}
+.mapbtns button{font-family:var(--display);font-weight:700;font-size:.9rem;background:none;border:2px solid var(--ink);color:var(--ink);border-radius:999px;padding:5px 14px;cursor:pointer}
+.mapbtns button:hover{border-color:var(--accent)}
+.tryit{font-family:var(--display);font-weight:600;font-size:.74rem;margin-inline-start:8px;border:1.5px solid var(--line);background:transparent;color:var(--link);border-radius:999px;padding:1px 9px;cursor:pointer;white-space:nowrap}
+.tryit:hover{border-color:var(--accent)}
+.ielts{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:clamp(20px,4vw,44px);align-items:center;margin-top:14px}
+.ielts figure{margin:0}
+.pin{position:relative}
+.pin img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.pin .ring{position:absolute;left:52.32%;top:17.18%;width:8.86%;height:6.87%;outline:3px solid var(--accent);outline-offset:4px;border-radius:5px;animation:ping 2.2s ease-out infinite}
+.pin .tag{position:absolute;top:20.6%;right:calc(47.7% + 14px);transform:translateY(-50%);background:var(--accent);color:#1b1500;font-family:var(--display);font-weight:700;font-size:.72rem;line-height:1.2;padding:5px 9px;border-radius:8px;text-align:right;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.pin .tag::after{content:"";position:absolute;left:100%;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:var(--accent)}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(232,162,0,.65)}100%{box-shadow:0 0 0 16px rgba(232,162,0,0)}}
+.ielts h3{font-size:1.5rem;font-weight:700}
+.ielts .facts{grid-template-columns:repeat(4,1fr);gap:10px}
+.ielts .fact{padding:12px 12px}
+.ielts .fact b{font-size:1.5rem}
+.ielts .fact span{font-size:.88rem}
+.ielts p{margin:8px 0 0;max-width:52ch}
+.story p{max-width:56ch;margin:0 0 .9em}
+.story p:first-child{font-size:1.25rem;line-height:1.5}
+@media (max-width:820px){.ielts{grid-template-columns:1fr}.ielts figure{max-width:420px}.ielts .facts{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){.pin .ring{animation:none}}
+
+/* v5: theme + language controls */
+.tools{display:flex;gap:8px;align-items:center;margin-inline-start:6px}
+.tbtn{font-family:var(--display);font-weight:700;font-size:.85rem;line-height:1;min-width:40px;height:36px;padding:0 12px;display:inline-grid;place-items:center;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;cursor:pointer}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn svg{width:18px;height:18px;display:block}
+:root:not([data-theme="light"]) .i-moon{display:none}
+:root[data-theme="light"] .i-sun{display:none}
+@media (prefers-reduced-motion:no-preference){body,.map,.card,.fact,.stat,.steps li,.tw,.also,.btn,.tbtn,.tags li,.interests li,.picker button{transition:background-color .25s,color .25s,border-color .25s}}
+
+/* glass menu + back to top */
+:root{--glass:rgba(15,22,38,.55);--glass-line:rgba(159,172,196,.18)}
+:root[data-theme="light"]{--glass:rgba(237,241,246,.6);--glass-line:rgba(18,32,58,.12)}
+html{scroll-padding-top:80px}
+nav.glass{display:block;padding:0;position:sticky;top:0;z-index:50;background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);border-bottom:1px solid var(--glass-line);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.navin{display:flex;gap:22px;flex-wrap:wrap;align-items:center;padding-top:10px;padding-bottom:10px}
+.totop{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:60;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer;color:var(--ink);background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s,transform .25s,visibility .25s,border-color .2s}
+.totop.show{opacity:1;visibility:visible;transform:none}
+.totop:hover{border-color:var(--accent)}
+.totop svg{width:20px;height:20px;display:block}
+@media (max-width:820px){html{scroll-padding-top:120px}.navin{gap:8px 16px;padding-top:8px;padding-bottom:8px}nav.glass{font-size:.92rem}}
+@media (prefers-reduced-motion:reduce){.totop{transition:none}}
+
+/* active section in the menu */
+:root{--navactive:var(--accent)}
+:root[data-theme="light"]{--navactive:#B36B00}
+nav.glass .navin a:not(.me){transition:color .2s,transform .2s,text-shadow .2s,border-color .2s;transform-origin:50% 100%}
+nav.glass .navin a.active:not(.me){color:var(--navactive);transform:scale(1.16);text-shadow:0 0 .7px currentColor;border-color:var(--navactive)}
+@media (prefers-reduced-motion:reduce){nav.glass .navin a:not(.me){transition:none}}
+
+/* Persian (right-to-left) */
+html[lang="fa"]{--display:'Vazirmatn','Segoe UI',Tahoma,Arial,sans-serif;--body:'Vazirmatn','Segoe UI',Tahoma,Arial,sans-serif}
+html[lang="fa"] *{letter-spacing:0!important}
+html[lang="fa"] body{font-size:1.05rem;line-height:1.9}
+html[lang="fa"] h1,html[lang="fa"] h2,html[lang="fa"] h3{line-height:1.35}
+html[lang="fa"] .hero h1{line-height:1.25}
+html[lang="fa"] em{font-style:normal;font-weight:700}
+html[lang="fa"] .lede,html[lang="fa"] .rlede{line-height:1.8}
+html[lang="fa"] .status,html[lang="fa"] .mapnote,html[lang="fa"] .rs{line-height:1.7}
+html[lang="fa"] .tbtn{font-size:.9rem}
+.picker button{direction:ltr;unicode-bidi:isolate}
+html[dir="rtl"] .stat b,html[dir="rtl"] .fact b{unicode-bidi:plaintext;text-align:right}
+html[dir="rtl"] td.ok{direction:ltr;text-align:left}
+</style>
+</head>
+<body>
+<nav aria-label="Main" class="glass"><div class="wrap navin">
+<a class="me" data-t="0" href="#top">Erfan Khadiv</a>
+<a data-t="1" href="#research">Research</a><a data-t="2" href="#projects">Projects</a><a data-t="3" href="#skills">Skills</a><a data-t="4" href="#education">Education</a><a data-t="5" href="#experience">Experience</a><a data-t="6" href="#contact">Contact</a>
+<div class="tools">
+      <button type="button" class="tbtn" id="langbtn" lang="fa">FA</button>
+      <button type="button" class="tbtn" id="themebtn"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+    </div>
+  </div></nav>
+<div class="wrap">
+<header class="hero" id="top">
+<div>
+<h1><span data-t="7">Erfan</span><span data-t="8">Khadiv</span></h1>
+<p class="lede" data-t="9" style="max-width:34ch">Computer engineering graduate interested in algorithms, software and artificial intelligence.</p>
+<div class="cta">
+<a class="btn fill" data-t="10" href="#research">See my research</a>
+<a class="btn" href="https://github.com/ErfanKhadiv" rel="noopener" target="_blank">GitHub</a>
+</div>
+</div>
+<div class="map">
+<div class="maphead"><span><b id="dsname">eil51</b> · <span data-t="11">iteration</span> <b id="it">0</b></span><span><span data-t="12">Length</span> <b id="len">0</b></span></div>
+<div aria-label="Choose a dataset" class="picker" id="picker" role="group"></div>
+<canvas aria-label="Animated map where the HBALS algorithm searches for the shortest route through the cities of the selected dataset. White dots are cities and yellow dots are bees. Click or tap to add a city; press Enter to add a random one." id="map" role="img" tabindex="0"></canvas>
+<div aria-live="polite" class="runstats"><div class="rs"><b id="known">426</b><span data-t="13">best known</span></div><div class="rs"><b id="gap">–</b><span data-t="14">above best known</span></div><div class="rs"><b id="sess">–</b><span data-t="15">best this session</span></div></div>
+<p aria-live="polite" class="status" id="status"></p>
+<ul aria-label="Legend" class="legend"><li data-t="16"><i class="city"></i>City</li><li data-t="17"><i class="city add"></i>City you added</li><li data-t="18"><i class="bee"></i>Bee</li><li data-t="19"><span class="ln" style="width:20px;height:3px;border-radius:2px;display:inline-block"></span>Best route so far</li></ul>
+<p class="mapnote" data-t="20">Pick a benchmark instance and watch HBALS solve it live, or tap the map to add your own cities. It is a JavaScript port of the Python code in <a href="https://github.com/ErfanKhadiv/HBALS-TSP" rel="noopener" target="_blank">my repository</a>. <a href="#research">How it works</a>. Instances are from TSPLIB (Reinelt, 1991).</p>
+<div class="mapbtns"><button data-t="21" id="rerun" type="button">Run again</button><button data-t="22" id="reset" type="button">Remove my cities</button></div>
+</div>
+</header>
+<section id="research">
+<h2 data-t="23">Research: HBALS</h2>
+<p class="rlede" data-t="24">A hybrid Bees Algorithm with adaptive local search, which I designed for the Traveling Salesman Problem. It was my bachelor's final project, and I am the sole author of the manuscript submitted to <em>Evolutionary Intelligence</em> (Springer).</p>
+<div class="cta"><a class="btn fill" data-t="25" href="https://github.com/ErfanKhadiv/HBALS-TSP" rel="noopener" target="_blank">Code, data and paper</a></div>
+<div class="two">
+<div>
+<h3 data-t="26">The problem</h3>
+<p data-t="27">Given a set of cities, find the shortest route that visits each one once and returns to the start. The problem is NP-hard, so for larger inputs the practical goal is a very good route found quickly, not a proof that it is the best.</p>
+<p data-t="28">The standard Bees Algorithm can converge slowly or stall in local optima. My question was whether adaptive neighbourhood control and local search can improve it while keeping the population exploring.</p>
+</div>
+<div>
+<h3 data-t="29">Reading the animation</h3>
+<ul class="key">
+<li><i class="city"></i><span data-t="30"><b>White dot:</b> a city.</span></li>
+<li><i class="bee"></i><span data-t="31"><b>Yellow dot:</b> a bee, flying along the best route found so far.</span></li>
+<li><i class="ln"></i><span data-t="32"><b>Line:</b> the best route so far. The counters show the iteration and its length.</span></li>
+</ul>
+<p data-t="33">In the algorithm itself, each bee is a candidate route. Bees search close to the best routes they know, while scouts try random new ones. The animation runs the real search in the background and uses the yellow dots to let you follow the best route.</p>
+</div>
+</div>
+<h3 class="rsub" data-t="34" style="margin-top:40px">How HBALS works</h3>
+<ol class="steps">
+<li data-t="35"><b>Start</b>A population of 20 routes: half built with nearest-neighbour, half random.</li>
+<li data-t="36"><b>Rank</b>All routes are sorted by total length.</li>
+<li data-t="37"><b>Elite sites</b>The best 3 routes each spawn 8 variants, improved with 2-opt and sometimes 3-opt.</li>
+<li data-t="38"><b>Selected sites</b>The next best, up to 12 sites in all, spawn 4 variants each with a lighter search.</li>
+<li data-t="39"><b>Scouts</b>New random routes refill the population so the search keeps exploring.</li>
+<li data-t="40"><b>Adapt and stop</b>The search neighbourhood shrinks while progress continues and widens after 3 stalled iterations. It stops after 20 iterations without improvement.</li>
+</ol>
+<h3 class="rsub" data-t="41" style="margin-top:40px">Results</h3>
+<div class="stats">
+<div class="stat"><b data-t="42">6 of 6</b><span data-t="43">instances with the shortest best tour among the five algorithms compared</span></div>
+<div class="stat"><b>41.5%</b><span data-t="44">shorter best tours than the Bees Algorithm baseline on average (15.3% to 68.0%)</span></div>
+<div class="stat"><b>3</b><span data-t="45">instances solved to the best-known optimum: eil51, berlin52, st70</span></div>
+<div class="stat"><b>0.01–2.25%</b><span data-t="46">mean gap to the best-known tour across all six instances</span></div>
+</div>
+<div class="tw"><table>
+<thead><tr><th data-t="47">TSPLIB instance</th><th data-t="48">Cities</th><th data-t="49">Best known</th><th data-t="50">HBALS best</th><th data-t="51">Mean gap (%)</th></tr></thead>
+<tbody><tr><td><span>eil51</span> <button class="tryit" data-ds="eil51" data-t="52" type="button">run live</button></td><td>51</td><td>426</td><td class="ok">426 ✓</td><td>0.43</td></tr><tr><td><span>berlin52</span> <button class="tryit" data-ds="berlin52" data-t="52" type="button">run live</button></td><td>52</td><td>7,542</td><td class="ok">7,542 ✓</td><td>0.01</td></tr><tr><td><span>st70</span> <button class="tryit" data-ds="st70" data-t="52" type="button">run live</button></td><td>70</td><td>675</td><td class="ok">675 ✓</td><td>0.65</td></tr><tr><td><span>kroA100</span> <button class="tryit" data-ds="kroA100" data-t="52" type="button">run live</button></td><td>100</td><td>21,282</td><td class="ok">21,296</td><td>0.50</td></tr><tr><td><span>ch150</span> <button class="tryit" data-ds="ch150" data-t="52" type="button">run live</button></td><td>150</td><td>6,528</td><td class="ok">6,570</td><td>1.53</td></tr><tr><td><span>rat195</span> <button class="tryit" data-ds="rat195" data-t="52" type="button">run live</button></td><td>195</td><td>2,323</td><td class="ok">2,349</td><td>2.25</td></tr></tbody>
+</table></div>
+<p class="note" data-t="53">20 independent runs per algorithm, 300 iterations at most. Baselines: Bees Algorithm, Ant Colony Optimization, Genetic Algorithm and Particle Swarm Optimization. A ✓ marks a best tour equal to the best-known one.</p>
+<p class="note" data-t="54">A Friedman test shows a significant difference between the algorithms (p &lt; 0.001). Against the Bees Algorithm and the Genetic Algorithm the gap is significant (Nemenyi p = 0.009 and 0.0001). Against Ant Colony and Particle Swarm it is not (p = 0.809 and 0.183), because only six instances were tested. Some published Bees Algorithm methods come closer to the best-known tours on the larger instances. The full implementation, datasets and results are open source under the MIT licence.</p>
+<figure class="fig"><img alt="HBALS summary graphic showing the berlin52 tour and convergence curve" loading="lazy" src="assets/img/t_hbals.jpg"/><figcaption data-t="55">berlin52 with 52 cities: HBALS reached the best-known length of 7,542 at iteration 20 in a single run (fast preset).</figcaption></figure>
+<div class="also">
+<img alt="Li-Fi research report thumbnail" loading="lazy" src="assets/img/t_lifi.jpg"/>
+<div><h3 data-t="56">Also: Li-Fi research report</h3><p data-t="57">A 19-reference report on Light Fidelity for the Research Methods and Presentation course. It covers modulation methods (OOK, VPPM, OFDM, CSK) and uses in healthcare, aviation and underwater communication.</p><div class="cta"><a class="btn" data-t="58" href="https://github.com/ErfanKhadiv/LiFi-Report" rel="noopener" target="_blank">Read the report</a></div></div>
+</div>
+</section>
+<section id="about">
+<div class="grid">
+<div class="side"><h2 data-t="59">About</h2></div>
+<div class="about">
+<p data-t="60">I am a Computer Engineering graduate with a strong foundation in algorithms, programming, computer networks and artificial intelligence.</p>
+<p data-t="61">I designed HBALS, build web apps with React and JavaScript, and like problems where there is a clear way to measure whether the answer got better.</p>
+<p data-t="62">I am looking to continue with a master's degree in computer science and engineering.</p>
+<ul class="interests"><li data-t="63">Artificial intelligence and machine learning</li><li data-t="64">Algorithms and combinatorial optimization</li><li data-t="65">Heuristic and metaheuristic optimization</li><li data-t="66">Constraint satisfaction and search</li></ul>
+</div>
+</div>
+</section>
+<section id="projects">
+<div class="sechead"><h2 data-t="67">Selected projects</h2><p data-t="68">Code is public on GitHub. Demos run in your browser.</p></div>
+<div class="cards"><article class="card"><img alt="Workfolio project thumbnail" class="thumb" loading="lazy" src="assets/img/t_workfolio.jpg"/><div class="body"><h3>Workfolio</h3><div class="kind" data-t="69">Web app · resume builder</div><p data-t="70">A browser-based resume builder in vanilla JavaScript, HTML and CSS, with five customizable templates, a live preview and export to PDF, Word, Excel and text. The AI Job Match tool takes a pasted job description and returns a match score, missing skills and tailoring suggestions.</p><ul class="tags"><li>JavaScript</li><li>HTML5</li><li>CSS3</li><li>AI Job Match</li></ul><div class="links"><a data-t="71" href="https://erfankhadiv.github.io/Workfolio/" rel="noopener" target="_blank">Live demo</a><a data-t="72" href="https://github.com/ErfanKhadiv/Workfolio" rel="noopener" target="_blank">Code</a></div></div></article>
+<article class="card"><img alt="Kouman project thumbnail" class="thumb" loading="lazy" src="assets/img/t_kouman.jpg"/><div class="body"><h3>Kouman</h3><div class="kind" data-t="73">Web app · e-commerce front end</div><p data-t="74">A multi-page online-shop front end in React with client-side routing, product pages, search and a cart saved in the browser. It works in Persian and English, right-to-left and left-to-right. The interface is inspired by an existing Iranian shop and was built for learning.</p><ul class="tags"><li>React</li><li>React Router</li><li>Vite</li><li>JavaScript</li><li>CSS</li></ul><div class="links"><a data-t="71" href="https://erfankhadiv.github.io/Kouman/" rel="noopener" target="_blank">Live demo</a><a data-t="72" href="https://github.com/ErfanKhadiv/Kouman" rel="noopener" target="_blank">Code</a></div></div></article>
+<article class="card"><img alt="CS50AI problem sets project thumbnail" class="thumb" loading="lazy" src="assets/img/t_cs50ai.jpg"/><div class="body"><h3 data-t="75">CS50AI problem sets</h3><div class="kind" data-t="76">Harvard CS50's Introduction to AI with Python</div><p data-t="77">Q-learning for Nim, k-nearest-neighbours for a shopping predictor, crossword generation as a constraint satisfaction problem with AC-3 and backtracking, CFG-based sentence parsing, and a convolutional neural network for traffic sign images.</p><ul class="tags"><li>Python</li><li>Q-learning</li><li>CSP</li><li>NLP</li><li>CNN (TensorFlow/Keras)</li></ul><div class="links"><a data-t="72" href="https://github.com/ErfanKhadiv/CS50AI" rel="noopener" target="_blank">Code</a></div></div></article>
+<article class="card"><img alt="Python Fundamentals project thumbnail" class="thumb" loading="lazy" src="assets/img/t_pyfund.jpg"/><div class="body"><h3 data-t="78">Python Fundamentals</h3><div class="kind" data-t="79">Practice projects</div><p data-t="80">Four small applications: a library management system with JSON storage, a password manager, a software company system in object-oriented design, and a NumPy analysis of monthly sales.</p><ul class="tags"><li>Python</li><li>OOP</li><li>NumPy</li><li>JSON</li></ul><div class="links"><a data-t="72" href="https://github.com/ErfanKhadiv/python-fundamentals" rel="noopener" target="_blank">Code</a></div></div></article></div>
+</section>
+<section id="skills">
+<div class="grid">
+<div class="side"><h2 data-t="3">Skills</h2></div>
+<dl style="margin:0">
+<div class="skill"><dt data-t="81">Programming</dt><dd>Python, C, JavaScript, SQL</dd></div>
+<div class="skill"><dt data-t="82">AI and algorithms</dt><dd data-t="83">Heuristic and metaheuristic optimization, Bees Algorithm, local search, constraint satisfaction, search algorithms, Q-learning, k-NN, CNNs (TensorFlow/Keras)</dd></div>
+<div class="skill"><dt data-t="84">Libraries and tools</dt><dd>Git, GitHub, NumPy, Pandas</dd></div>
+<div class="skill"><dt data-t="85">Web</dt><dd>React, React Router, HTML, CSS, Vite</dd></div>
+<div class="skill"><dt data-t="86">Database</dt><dd>PostgreSQL</dd></div>
+<div class="skill"><dt data-t="87">Networking</dt><dd data-t="88">TCP/IP, routing, VLANs, Cisco switches, VPN, DNS, DHCP</dd></div>
+<div class="skill"><dt data-t="89">Languages</dt><dd data-t="90">Persian (native), English (advanced)</dd></div>
+<div class="skill"><dt data-t="91">Right now</dt><dd data-t="92">Learning machine learning and deepening my AI knowledge, and working to publish my research article.</dd></div>
+</dl>
+</div>
+</section>
+<section id="education">
+<h2 data-t="4">Education</h2>
+<div style="margin-top:28px">
+<div>
+<div class="degree">
+<div>
+<h3 data-t="93">B.Sc. Computer Engineering</h3>
+<p data-t="94" style="margin:6px 0 0;color:var(--muted)">Islamic Azad University, Ardabil Branch, Iran · September 2022 – July 2026</p>
+<div class="facts" style="margin-top:20px">
+<div class="fact"><b>18.05</b><span data-t="95">GPA out of 20 (152 credits)</span></div>
+<div class="fact"><b data-t="96">4th</b><span data-t="97">rank among graduates</span></div>
+<div class="fact"><b>19.7<small class="of">/20</small></b><span data-t="98">average in key computer science courses</span></div>
+</div>
+</div>
+<figure style="margin:0"><img alt="Faculty of Engineering building, Islamic Azad University, Ardabil Branch" loading="lazy" src="assets/img/faculty.jpg"/><figcaption class="cap" data-t="99">Faculty of Engineering, Islamic Azad University, Ardabil Branch</figcaption></figure>
+</div>
+<div class="sub" data-t="100">English</div>
+<div class="ielts">
+<figure>
+<div class="pin">
+<img alt="Erfan Khadiv holding his passport in front of the British Council IELTS test centre in Van, Turkey, just before his exam" loading="lazy" src="assets/img/ielts_van.jpg"/>
+<span aria-hidden="true" class="ring"></span>
+<span aria-hidden="true" class="tag" data-t="101">British Council IELTS<br/>test centre</span>
+</div>
+<figcaption class="cap" data-t="102">Van, Turkey, 4 September 2026, just before the exam. The highlighted sign is the British Council IELTS test centre.</figcaption>
+</figure>
+<div>
+<h3 data-t="103">IELTS Academic, 8.0 overall</h3>
+<p data-t="104">I sat the exam at the British Council test centre in Van, Turkey, on 4 September 2026.</p>
+<div class="facts">
+<div class="fact"><b>8.5</b><span>Listening</span></div>
+<div class="fact"><b>9.0</b><span>Reading</span></div>
+<div class="fact"><b>7.0</b><span>Writing</span></div>
+<div class="fact"><b>6.5</b><span>Speaking</span></div>
+</div>
+</div>
+</div>
+<div class="sub" data-t="105">Certificates</div>
+<div class="certs"><figure><button aria-label="Enlarge certificate: CS50 Introduction to AI with Python" data-full="assets/img/cert_CS50AI.jpg" type="button"><img alt="Certificate: CS50 Introduction to AI with Python" loading="lazy" src="assets/img/cert_CS50AI.jpg"/></button><figcaption data-t="106"><strong>CS50 Introduction to AI with Python</strong>Harvard · May 2025 · twelve projects</figcaption></figure><figure><button aria-label="Enlarge certificate: CS50x Introduction to Computer Science" data-full="assets/img/cert_CS50x.jpg" type="button"><img alt="Certificate: CS50x Introduction to Computer Science" loading="lazy" src="assets/img/cert_CS50x.jpg"/></button><figcaption data-t="107"><strong>CS50x Introduction to Computer Science</strong>Harvard · May 2024 · ten problem sets and a final project</figcaption></figure><figure><button aria-label="Enlarge certificate: CS50P Introduction to Programming with Python" data-full="assets/img/cert_CS50P.jpg" type="button"><img alt="Certificate: CS50P Introduction to Programming with Python" loading="lazy" src="assets/img/cert_CS50P.jpg"/></button><figcaption data-t="108"><strong>CS50P Introduction to Programming with Python</strong>Harvard · October 2024 · nine problem sets and a final project</figcaption></figure><figure><button aria-label="Enlarge certificate: Network Plus and Practical Networking Fundamentals" data-full="assets/img/cert_fara.jpg" type="button"><img alt="Certificate: Network Plus and Practical Networking Fundamentals" loading="lazy" src="assets/img/cert_fara.jpg"/></button><figcaption data-t="109"><strong>Network Plus and Practical Networking Fundamentals</strong>FaraDars · December 2025 · ID 5987D551</figcaption></figure></div>
+<p data-t="110" style="font-size:.98rem;color:var(--muted);margin:14px 0 0">Verify online: <a href="https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb" rel="noopener" target="_blank">CS50AI</a>, <a href="https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce" rel="noopener" target="_blank">CS50x</a>, <a href="https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181" rel="noopener" target="_blank">CS50P</a>, <a href="https://faradars.org/verify/5987D551?lang=en" rel="noopener" target="_blank">FaraDars</a>.</p>
+<div class="sub" data-t="111">Learning in practice</div>
+<div class="pair">
+<figure><img alt="Laptop on a lap in the university campus green space, running CS50 problem set checks" loading="lazy" src="assets/img/cs50_campus.jpg"/><figcaption class="cap" data-t="112">Working through CS50 problem sets in the campus green space between classes.</figcaption></figure>
+<figure><img alt="Monitor showing a code editor next to the CS50P lecture video" loading="lazy" src="assets/img/cs50_lecture.jpg"/><figcaption class="cap" data-t="113">Following the CS50P lectures with my editor open beside the course.</figcaption></figure>
+</div>
+<div class="pair" style="margin-top:16px">
+<figure><img alt="A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class" loading="lazy" src="assets/img/lab_scope.jpg"/><figcaption class="cap" data-t="114">Electrical Circuits Laboratory class: reading a signal on the oscilloscope.</figcaption></figure>
+<figure><img alt="A breadboard circuit with two oscilloscope probes attached" loading="lazy" src="assets/img/lab_breadboard.jpg"/><figcaption class="cap" data-t="115">The breadboard circuit with the two probes attached, in the same class.</figcaption></figure>
+</div>
+</div>
+</div>
+</section>
+<section id="experience">
+<h2 data-t="5">Experience</h2>
+<div style="margin-top:28px">
+<div class="exp">
+<figure><img alt="Erfan Khadiv in a Ports and Maritime Organization safety vest working on a network cabinet" loading="lazy" src="assets/img/exp_pmo.jpg"/><figcaption class="cap" data-t="116">On site during the internship: a network cabinet with switches and patch panels.</figcaption></figure>
+<div>
+<h3 data-t="117">A summer at the port</h3>
+<div class="meta" data-t="118">IT and Networking Intern · Ports &amp; Maritime Organization of Iran, Astara · Summer 2025 · 120 hours</div>
+<div class="story">
+<p data-t="119">Before this internship, networks were something I drew on paper and configured in lab exercises. At the port in Astara they were cabinets, cables and people who needed everything to just work.</p>
+<p data-t="120">I got to work on real equipment: switches and patch panels, VLANs, VPN, DNS and DHCP. I learned that troubleshooting is mostly patience and knowing the next good question to ask, and I enjoyed it far more than I expected.</p>
+<p data-t="121">Working in a port was a special experience. It is a place that keeps moving, and the network quietly holds a lot of that together. It made me care about systems that people depend on without ever thinking about them.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="contact" id="contact">
+<h2 data-t="122">Let's talk.</h2>
+<div id="contactlinks"></div>
+<p class="loc" data-t="123">Based in Astara, Iran.</p>
+</section>
+<dialog id="lb"><img alt="Certificate enlarged"/></dialog>
+<footer>© <span id="yr"></span> <span data-t="0">Erfan Khadiv</span></footer>
+</div>
+
+<button type="button" id="totop" class="totop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>
+/* Contact links */
+const LINKS=[
+  {label:'Email',fa:'ایمیل',url:'mailto:erfan.khadiv.dev@gmail.com'},
+  {label:'GitHub',url:'https://github.com/ErfanKhadiv'},
+  {label:'LinkedIn',url:'https://www.linkedin.com/in/erfan-khadiv-777a66279/'},
+  {label:'X',url:'https://x.com/ErfanKhadiv'}
+];
+const box=document.getElementById('contactlinks'),linkEls=[];
+LINKS.filter(l=>l.url&&!l.url.includes('YOUR-')).forEach((l,i)=>{
+  const a=document.createElement('a');linkEls.push([a,l]);a.className='btn'+(i===0?' fill':'');a.textContent=l.label;a.href=l.url;
+  if(!l.url.startsWith('mailto')){a.target='_blank';a.rel='noopener'}box.appendChild(a);
+});
+const isFa=()=>document.documentElement.lang==='fa';
+const setYear=()=>{const d=new Date();let y=d.getFullYear();
+  if(isFa()){try{y=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{year:'numeric'}).formatToParts(d).find(p=>p.type==='year').value}catch(e){}}
+  document.getElementById('yr').textContent=y};
+setYear();
+addEventListener('langchange',()=>{setYear();linkEls.forEach(([a,l])=>{a.textContent=(isFa()&&l.fa)||l.label})});
+
+/* HBALS (Hybrid Bees Algorithm with Adaptive Local Search): JavaScript port of src/hbals.py, "fast" preset.
+   Runs on the real TSPLIB benchmark instances (EUC_2D, rounded distances) or on cities you add. */
+(function(){
+  const DATA={"eil51":{"best":426,"pts":[[37,52],[49,49],[52,64],[20,26],[40,30],[21,47],[17,63],[31,62],[52,33],[51,21],[42,41],[31,32],[5,25],[12,42],[36,16],[52,41],[27,23],[17,33],[13,13],[57,58],[62,42],[42,57],[16,57],[8,52],[7,38],[27,68],[30,48],[43,67],[58,48],[58,27],[37,69],[38,46],[46,10],[61,33],[62,63],[63,69],[32,22],[45,35],[59,15],[5,6],[10,17],[21,10],[5,64],[30,15],[39,10],[32,39],[25,32],[25,55],[48,28],[56,37],[30,40]]},"berlin52":{"best":7542,"pts":[[565,575],[25,185],[345,750],[945,685],[845,655],[880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],[1220,580],[1465,200],[1530,5],[845,680],[725,370],[145,665],[415,635],[510,875],[560,365],[300,465],[520,585],[480,415],[835,625],[975,580],[1215,245],[1320,315],[1250,400],[660,180],[410,250],[420,555],[575,665],[1150,1160],[700,580],[685,595],[685,610],[770,610],[795,645],[720,635],[760,650],[475,960],[95,260],[875,920],[700,500],[555,815],[830,485],[1170,65],[830,610],[605,625],[595,360],[1340,725],[1740,245]]},"st70":{"best":675,"pts":[[64,96],[80,39],[69,23],[72,42],[48,67],[58,43],[81,34],[79,17],[30,23],[42,67],[7,76],[29,51],[78,92],[64,8],[95,57],[57,91],[40,35],[68,40],[92,34],[62,1],[28,43],[76,73],[67,88],[93,54],[6,8],[87,18],[30,9],[77,13],[78,94],[55,3],[82,88],[73,28],[20,55],[27,43],[95,86],[67,99],[48,83],[75,81],[8,19],[20,18],[54,38],[63,36],[44,33],[52,18],[12,13],[25,5],[58,85],[5,67],[90,9],[41,76],[25,76],[37,64],[56,63],[10,55],[98,7],[16,74],[89,60],[48,82],[81,76],[29,60],[17,22],[5,45],[79,70],[9,100],[17,82],[74,67],[10,68],[48,19],[83,86],[84,94]]},"kroA100":{"best":21282,"pts":[[1380,939],[2848,96],[3510,1671],[457,334],[3888,666],[984,965],[2721,1482],[1286,525],[2716,1432],[738,1325],[1251,1832],[2728,1698],[3815,169],[3683,1533],[1247,1945],[123,862],[1234,1946],[252,1240],[611,673],[2576,1676],[928,1700],[53,857],[1807,1711],[274,1420],[2574,946],[178,24],[2678,1825],[1795,962],[3384,1498],[3520,1079],[1256,61],[1424,1728],[3913,192],[3085,1528],[2573,1969],[463,1670],[3875,598],[298,1513],[3479,821],[2542,236],[3955,1743],[1323,280],[3447,1830],[2936,337],[1621,1830],[3373,1646],[1393,1368],[3874,1318],[938,955],[3022,474],[2482,1183],[3854,923],[376,825],[2519,135],[2945,1622],[953,268],[2628,1479],[2097,981],[890,1846],[2139,1806],[2421,1007],[2290,1810],[1115,1052],[2588,302],[327,265],[241,341],[1917,687],[2991,792],[2573,599],[19,674],[3911,1673],[872,1559],[2863,558],[929,1766],[839,620],[3893,102],[2178,1619],[3822,899],[378,1048],[1178,100],[2599,901],[3416,143],[2961,1605],[611,1384],[3113,885],[2597,1830],[2586,1286],[161,906],[1429,134],[742,1025],[1625,1651],[1187,706],[1787,1009],[22,987],[3640,43],[3756,882],[776,392],[1724,1642],[198,1810],[3950,1558]]},"ch150":{"best":6528,"pts":[[37.4393516691,541.2090699418],[612.1759508571,494.3166877396],[38.1312338227,353.1484581781],[53.4418081065,131.484901365],[143.0606355347,631.7200953923],[689.9451267256,468.5354998742],[112.7478815786,529.417757826],[141.4875865042,504.818485571],[661.0513901702,445.9375182115],[98.7899036592,384.5926031158],[697.3881696597,180.3962284275],[536.4894189738,287.2279085051],[192.4067320507,20.439405931],[282.7865258765,229.8001556189],[240.8251726391,281.51414372],[246.9281323057,322.461332116],[649.7313216456,62.3331575282],[352.96585626,666.7873101942],[633.392367658,534.9398453712],[488.311799404,437.4869439948],[141.4039286509,228.4325551488],[17.3632612602,240.2407068508],[397.5586451389,231.3591208928],[565.7853781464,282.3858748974],[475.8975387047,468.5392706317],[322.4224566559,550.3165478233],[397.5586634023,74.7588387765],[672.8618339396,432.882640963],[571.2189680147,530.261699153],[104.6531165914,482.8224768783],[356.7098388794,67.6477131712],[400.4070255527,253.6794479997],[282.3036243109,426.8380500923],[58.7766988363,507.1712386832],[189.75062244,460.3815233617],[659.9124120147,226.6284156239],[639.0307636033,467.2302300719],[415.0258357432,233.3045376118],[547.2662016307,161.6589278401],[616.6547902644,339.3409309407],[494.8592427417,148.1217856389],[629.9980812186,433.4548164038],[471.101431241,314.2219307579],[138.2440514421,137.1679919735],[91.5847556724,110.0203007516],[390.6972811808,423.9774318385],[565.1617825137,429.1598152874],[54.5248980387,438.5515408431],[334.350832971,153.796923804],[531.0291024509,612.3874827889],[475.7345905802,385.7844618897],[228.8325218994,410.4461939615],[578.3805347586,321.3303494537],[358.9170574485,404.4670352898],[486.4648554867,593.0429937016],[343.169370767,509.3123571315],[530.3626972076,137.6881275684],[498.8065475299,576.2102674608],[224.31827155,312.4677490415],[595.836073259,81.8130051356],[661.5588724308,217.0456944477],[43.6892045516,305.4722789165],[79.465345253,445.9641737689],[210.4163247004,130.7151137038],[432.2642292251,629.4092661116],[623.2487161301,69.189285084],[436.5194739944,282.935645607],[59.4163265482,40.1280234442],[630.9230074073,230.342988813],[579.3265539688,601.0359410602],[117.862450748,112.9796833705],[297.7912565664,166.3131886803],[22.7642703744,455.5340094037],[259.7095810385,10.6199925885],[342.3579873647,599.3880182608],[10.0260950143,488.9310558282],[315.2926064118,273.2275475579],[220.7044919297,270.0819745721],[192.1186059948,314.1839922798],[271.5042718992,225.2921989972],[530.7320005441,504.0670155337],[42.5331441666,656.3645162886],[396.1274792588,539.4648066027],[118.6631474021,508.7129103929],[395.6913876595,699.5376048429],[559.0157105844,560.8866941411],[22.6471035906,526.2470392816],[135.6377085256,325.8409901555],[141.4507014379,485.2477927763],[396.7741299332,460.7557115283],[87.7494562765,19.6170129082],[350.4245639661,420.6531186835],[216.7010817133,466.4816410995],[130.9237737024,351.1491733079],[72.6329856671,645.7852219213],[144.6002949996,457.4224283926],[212.3725077442,594.9216893413],[49.9186786455,541.4350825349],[656.6943525585,558.1109593509],[176.5941623792,648.5239953299],[500.3825200226,198.7428378322],[634.317867842,612.8291643194],[59.7537372726,551.6321886765],[15.2145765106,143.0441928532],[283.0054378872,376.4439530184],[146.5389000907,39.4231794338],[101.8685605377,635.098685018],[588.1968537448,580.5946976921],[457.2628632528,350.0164047376],[537.4663680494,472.5842276692],[269.3669098585,367.4763636538],[239.9045383695,102.629765339],[88.4677500396,384.0507209275],[658.9133693395,583.9575181023],[97.7359146347,157.4558657632],[506.6191384007,233.0022156094],[500.2566898239,64.9136393489],[594.4048565021,275.874186899],[66.230814661,24.1317387604],[598.4162993909,414.5557574275],[172.308833083,344.3963466366],[299.48128518,251.829512132],[303.8379894831,21.052606379],[197.896926984,512.388896098],[56.0199567669,243.0663818382],[255.5566183121,448.8651882442],[608.4256112402,222.5421309272],[70.2722703273,77.9227026433],[398.2298999899,119.557657386],[635.4970237093,133.3225902609],[378.3484559418,272.2907677147],[484.8029663388,677.0730379436],[278.8710882619,299.9308770828],[381.6537300653,360.3337602785],[557.6070707573,595.3185092281],[249.0589749342,76.6595112599],[562.9048787838,670.0382113114],[398.550436558,392.6493259144],[590.893972056,370.7414913742],[558.2008003726,0.4198814512],[461.4114714423,530.5254969413],[354.7242881504,685.40453619],[193.6611295657,669.7432521028],[352.3140807211,140.3273323662],[308.434570974,115.2054269847],[299.588137008,530.588961902],[334.2748764383,152.1494569394],[690.9658585947,134.5793307203],[48.0798124069,270.968067372],[91.6467647724,166.3541158474]]},"rat195":{"best":2323,"pts":[[3,12],[17,12],[23,9],[34,11],[47,11],[54,12],[66,16],[75,7],[86,6],[94,8],[107,9],[115,14],[123,15],[3,32],[15,32],[26,34],[33,34],[42,34],[53,25],[64,32],[74,32],[85,34],[95,28],[104,25],[113,31],[125,34],[3,48],[15,46],[26,50],[36,54],[48,50],[54,46],[64,54],[75,44],[88,49],[98,50],[103,54],[115,47],[127,49],[6,75],[15,75],[27,73],[36,73],[47,68],[54,72],[66,68],[74,67],[85,65],[94,74],[107,65],[117,65],[125,68],[6,84],[13,95],[25,94],[37,84],[47,87],[53,95],[63,86],[77,93],[83,89],[94,95],[103,92],[115,95],[123,93],[7,114],[15,111],[24,112],[36,108],[43,112],[56,105],[64,112],[73,112],[86,107],[98,108],[104,113],[117,115],[126,109],[6,127],[17,125],[27,134],[35,126],[44,131],[54,132],[63,124],[77,127],[82,134],[96,128],[103,126],[116,130],[126,134],[7,152],[16,147],[24,153],[35,151],[45,154],[55,146],[63,155],[75,151],[87,154],[93,156],[104,151],[117,153],[127,148],[3,164],[16,172],[25,165],[35,175],[44,169],[53,174],[64,168],[76,171],[87,173],[95,174],[106,168],[114,169],[125,169],[3,190],[16,188],[25,195],[37,186],[44,189],[54,194],[66,192],[77,192],[85,188],[93,185],[106,192],[113,193],[125,195],[5,207],[15,213],[24,209],[33,214],[43,206],[53,211],[64,213],[74,212],[84,212],[94,209],[104,215],[115,206],[127,209],[6,229],[13,227],[26,235],[34,225],[43,227],[55,225],[67,229],[75,234],[87,230],[95,235],[105,228],[117,225],[127,230],[6,249],[15,246],[26,255],[33,246],[47,248],[58,252],[65,248],[73,247],[87,249],[94,245],[104,256],[113,246],[125,253],[5,266],[16,274],[24,267],[37,266],[45,267],[54,266],[67,267],[74,265],[87,264],[95,271],[106,264],[116,271],[127,273],[7,287],[17,294],[23,287],[33,284],[43,288],[53,295],[67,288],[73,286],[87,293],[94,284],[104,291],[114,294],[127,290]]}};
+  const ORDER=['eil51','berlin52','st70','kroA100','ch150','rat195'];
+  const c=document.getElementById('map'),x=c.getContext('2d');
+  const $=id=>document.getElementById(id);
+  const lenEl=$('len'),itEl=$('it'),nameEl=$('dsname'),knownEl=$('known'),gapEl=$('gap'),sessEl=$('sess'),statEl=$('status'),pick=$('picker');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const P={n:20,m:12,e:3,nep:8,nsp:4,ngh:3,alpha:.9,beta:1.05,nnRatio:.5,patience:20};
+  const MAXN=260;
+  let cur='eil51',base=[],extra=[],bounds={},exact=false,T={s:1,ox:0,oy:0};
+  let W=0,H=0,pts=[],D=[],N=0,pop=[],costs=[],best=[],bestCost=0,noImp=0,iter=0,ngh=P.ngh,done=false,bees=[],raf,last=0;
+  const sess={};
+  const rnd=n=>Math.floor(Math.random()*n);
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const len=t=>{let s=0;for(let k=0;k<t.length;k++)s+=D[t[k]][t[(k+1)%t.length]];return s};
+  const randTour=()=>{const t=[...Array(N).keys()];for(let i=N-1;i>0;i--){const j=rnd(i+1);[t[i],t[j]]=[t[j],t[i]]}return t};
+  function nnTour(s){const un=new Set([...Array(N).keys()]);un.delete(s);const t=[s];while(un.size){const cu=t[t.length-1];let bn=-1,bd=Infinity;un.forEach(v=>{if(D[cu][v]<bd){bd=D[cu][v];bn=v}});t.push(bn);un.delete(bn)}return t}
+  const rev=(t,i,j)=>t.slice(0,i).concat(t.slice(i,j+1).reverse(),t.slice(j+1));
+  function twoOpt(tour,maxIt){
+    let t=tour.slice(),l=len(t),imp=true,it=0;const n=t.length;
+    while(imp&&it<maxIt){imp=false;it++;
+      outer:for(let i=1;i<n-2;i++)for(let j=i+1;j<n;j++){
+        if(j-i===1)continue;
+        const a=t[i-1],b=t[i],cc=t[j],d=t[(j+1)%n],delta=D[a][cc]+D[b][d]-D[a][b]-D[cc][d];
+        if(delta<-1e-9){t=rev(t,i,j);l+=delta;imp=true;break outer}
+      }}
+    return [t,l];
+  }
+  function threeOpt(tour,tries){
+    const n=tour.length;let bt=tour.slice(),bl=len(bt);if(n<5)return bt;
+    for(let k=0;k<tries;k++){
+      const s=new Set();while(s.size<3)s.add(1+rnd(n-1));
+      const [i,j]=[...s].sort((a,b)=>a-b);
+      const cand=tour.slice(0,i).concat(tour.slice(i,j).reverse(),tour.slice(j));const cl=len(cand);
+      if(cl<bl){bt=cand;bl=cl}
+    }
+    return bt;
+  }
+  function swaps(t,k){for(let q=0;q<k;q++){const i=rnd(N);let j=rnd(N-1);if(j>=i)j++;[t[i],t[j]]=[t[j],t[i]]}}
+  function elite(base,nep,g){
+    let bt=base.slice(),bc=len(bt);
+    for(let q=0;q<nep;q++){
+      let cand=base.slice(),cc;swaps(cand,g);
+      if(Math.random()<.7)[cand,cc]=twoOpt(cand,20);else cc=len(cand);
+      if(Math.random()<.1){cand=threeOpt(cand,3);cc=len(cand)}
+      if(cc<bc){bt=cand;bc=cc}
+    }
+    return [bt,bc];
+  }
+  function selected(base,nsp,g){
+    let bt=base.slice(),bc=len(bt);
+    for(let q=0;q<nsp;q++){
+      let cand=base.slice(),cc;swaps(cand,Math.max(1,g>>1));
+      if(Math.random()<.3)[cand,cc]=twoOpt(cand,10);else cc=len(cand);
+      if(cc<bc){bt=cand;bc=cc}
+    }
+    return [bt,bc];
+  }
+  function init(){
+    N=pts.length;
+    /* TSPLIB instances use rounded Euclidean distances; random or user-added cities use exact ones. */
+    D=pts.map(p=>pts.map(q=>{const d=Math.hypot(p[0]-q[0],p[1]-q[1]);return exact?d:Math.round(d)}));
+    pop=[];const nn=Math.max(1,Math.floor(P.nnRatio*P.n));
+    for(let s=0;s<Math.min(nn,N);s++)pop.push(nnTour(s));
+    while(pop.length<P.n)pop.push(randTour());
+    costs=pop.map(len);const bi=costs.indexOf(Math.min(...costs));
+    best=pop[bi].slice();bestCost=costs[bi];noImp=0;iter=0;ngh=P.ngh;done=N<5;
+    bees=[0,1,2,3,4].map(i=>({s:i*N/5}));
+  }
+  function step(){
+    if(done)return;
+    ngh=noImp>=3?Math.min(Math.floor(ngh*P.beta),N>>1):Math.max(Math.floor(ngh*P.alpha),1);
+    const idx=costs.map((v,i)=>i).sort((a,b)=>costs[a]-costs[b]);
+    const np=[],nc=[];
+    idx.slice(0,P.e).forEach(i=>{const[t,cc]=elite(pop[i],P.nep,ngh);np.push(t);nc.push(cc)});
+    idx.slice(P.e,P.m).forEach(i=>{const[t,cc]=selected(pop[i],P.nsp,ngh);np.push(t);nc.push(cc)});
+    while(np.length<P.n){const t=randTour();np.push(t);nc.push(len(t))}
+    pop=np;costs=nc;iter++;
+    const ci=costs.indexOf(Math.min(...costs));
+    if(costs[ci]<bestCost){best=pop[ci].slice();bestCost=costs[ci];noImp=0}else noImp++;
+    if(noImp>=P.patience)done=true;
+  }
+  /* data coordinates -> screen, fitted once per dataset so added cities keep their place */
+  function fit(){
+    const b=bounds,m=26,rx=Math.max(b.maxX-b.minX,1e-9),ry=Math.max(b.maxY-b.minY,1e-9);
+    const s=Math.min((W-2*m)/rx,(H-2*m)/ry);
+    T.s=s;T.ox=(W-s*rx)/2-s*b.minX;T.oy=(H-s*ry)/2+s*b.maxY;
+  }
+  const S=p=>[T.ox+p[0]*T.s,T.oy-p[1]*T.s];
+  function size(){const r=c.getBoundingClientRect(),k=window.devicePixelRatio||1;W=r.width;H=r.height;c.width=W*k;c.height=H*k;x.setTransform(k,0,0,k,0,0);fit()}
+  const fmt=v=>exact?v.toFixed(1):String(Math.round(v));
+  function readout(){
+    const k=(!exact&&cur!=='random')?DATA[cur].best:null;
+    lenEl.textContent=fmt(bestCost);
+    itEl.textContent=iter+(done&&iter?' ('+(isFa()?'همگرا شد':'converged')+')':'');
+    knownEl.textContent=k?k.toLocaleString('en-US'):'–';
+    gapEl.textContent=k?(((Math.round(bestCost)-k)/k*100).toFixed(2)+'%'):'–';
+    if(k){sess[cur]=Math.min(sess[cur]||Infinity,Math.round(bestCost));sessEl.textContent=sess[cur].toLocaleString('en-US')}else sessEl.textContent='–';
+    statEl.className='status';
+    if(!done){statEl.textContent=isFa()?'در حال جست‌وجو…':'Searching…';return}
+    if(k){
+      const r=Math.round(bestCost);
+      if(r===k){statEl.className='status ok';statEl.textContent=isFa()?'به بهترین مسیر شناخته‌شده رسید: '+k.toLocaleString('en-US')+'.':'Reached the best-known tour, '+k.toLocaleString('en-US')+'.'}
+      else statEl.textContent=isFa()?'همگرا شد؛ '+(((r-k)/k*100).toFixed(2))+'% بالاتر از بهترین مقدار شناخته‌شده. هر اجرا تصادفی است، پس برای دیدن پراکندگی دوباره اجرا کنید. جدول زیر 20 اجرا برای هر نمونه را گزارش می‌کند.':'Converged '+(((r-k)/k*100).toFixed(2))+'% above the best known. Each run is random, so run it again to see the spread. The table below reports 20 runs per instance.'
+    }else statEl.textContent=isFa()?'پس از '+iter+' تکرار همگرا شد. برای این نمونه بهینهٔ شناخته‌شده‌ای برای مقایسه وجود ندارد.':'Converged after '+iter+' iterations. This instance has no known optimum to compare with.';
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    x.lineWidth=2;x.lineJoin='round';x.strokeStyle=css('--route');x.globalAlpha=.6;
+    x.beginPath();best.forEach((v,i)=>{const p=S(pts[v]);i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1])});x.closePath();x.stroke();x.globalAlpha=1;
+    const r=N>120?3:N>60?4:5,nb=base.length;
+    x.fillStyle='#fff';x.lineWidth=2;
+    pts.forEach((q,i)=>{const p=S(q);x.strokeStyle=i>=nb?css('--accent'):css('--ink');x.lineWidth=i>=nb?3:2;x.beginPath();x.arc(p[0],p[1],i>=nb?r+1:r,0,7);x.fill();x.stroke()});
+    x.fillStyle=css('--accent');x.strokeStyle=css('--ink');x.lineWidth=1.5;
+    bees.forEach(b=>{const m=best.length,i=Math.floor(b.s)%m,f=b.s%1,p=S(pts[best[i]]),q=S(pts[best[(i+1)%m]]);
+      x.beginPath();x.arc(p[0]+(q[0]-p[0])*f,p[1]+(q[1]-p[1])*f,6,0,7);x.fill();x.stroke()});
+    readout();
+  }
+  function loop(t){
+    if(!done&&t-last>110){step();last=t}
+    const sp=Math.max(.04,N/700);bees.forEach(b=>b.s=(b.s+sp)%best.length);draw();raf=requestAnimationFrame(loop);
+  }
+  function solveNow(){init();for(let g=0;g<500&&!done;g++)step();draw()}
+  function setName(){
+    nameEl.textContent=cur==='random'?(isFa()?'شهرهای تصادفی':'random cities'):cur+(extra.length?' + '+extra.length+(isFa()?' شهر':(extra.length===1?' city':' cities')):'');
+  }
+  function restart(){
+    cancelAnimationFrame(raf);
+    pts=base.concat(extra);exact=extra.length>0||cur==='random';
+    setName();
+    $('reset').hidden=!extra.length;
+    if(still)solveNow();else{init();raf=requestAnimationFrame(loop)}
+  }
+  function boundsOf(a){let b={minX:Infinity,maxX:-Infinity,minY:Infinity,maxY:-Infinity};a.forEach(p=>{b.minX=Math.min(b.minX,p[0]);b.maxX=Math.max(b.maxX,p[0]);b.minY=Math.min(b.minY,p[1]);b.maxY=Math.max(b.maxY,p[1])});return b}
+  function select(name){
+    cur=name;extra=[];
+    if(name==='random'){base=[];for(let i=0;i<30;i++)base.push([30+Math.random()*940,30+Math.random()*640]);bounds={minX:0,maxX:1000,minY:0,maxY:700}}
+    else{base=DATA[name].pts;bounds=boundsOf(base)}
+    pick.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.ds===name?'true':'false'));
+    size();restart();
+  }
+  /* picker buttons */
+  ORDER.concat(['random']).forEach(n=>{
+    const b=document.createElement('button');b.type='button';b.dataset.ds=n;b.setAttribute('aria-pressed','false');
+    b.innerHTML=n==='random'?'<span>Random</span><small>30</small>':n+'<small>'+DATA[n].pts.length+'</small>';
+    b.addEventListener('click',()=>select(n));pick.appendChild(b);
+  });
+  function addCity(px,py){
+    if(pts.length>=MAXN)return;
+    extra.push([(px-T.ox)/T.s,(T.oy-py)/T.s]);restart();
+  }
+  c.addEventListener('click',e=>{const r=c.getBoundingClientRect();addCity(e.clientX-r.left,e.clientY-r.top)});
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();addCity(30+Math.random()*(W-60),30+Math.random()*(H-60))}});
+  $('rerun').addEventListener('click',restart);
+  $('reset').addEventListener('click',()=>{extra=[];restart()});
+  document.querySelectorAll('.tryit').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.ds);$('top').scrollIntoView({behavior:still?'auto':'smooth'})}));
+  addEventListener('resize',()=>{size();if(still)draw()});
+  addEventListener('langchange',()=>{const r=pick.querySelector('[data-ds="random"] span');if(r)r.textContent=isFa()?'تصادفی':'Random';setName();if(still)draw()});
+  addEventListener('themechange',()=>{if(still)draw()});
+  select('eil51');
+})();
+
+/* Certificate viewer */
+(function(){
+  const lb=document.getElementById('lb'),im=lb.querySelector('img');
+  document.querySelectorAll('.certs button').forEach(b=>b.addEventListener('click',()=>{im.src=b.dataset.full;im.alt=b.querySelector('img').alt;lb.showModal()}));
+  lb.addEventListener('click',()=>lb.close());
+})();
+
+/* Theme (dark by default) and language (English / Persian) */
+(function(){
+  const FA=["عرفان خدیو", "پژوهش", "پروژه‌ها", "مهارت‌ها", "تحصیلات", "تجربه", "تماس", "عرفان", "خدیو", "فارغ‌التحصیل مهندسی کامپیوتر، علاقه‌مند به الگوریتم، نرم‌افزار و هوش مصنوعی.", "پژوهش من را ببینید", "تکرار", "طول", "بهترین مقدار شناخته‌شده", "بالاتر از بهترین مقدار شناخته‌شده", "بهترین در این نشست", "<i class=\"city\"><\/i>شهر", "<i class=\"city add\"><\/i>شهری که شما اضافه کردید", "<i class=\"bee\"><\/i>زنبور", "<span class=\"ln\" style=\"width:20px;height:3px;border-radius:2px;display:inline-block\"><\/span>بهترین مسیر تا اینجا", "یک نمونهٔ معیار انتخاب کنید و حل زندهٔ آن را با HBALS تماشا کنید، یا روی نقشه بزنید و شهرهای خودتان را اضافه کنید. این برنامه برگردان جاوااسکریپتی کد پایتون در <a href=\"https://github.com/ErfanKhadiv/HBALS-TSP\" rel=\"noopener\" target=\"_blank\">مخزن من<\/a> است. <a href=\"#research\">طرز کار آن<\/a>. نمونه‌ها از TSPLIB (Reinelt، 1991) هستند.", "اجرای دوباره", "حذف شهرهای من", "پژوهش: HBALS", "یک الگوریتم زنبور هیبریدی با جست‌وجوی محلی تطبیقی که برای مسئلهٔ فروشندهٔ دوره‌گرد طراحی کرده‌ام. این پروژهٔ پایانی کارشناسی من بود و من تنها نویسندهٔ مقاله‌ای هستم که به <em>Evolutionary Intelligence<\/em> (Springer) ارسال شده است.", "کد، داده و مقاله", "مسئله", "مجموعه‌ای از شهرها داده شده است؛ کوتاه‌ترین مسیری را پیدا کنید که از هر شهر دقیقاً یک بار بگذرد و به نقطهٔ شروع برگردد. این مسئله NP-سخت است، بنابراین برای ورودی‌های بزرگ‌تر، هدف عملی پیدا کردن سریع یک مسیر بسیار خوب است، نه اثبات بهینه بودن آن.", "الگوریتم زنبور استاندارد ممکن است کند همگرا شود یا در بهینه‌های محلی گیر کند. پرسش من این بود که آیا کنترل تطبیقی همسایگی و جست‌وجوی محلی می‌تواند آن را بهتر کند، بی‌آنکه جمعیت از کاوش بازبماند.", "خواندن انیمیشن", "<b>نقطهٔ سفید:<\/b> یک شهر.", "<b>نقطهٔ زرد:<\/b> یک زنبور که روی بهترین مسیرِ پیدا‌شده تا اینجا پرواز می‌کند.", "<b>خط:<\/b> بهترین مسیر تا اینجا. شمارنده‌ها تکرار و طول آن را نشان می‌دهند.", "در خود الگوریتم، هر زنبور یک مسیر کاندیدا است. زنبورها نزدیک بهترین مسیرهایی که می‌شناسند جست‌وجو می‌کنند و پیشاهنگ‌ها مسیرهای تصادفی تازه را امتحان می‌کنند. انیمیشن، جست‌وجوی واقعی را در پس‌زمینه اجرا می‌کند و از نقطه‌های زرد استفاده می‌کند تا بتوانید بهترین مسیر را دنبال کنید.", "HBALS چگونه کار می‌کند", "<b>شروع<\/b>جمعیتی از 20 مسیر: نیمی با روش نزدیک‌ترین همسایه ساخته می‌شوند و نیمی تصادفی‌اند.", "<b>رتبه‌بندی<\/b>همهٔ مسیرها بر اساس طول کل مرتب می‌شوند.", "<b>جایگاه‌های نخبه<\/b>3 مسیر برتر هرکدام 8 گونه تولید می‌کنند که با 2-opt و گاهی 3-opt بهبود می‌یابند.", "<b>جایگاه‌های منتخب<\/b>مسیرهای بعدی، تا مجموعاً 12 جایگاه، هرکدام 4 گونه با جست‌وجوی سبک‌تر تولید می‌کنند.", "<b>پیشاهنگ‌ها<\/b>مسیرهای تصادفی تازه جمعیت را پر می‌کنند تا جست‌وجو به کاوش ادامه دهد.", "<b>تطبیق و توقف<\/b>تا وقتی پیشرفت ادامه دارد همسایگی جست‌وجو کوچک می‌شود و پس از 3 تکرار بدون پیشرفت گسترده‌تر می‌شود. پس از 20 تکرار بدون بهبود متوقف می‌شود.", "نتایج", "6 از 6", "نمونه‌ای که HBALS در آن‌ها کوتاه‌ترین بهترین مسیر را میان پنج الگوریتم مقایسه‌شده داشت", "بهترین مسیرها به‌طور میانگین کوتاه‌تر از الگوریتم زنبور پایه (از 15.3% تا 68.0%)", "نمونه‌ای که به بهترین جواب شناخته‌شده رسیدند: eil51، berlin52، st70", "میانگین فاصله تا بهترین مسیر شناخته‌شده در هر شش نمونه", "نمونهٔ TSPLIB", "شهرها", "بهترین شناخته‌شده", "بهترین HBALS", "میانگین فاصله (%)", "اجرای زنده", "20 اجرای مستقل برای هر الگوریتم، حداکثر 300 تکرار. الگوریتم‌های مبنا: الگوریتم زنبور، بهینه‌سازی کلونی مورچگان، الگوریتم ژنتیک و بهینه‌سازی ازدحام ذرات. علامت ✓ یعنی بهترین مسیر با بهترین مسیر شناخته‌شده برابر است.", "آزمون فریدمن تفاوت معناداری میان الگوریتم‌ها نشان می‌دهد (p &lt; 0.001). در مقایسه با الگوریتم زنبور و الگوریتم ژنتیک، این اختلاف معنادار است (آزمون Nemenyi: p = 0.009 و 0.0001). در مقایسه با کلونی مورچگان و ازدحام ذرات معنادار نیست (p = 0.809 و 0.183)، چون فقط شش نمونه آزمایش شد. برخی روش‌های منتشرشدهٔ الگوریتم زنبور در نمونه‌های بزرگ‌تر به بهترین مسیرهای شناخته‌شده نزدیک‌ترند. پیاده‌سازی کامل، مجموعه‌داده‌ها و نتایج با مجوز MIT متن‌باز هستند.", "berlin52 با 52 شهر: HBALS در یک اجرا (تنظیم سریع) در تکرار 20 به بهترین طول شناخته‌شده، یعنی 7,542، رسید.", "همچنین: گزارش پژوهشی Li-Fi", "گزارشی با 19 منبع دربارهٔ Light Fidelity برای درس روش تحقیق و ارائه. این گزارش روش‌های مدولاسیون (OOK، VPPM، OFDM، CSK) و کاربردها در سلامت، هوانوردی و ارتباطات زیر آب را پوشش می‌دهد.", "خواندن گزارش", "دربارهٔ من", "من فارغ‌التحصیل مهندسی کامپیوتر هستم و پایه‌ای قوی در الگوریتم، برنامه‌نویسی، شبکه‌های کامپیوتری و هوش مصنوعی دارم.", "HBALS را طراحی کرده‌ام، با React و جاوااسکریپت برنامهٔ وب می‌سازم و مسائلی را دوست دارم که راه روشنی برای سنجیدن بهتر شدن پاسخ دارند.", "قصد دارم تحصیل در مقطع کارشناسی ارشد علوم و مهندسی کامپیوتر را ادامه دهم.", "هوش مصنوعی و یادگیری ماشین", "الگوریتم‌ها و بهینه‌سازی ترکیبیاتی", "بهینه‌سازی ابتکاری و فراابتکاری", "ارضای قیود و جست‌وجو", "پروژه‌های منتخب", "کد در GitHub عمومی است. دموها در مرورگر شما اجرا می‌شوند.", "برنامهٔ وب · رزومه‌ساز", "رزومه‌ساز مبتنی بر مرورگر با جاوااسکریپت، HTML و CSS ساده، با پنج قالب قابل‌شخصی‌سازی، پیش‌نمایش زنده و خروجی PDF، Word، Excel و متن. ابزار AI Job Match یک شرح شغلی چسبانده‌شده را می‌گیرد و امتیاز تطابق، مهارت‌های کم‌داشته و پیشنهادهای متناسب‌سازی را برمی‌گرداند.", "دموی زنده", "کد", "برنامهٔ وب · فرانت‌اند فروشگاه اینترنتی", "فرانت‌اند یک فروشگاه اینترنتی چندصفحه‌ای با React، با مسیریابی سمت کلاینت، صفحهٔ محصول، جست‌وجو و سبد خریدی که در مرورگر ذخیره می‌شود. به دو زبان فارسی و انگلیسی، راست‌به‌چپ و چپ‌به‌راست کار می‌کند. رابط آن از یک فروشگاه ایرانی موجود الهام گرفته شده و برای یادگیری ساخته شده است.", "تمرین‌های CS50AI", "مقدمه‌ای بر هوش مصنوعی با پایتون، CS50 هاروارد", "یادگیری Q برای بازی Nim، الگوریتم k نزدیک‌ترین همسایه (k-NN) برای پیش‌بینی خرید، تولید جدول کلمات متقاطع به‌صورت مسئلهٔ ارضای قیود با AC-3 و بازگشت به عقب، تجزیهٔ جمله بر پایهٔ CFG و یک شبکهٔ عصبی کانولوشنی برای تصاویر تابلوهای راهنمایی.", "مبانی پایتون", "پروژه‌های تمرینی", "چهار برنامهٔ کوچک: سامانهٔ مدیریت کتابخانه با ذخیره‌سازی JSON، مدیر گذرواژه، سامانهٔ یک شرکت نرم‌افزاری با طراحی شیءگرا و تحلیل فروش ماهانه با NumPy.", "برنامه‌نویسی", "هوش مصنوعی و الگوریتم‌ها", "بهینه‌سازی ابتکاری و فراابتکاری، الگوریتم زنبور، جست‌وجوی محلی، ارضای قیود، الگوریتم‌های جست‌وجو، یادگیری Q، k-NN، شبکه‌های عصبی کانولوشنی (TensorFlow/Keras)", "کتابخانه‌ها و ابزارها", "وب", "پایگاه داده", "شبکه", "TCP/IP، مسیریابی، VLAN، سوییچ‌های Cisco، VPN، DNS، DHCP", "زبان‌ها", "فارسی (زبان مادری)، انگلیسی (پیشرفته)", "در حال حاضر", "در حال یادگیری یادگیری ماشین و عمیق‌تر کردن دانش هوش مصنوعی‌ام هستم و برای انتشار مقالهٔ پژوهشی‌ام تلاش می‌کنم.", "کارشناسی مهندسی کامپیوتر", "دانشگاه آزاد اسلامی، واحد اردبیل، ایران · مهر 1401 – تیر 1405", "معدل از 20 (152 واحد)", "چهارم", "رتبه در میان فارغ‌التحصیلان", "میانگین در دروس کلیدی علوم کامپیوتر", "دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "زبان انگلیسی", "مرکز آزمون IELTS<br/>بریتیش کانسیل", "وان، ترکیه، 13 شهریور 1405، کمی پیش از آزمون. تابلوی مشخص‌شده، مرکز آزمون IELTS بریتیش کانسیل است.", "آیلتس آکادمیک، نمرهٔ کلی 8.0", "در 13 شهریور 1405 در مرکز آزمون بریتیش کانسیل در وان ترکیه در این آزمون شرکت کردم.", "گواهینامه‌ها", "<strong>مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)<\/strong>هاروارد · اردیبهشت 1404 · دوازده پروژه", "<strong>مقدمه‌ای بر علوم کامپیوتر (CS50x)<\/strong>هاروارد · اردیبهشت 1403 · ده مجموعه تمرین و یک پروژهٔ پایانی", "<strong>مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)<\/strong>هاروارد · مهر 1403 · نه مجموعه تمرین و یک پروژهٔ پایانی", "<strong>Network Plus و مبانی عملی شبکه<\/strong>فرادرس · آذر 1404 · شناسه 5987D551", "تأیید آنلاین: <a href=\"https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb\" rel=\"noopener\" target=\"_blank\">CS50AI<\/a>، <a href=\"https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce\" rel=\"noopener\" target=\"_blank\">CS50x<\/a>، <a href=\"https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181\" rel=\"noopener\" target=\"_blank\">CS50P<\/a>، <a href=\"https://faradars.org/verify/5987D551?lang=en\" rel=\"noopener\" target=\"_blank\">فرادرس<\/a>.", "یادگیری در عمل", "کار روی تمرین‌های CS50 در فضای سبز دانشگاه، میان کلاس‌ها.", "تماشای درس‌های CS50P با ویرایشگر باز در کنار دوره.", "کلاس آزمایشگاه مدارهای الکتریکی: خواندن یک سیگنال روی اسیلوسکوپ.", "مدار روی بردبورد با دو پراب متصل، در همان کلاس.", "در محل کارآموزی: یک کابینت شبکه با سوییچ‌ها و پچ‌پنل‌ها.", "تابستانی در بندر", "کارآموز فناوری اطلاعات و شبکه · سازمان بنادر و دریانوردی ایران، آستارا · تابستان 1404 · 120 ساعت", "پیش از این کارآموزی، شبکه‌ها چیزی بودند که روی کاغذ می‌کشیدم و در تمرین‌های آزمایشگاهی پیکربندی می‌کردم. در بندر آستارا، شبکه یعنی کابینت، کابل و آدم‌هایی که می‌خواستند همه‌چیز بی‌دردسر کار کند.", "روی تجهیزات واقعی کار کردم: سوییچ‌ها و پچ‌پنل‌ها، VLAN، VPN، DNS و DHCP. یاد گرفتم که عیب‌یابی بیشتر صبر است و دانستن اینکه پرسش خوب بعدی چیست، و بیش از آنچه انتظار داشتم از آن لذت بردم.", "کار در بندر تجربه‌ای ویژه بود. جایی است که همیشه در حرکت است و شبکه بی‌صدا بخش بزرگی از آن را کنار هم نگه می‌دارد. این تجربه باعث شد به سامانه‌هایی اهمیت بدهم که مردم به آن‌ها تکیه می‌کنند بی‌آنکه هرگز به آن‌ها فکر کنند.", "بیایید صحبت کنیم.", "ساکن آستارا، ایران."];
+  const ATTR={"Main": "اصلی", "Choose a dataset": "انتخاب مجموعه‌داده", "Animated map where the HBALS algorithm searches for the shortest route through the cities of the selected dataset. White dots are cities and yellow dots are bees. Click or tap to add a city; press Enter to add a random one.": "نقشهٔ متحرکی که در آن الگوریتم HBALS کوتاه‌ترین مسیر عبور از شهرهای مجموعه‌دادهٔ انتخاب‌شده را جست‌وجو می‌کند. نقطه‌های سفید شهر و نقطه‌های زرد زنبور هستند. برای افزودن شهر کلیک کنید یا بزنید؛ برای افزودن یک شهر تصادفی Enter را فشار دهید.", "Legend": "راهنما", "Back to top": "بازگشت به بالا", "HBALS summary graphic showing the berlin52 tour and convergence curve": "تصویر خلاصهٔ HBALS شامل مسیر berlin52 و منحنی همگرایی", "Li-Fi research report thumbnail": "تصویر بندانگشتی گزارش پژوهشی Li-Fi", "Workfolio project thumbnail": "تصویر بندانگشتی پروژهٔ Workfolio", "Kouman project thumbnail": "تصویر بندانگشتی پروژهٔ Kouman", "CS50AI problem sets project thumbnail": "تصویر بندانگشتی پروژهٔ تمرین‌های CS50AI", "Python Fundamentals project thumbnail": "تصویر بندانگشتی پروژهٔ مبانی پایتون", "Faculty of Engineering building, Islamic Azad University, Ardabil Branch": "ساختمان دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "Erfan Khadiv holding his passport in front of the British Council IELTS test centre in Van, Turkey, just before his exam": "عرفان خدیو با گذرنامه در دست، مقابل مرکز آزمون IELTS بریتیش کانسیل در وان ترکیه، درست پیش از آزمون", "Enlarge certificate: CS50 Introduction to AI with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Certificate: CS50 Introduction to AI with Python": "گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Enlarge certificate: CS50x Introduction to Computer Science": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Certificate: CS50x Introduction to Computer Science": "گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Enlarge certificate: CS50P Introduction to Programming with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Certificate: CS50P Introduction to Programming with Python": "گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Enlarge certificate: Network Plus and Practical Networking Fundamentals": "بزرگ‌نمایی گواهینامه: Network Plus و مبانی عملی شبکه", "Certificate: Network Plus and Practical Networking Fundamentals": "گواهینامه: Network Plus و مبانی عملی شبکه", "Laptop on a lap in the university campus green space, running CS50 problem set checks": "لپ‌تاپ روی پا در فضای سبز دانشگاه، در حال اجرای بررسی‌های تمرین CS50", "Monitor showing a code editor next to the CS50P lecture video": "نمایشگر با ویرایشگر کد در کنار ویدیوی درس CS50P", "A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class": "موج سینوسی روی اسیلوسکوپ GW GOS-652G در کلاس آزمایشگاه مدارهای الکتریکی", "A breadboard circuit with two oscilloscope probes attached": "مداری روی بردبورد با دو پراب اسیلوسکوپ متصل", "Erfan Khadiv in a Ports and Maritime Organization safety vest working on a network cabinet": "عرفان خدیو با جلیقهٔ ایمنی سازمان بنادر و دریانوردی در حال کار روی یک کابینت شبکه", "Certificate enlarged": "گواهینامهٔ بزرگ‌نمایی‌شده"};
+  const root=document.documentElement;
+  const tb=document.getElementById('themebtn'),lg=document.getElementById('langbtn');
+  const save=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const metaD=document.querySelector('meta[name="description"]');
+  const EN_TITLE=document.title,EN_DESC=metaD?metaD.content:'';
+  const FA_TITLE='عرفان خدیو — مهندس کامپیوتر';
+  const FA_DESC='عرفان خدیو، فارغ‌التحصیل مهندسی کامپیوتر: پژوهش HBALS روی مسئلهٔ فروشندهٔ دوره‌گرد، پروژه‌ها، مهارت‌ها، تحصیلات و راه‌های تماس.';
+  function translate(fa){
+    document.querySelectorAll('[data-t]').forEach(el=>{
+      if(el.dataset.en===undefined)el.dataset.en=el.innerHTML;
+      const v=FA[+el.dataset.t];
+      el.innerHTML=fa&&v?v:el.dataset.en;
+    });
+    document.querySelectorAll('[alt],[aria-label]').forEach(el=>{
+      if(el.classList.contains('tbtn'))return;
+      ['alt','aria-label'].forEach(a=>{
+        if(!el.hasAttribute(a))return;
+        const k='data-en-'+a;
+        if(!el.hasAttribute(k))el.setAttribute(k,el.getAttribute(a));
+        const en=el.getAttribute(k);
+        el.setAttribute(a,fa&&ATTR[en]?ATTR[en]:en);
+      });
+    });
+    document.title=fa?FA_TITLE:EN_TITLE;
+    if(metaD)metaD.content=fa?FA_DESC:EN_DESC;
+  }
+  function syncButtons(){
+    const fa=root.lang==='fa',dark=root.getAttribute('data-theme')!=='light';
+    lg.textContent=fa?'EN':'FA';lg.lang=fa?'en':'fa';
+    const ll=fa?'تغییر به انگلیسی (English)':'Switch to Persian (فارسی)';
+    lg.setAttribute('aria-label',ll);lg.title=ll;
+    const tl=dark?(fa?'تغییر به حالت روشن':'Switch to light mode'):(fa?'تغییر به حالت تاریک':'Switch to dark mode');
+    tb.setAttribute('aria-label',tl);tb.title=tl;
+  }
+  function setLang(l,persist){
+    const fa=l==='fa';
+    root.lang=fa?'fa':'en';root.dir=fa?'rtl':'ltr';
+    if(fa&&window.loadFaFont)loadFaFont();
+    translate(fa);syncButtons();
+    if(persist)save('lang',l);
+    dispatchEvent(new Event('langchange'));
+  }
+  function setTheme(t,persist){
+    root.setAttribute('data-theme',t);syncButtons();
+    if(persist)save('theme',t);
+    dispatchEvent(new Event('themechange'));
+  }
+  lg.addEventListener('click',()=>setLang(root.lang==='fa'?'en':'fa',true));
+  tb.addEventListener('click',()=>setTheme(root.getAttribute('data-theme')==='light'?'dark':'light',true));
+  setLang(root.lang==='fa'?'fa':'en',false);
+})();
+
+/* Highlight the menu item of the section being viewed */
+(function(){
+  const links=[...document.querySelectorAll('nav a[href^="#"]')].filter(a=>!a.classList.contains('me'));
+  const secs=[...document.querySelectorAll('section[id]')];
+  function upd(){
+    const line=innerHeight*0.35;let id='';
+    secs.forEach(s=>{if(s.getBoundingClientRect().top<=line)id=s.id});
+    if(innerHeight+scrollY>=document.documentElement.scrollHeight-4&&secs.length)id=secs[secs.length-1].id;
+    links.forEach(a=>{const on=a.getAttribute('href')==='#'+id;a.classList.toggle('active',on);if(on)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+  }
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+
+/* Back to top */
+(function(){
+  const b=document.getElementById('totop');
+  const upd=()=>b.classList.toggle('show',window.scrollY>500);
+  addEventListener('scroll',upd,{passive:true});upd();
+  b.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+})();
+</script>
+</body>
+</html>
