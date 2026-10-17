@@ -8,7 +8,7 @@ Computer engineering graduate interested in algorithms, software and artificial 
 [![GitHub](https://img.shields.io/badge/GitHub-ErfanKhadiv-0F1626?style=for-the-badge&logo=github)](https://github.com/ErfanKhadiv)
 
 <a href="https://erfankhadiv.github.io/">
-  <img src="https://placehold.co/1200x680/0F1626/E8EDF7?text=Hero+screenshot+(dark)" alt="Portfolio hero section in dark mode" width="860">
+  <img src="docs/screenshots/Dark_Mode_En.png" alt="Portfolio hero section in dark mode" width="860">
 </a>
 
 </div>
@@ -23,13 +23,11 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 
 | Dark mode | Light mode |
 |---|---|
-| ![Dark mode](https://placehold.co/600x380/0F1626/E8EDF7?text=Dark+mode) | ![Light mode](https://placehold.co/600x380/EDF1F6/12203A?text=Light+mode) |
+| ![Dark mode](docs/screenshots/Dark_Mode_En.png) | ![Light mode](docs/screenshots/Light_Mode_En.png) |
 
-| Persian (RTL) | Mobile |
-|---|---|
-| ![Persian version](https://placehold.co/600x380/0F1626/E8EDF7?text=Persian+RTL) | ![Mobile view](https://placehold.co/300x380/0F1626/E8EDF7?text=Mobile) |
-
-<sub>Placeholder images. Replace them with real screenshots, for example in `docs/screenshots/`, and change the paths above.</sub>
+| Persian (RTL) |
+|---|
+| ![Persian version](docs/screenshots/Dark_Mode_Fa.png)
 
 ## Sections
 
