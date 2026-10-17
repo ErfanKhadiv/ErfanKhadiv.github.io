@@ -27,7 +27,7 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 
 | Persian (RTL) |
 |---|
-| ![Persian version](docs/screenshots/Dark_Mode_Fa.png)
+| ![Persian version](docs/screenshots/Dark_Mode_Fa.png) |
 
 ## Sections
 
@@ -52,10 +52,11 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 ## Project structure
 
 ```
-index.html        the whole page (styles, content and scripts)
-assets/img/       thumbnails, certificates and photos
-icon.svg, favicon.ico, apple-touch-icon.png   site icons
-.nojekyll         tells GitHub Pages to serve the files as they are
+index.html          the whole page (styles, content and scripts)
+assets/img/         thumbnails, certificates and photos
+docs/screenshots/   preview images used in this README and in link previews
+icon.svg, favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png   site icons
+.nojekyll           tells GitHub Pages to serve the files as they are
 ```
 
 ## Run locally
