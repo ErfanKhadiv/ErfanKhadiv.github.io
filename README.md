@@ -1,35 +1,83 @@
-# Erfan Khadiv, portfolio website
+<div align="center">
 
-Personal portfolio: HBALS research on the Traveling Salesman Problem, selected projects, skills, education, certificates, a short internship story and contact.
+# Erfan Khadiv, portfolio
 
-It is a plain static site (HTML, CSS and a little JavaScript). There is no build step and nothing to install.
+Computer engineering graduate interested in algorithms, software and artificial intelligence.
 
-## Files
+[![Live demo](https://img.shields.io/badge/Live_demo-erfankhadiv.github.io-F2B632?style=for-the-badge&logo=githubpages&logoColor=0F1626&labelColor=0F1626)](https://erfankhadiv.github.io/)
+[![GitHub](https://img.shields.io/badge/GitHub-ErfanKhadiv-0F1626?style=for-the-badge&logo=github)](https://github.com/ErfanKhadiv)
 
-- `index.html`: the whole page
-- `assets/img/`: thumbnails, certificates and photos
+<a href="https://erfankhadiv.github.io/">
+  <img src="https://placehold.co/1200x680/0F1626/E8EDF7?text=Hero+screenshot+(dark)" alt="Portfolio hero section in dark mode" width="860">
+</a>
 
-## Publish with GitHub Pages
+</div>
 
-1. Create a new public repository on GitHub. Naming it `ErfanKhadiv.github.io` puts the site at `https://erfankhadiv.github.io/`. Any other name puts it at `https://erfankhadiv.github.io/<repo-name>/`.
-2. Upload every file from this folder, keeping `index.html` at the top level of the repository and the `assets` folder next to it.
-3. Open Settings, then Pages. Under Build and deployment choose "Deploy from a branch", select the `main` branch and the `/ (root)` folder, then save.
-4. After a minute the site is live. Add the link to your CV, GitHub profile and LinkedIn.
+## About this site
 
-## Preview locally
+A personal portfolio built as one static page: plain HTML, CSS and a little JavaScript. There is no framework, no build step and nothing to install. It is available in **English and Persian (right-to-left)** and in **dark and light mode**.
 
-Open `index.html` in a browser, or run `python3 -m http.server` in this folder and visit `http://localhost:8000`.
+At the top of the page, an animated map runs HBALS, my Traveling Salesman Problem algorithm, live in the browser.
 
-## Notes
+## Preview
 
-- The animated map at the top runs HBALS, a JavaScript port of the Python implementation in [HBALS-TSP](https://github.com/ErfanKhadiv/HBALS-TSP) (fast preset). Visitors can pick one of six TSPLIB instances (eil51, berlin52, st70, kroA100, ch150, rat195) or random cities, and tap the map to add their own. TSPLIB instances use rounded Euclidean distances, as in the benchmark; random and added cities use exact distances. The instance coordinates are embedded in `index.html` (search for `const DATA=`). Source: Reinelt, TSPLIB, 1991.
-- Results vary from run to run because the search is random, so the page shows the best result seen this session next to the best-known length.
-- Photos added: `ielts_van.jpg` (the highlighted British Council sign is positioned with percentages in the `.pin .ring` CSS rule) and `lab_scope.jpg`, `lab_breadboard.jpg` (Electrical Circuits Laboratory).
-- Fonts load from Google Fonts. If they are blocked the page falls back to system fonts.
-- To change a link, search `index.html` for its URL. The contact buttons are listed near the bottom of the file, in the `LINKS` list.
-- Theme and language: the page opens in dark mode and English. The sun/moon button switches between dark and light, and the FA/EN button switches between English and Persian (right-to-left). Both choices are remembered in the visitor's browser (localStorage).
-- Persian text: every translatable element in `index.html` has a `data-t="N"` attribute, and the Persian strings are in the `FA` array near the bottom of the file (item N is the translation of element `data-t="N"`). Image descriptions and aria-labels are in the `ATTR` object next to it, keyed by the English text. The Persian font (Vazirmatn) is only loaded from Google Fonts when Persian is selected. Numbers stay in Latin digits. To change a sentence, edit the English in the HTML and the matching entry in `FA`.
-- Icons: `icon.svg` (modern browsers), `favicon.ico`, `apple-touch-icon.png` (iPhone/iPad home screen) and `icon-192.png` / `icon-512.png`. Keep them in the top-level folder next to `index.html`.
-- In Persian mode dates are shown in the Persian (Solar Hijri) calendar, and the footer year too.
-- The top menu is sticky with a frosted-glass look (`nav.glass`), and a round back-to-top button (`#totop`) appears at the bottom right after scrolling.
-- The menu item of the section you are viewing is highlighted (yellow, bolder, slightly larger). Style: `nav.glass .navin a.active`.
+| Dark mode | Light mode |
+|---|---|
+| ![Dark mode](https://placehold.co/600x380/0F1626/E8EDF7?text=Dark+mode) | ![Light mode](https://placehold.co/600x380/EDF1F6/12203A?text=Light+mode) |
+
+| Persian (RTL) | Mobile |
+|---|---|
+| ![Persian version](https://placehold.co/600x380/0F1626/E8EDF7?text=Persian+RTL) | ![Mobile view](https://placehold.co/300x380/0F1626/E8EDF7?text=Mobile) |
+
+<sub>Placeholder images. Replace them with real screenshots, for example in `docs/screenshots/`, and change the paths above.</sub>
+
+## Sections
+
+- **Hero:** name, a short tagline and the live HBALS map.
+- **Research:** the HBALS project, what it solves and how it performed.
+- **About:** a short introduction and areas of interest.
+- **Projects:** selected work with demos and code.
+- **Skills:** languages, tools and topics.
+- **Education:** degree, IELTS and certificates.
+- **Experience:** an internship story.
+- **Contact:** ways to get in touch.
+
+## Features
+
+- Dark mode by default, with a light mode toggle that is remembered
+- English / Persian switch with a full right-to-left layout
+- Frosted-glass menu that highlights the section you are viewing
+- Back-to-top button
+- Live, interactive HBALS demo on real TSPLIB benchmark instances
+- Responsive layout and keyboard-friendly controls
+
+## Project structure
+
+```
+index.html        the whole page (styles, content and scripts)
+assets/img/       thumbnails, certificates and photos
+icon.svg, favicon.ico, apple-touch-icon.png   site icons
+.nojekyll         tells GitHub Pages to serve the files as they are
+```
+
+## Run locally
+
+Open `index.html` in a browser, or run:
+
+```bash
+python3 -m http.server
+```
+
+then visit `http://localhost:8000`.
+
+## Deploy
+
+Hosted with GitHub Pages: Settings → Pages → Deploy from a branch → `main` / root.
+
+## Related
+
+- [HBALS-TSP](https://github.com/ErfanKhadiv/HBALS-TSP): code, data and paper for the algorithm shown on the site.
+
+## License
+
+All rights reserved. The text, photos and certificates on this site are personal content and may not be reused without permission.
