@@ -15,6 +15,9 @@
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0F1626">
+<link rel="canonical" href="https://erfankhadiv.github.io/">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="fa_IR">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Erfan Khadiv","url":"https://erfankhadiv.github.io/","jobTitle":"Computer Engineer","description":"Computer engineering graduate working on algorithms, metaheuristic optimization (HBALS for the Traveling Salesman Problem), web apps and artificial intelligence.","alumniOf":{"@type":"CollegeOrUniversity","name":"Islamic Azad University, Ardabil Branch"},"knowsAbout":["Algorithms","Combinatorial optimization","Metaheuristics","Bees Algorithm","Traveling Salesman Problem","Machine learning","React","Python"],"sameAs":["https://github.com/ErfanKhadiv","https://www.linkedin.com/in/erfan-khadiv-777a66279/","https://x.com/ErfanKhadiv"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -63,7 +66,12 @@ canvas{display:block;width:100%;height:clamp(280px,42vw,430px);border-radius:10p
 .mapnote button{font:inherit;background:none;border:0;padding:0;color:var(--link);text-decoration:underline;cursor:pointer;text-underline-offset:3px}
 
 /* sections */
-section{padding:clamp(40px,7vw,84px) 0;border-top:1px solid var(--line)}
+section{padding:clamp(24px,5vw,56px) 0 clamp(40px,7vw,84px)}
+.frieze{color:var(--accent);opacity:.55;margin:clamp(8px,2vw,20px) 0 0}
+.frieze svg{display:block;width:100%;height:auto;max-height:46px}
+.backdrop{position:fixed;inset:auto 0 0 0;height:min(46vh,380px);z-index:-1;pointer-events:none;color:var(--muted);opacity:.07}
+.backdrop svg{display:block;width:100%;height:100%}
+@media print{.backdrop{display:none}}
 .grid{display:grid;grid-template-columns:minmax(170px,1fr) 3fr;gap:clamp(20px,4vw,56px)}
 h2{font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:700}
 .side p{color:var(--muted);font-size:1rem;margin:10px 0 0;max-width:24ch}
@@ -76,15 +84,7 @@ h2{font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:700}
 .thumb.fb{display:flex;flex-direction:column;justify-content:center;padding:14px 16px;background:#F7F1E3;color:#1d2a44;font-family:var(--display)}
 .thumb.fb b{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1}
 .thumb.fb span{font-size:.8rem;margin-top:6px;color:#4a5870}
-.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
-.certs figure{margin:0}
-.certs button{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel);cursor:zoom-in;display:block;width:100%}
-.certs img{display:block;width:100%;height:auto}
-.certs figcaption{font-size:.95rem;margin-top:8px;line-height:1.35}
-.certs figcaption strong{font-family:var(--display);display:block}
-dialog{border:0;padding:0;background:transparent;max-width:min(92vw,900px)}
-dialog::backdrop{background:rgba(8,12,22,.75)}
-dialog img{width:100%;height:auto;border-radius:10px;display:block}
+main img,section img{cursor:zoom-in}
 .proj:first-child{padding-top:0}
 .proj h3{font-size:1.55rem;font-weight:700}
 .proj .kind{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:6px 0 10px}
@@ -291,9 +291,438 @@ html[lang="fa"] .tbtn{font-size:.9rem}
 .picker button{direction:ltr;unicode-bidi:isolate}
 html[dir="rtl"] .stat b,html[dir="rtl"] .fact b{unicode-bidi:plaintext;text-align:right}
 html[dir="rtl"] td.ok{direction:ltr;text-align:left}
+
+/* v6: glass cards, focused view, hover effects, certificates, learning shots */
+:root{
+  --gc-bg:linear-gradient(150deg,rgba(255,255,255,.085),rgba(255,255,255,.026));
+  --gc-bg-hover:linear-gradient(150deg,rgba(255,255,255,.125),rgba(255,255,255,.05));
+  --gc-line:rgba(159,172,196,.2);
+  --gc-line-hover:rgba(242,182,50,.6);
+  --gc-shadow:0 10px 30px rgba(3,8,20,.28),inset 0 1px 0 rgba(255,255,255,.09);
+  --gc-shadow-hover:0 24px 54px rgba(3,8,20,.42),inset 0 1px 0 rgba(255,255,255,.15);
+  --chip-bg:rgba(255,255,255,.06);
+  --spot:rgba(242,182,50,.17);
+  --fc-bg:linear-gradient(150deg,rgba(30,43,70,.74),rgba(17,26,45,.66));
+  --scrim:rgba(5,9,18,.58);
+  --blob-a:rgba(242,182,50,.13);--blob-b:rgba(125,179,240,.14);--blob-c:rgba(95,211,155,.07);
+}
+:root[data-theme="light"]{
+  --gc-bg:linear-gradient(150deg,rgba(255,255,255,.8),rgba(255,255,255,.44));
+  --gc-bg-hover:linear-gradient(150deg,rgba(255,255,255,.94),rgba(255,255,255,.62));
+  --gc-line:rgba(18,32,58,.12);
+  --gc-line-hover:rgba(179,107,0,.6);
+  --gc-shadow:0 10px 30px rgba(18,32,58,.1),inset 0 1px 0 rgba(255,255,255,.95);
+  --gc-shadow-hover:0 24px 54px rgba(18,32,58,.2),inset 0 1px 0 #fff;
+  --chip-bg:rgba(255,255,255,.55);
+  --spot:rgba(232,162,0,.22);
+  --fc-bg:linear-gradient(150deg,rgba(255,255,255,.84),rgba(238,244,251,.72));
+  --scrim:rgba(18,32,58,.38);
+  --blob-a:rgba(232,162,0,.2);--blob-b:rgba(27,95,168,.16);--blob-c:rgba(11,107,58,.08);
+}
+
+/* soft colour behind the page so the glass has something to blur */
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(52vmax 44vmax at 88% 6%,var(--blob-a),transparent 62%),
+    radial-gradient(48vmax 42vmax at 4% 46%,var(--blob-b),transparent 62%),
+    radial-gradient(44vmax 36vmax at 78% 98%,var(--blob-c),transparent 62%)}
+
+/* glass surfaces */
+.map,.card,.fact,.stat,.steps li,.also,.tw,.cert,.shot{
+  background:var(--gc-bg);border-color:var(--gc-line);box-shadow:var(--gc-shadow);
+  -webkit-backdrop-filter:blur(16px) saturate(165%);backdrop-filter:blur(16px) saturate(165%)}
+.tags li,.interests li{background:var(--chip-bg);border-color:var(--gc-line)}
+.picker button:not([aria-pressed="true"]){background:var(--chip-bg)}
+.card .thumb,.also img{border-color:var(--gc-line)}
+.card .thumb{border-bottom:1px solid var(--gc-line)}
+
+/* clickable cards */
+.gcard{position:relative;isolation:isolate;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gcard img{cursor:inherit}
+.gcard::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;opacity:0;transition:opacity .3s;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),var(--spot),transparent 65%)}
+.gcard:hover::after,.gcard:focus-visible::after{opacity:1}
+.gcard:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.gcard:hover{border-color:var(--gc-line-hover);background:var(--gc-bg-hover);box-shadow:var(--gc-shadow-hover)}
+.fc-img,[data-fc="img"]{cursor:zoom-in}
+
+/* hover motion (only on devices with a real pointer, and not when motion is reduced) */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .gcard,.btn,.tbtn,.tags li,.interests li,.picker button,.mapbtns button,.card .links a,.cert .verify,
+  .fig img,.degree img,.exp img,.pin,.totop{
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .25s,background-color .25s,background .25s,color .25s}
+  .gcard:hover{transform:translateY(-6px)}
+  .card .thumb,.plate img,.shot img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .card:hover .thumb,.cert:hover .plate img,.shot:hover img{transform:scale(1.045)}
+  .btn:hover,.card .links a:hover,.mapbtns button:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(242,182,50,.22)}
+  .tags li:hover,.interests li:hover,.picker button:hover{transform:translateY(-2px)}
+  .tbtn:hover{transform:translateY(-1px)}
+  .totop.show:hover{transform:scale(1.08)}
+  .fig img:hover,.degree img:hover,.exp img:hover,.pin:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(3,8,20,.38)}
+}
+.btn.fill:hover{background:var(--accent);color:#1b1500;border-color:var(--accent)}
+.card .links a:first-child:hover{background:var(--accent);color:#1b1500;border-color:var(--accent)}
+.tags li:hover,.interests li:hover{border-color:var(--gc-line-hover)}
+nav.glass .navin a:not(.me):hover{color:var(--navactive)}
+.skill{transition:background-color .25s}
+.skill:hover{background:rgba(242,182,50,.07)}
+.skill:hover dt{color:var(--navactive)}
+tbody tr{transition:background-color .2s}
+tbody tr:hover td{background:rgba(242,182,50,.08)}
+.key li:hover i{box-shadow:0 0 0 4px rgba(242,182,50,.25)}
+
+/* certificates */
+.certs,.shots{margin-top:14px}
+.certs{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:20px;align-items:stretch}
+.cert{margin:0;display:flex;flex-direction:column;border:1px solid var(--gc-line);border-radius:18px;overflow:hidden;min-width:0}
+.cert.trf{grid-row:span 2}
+.cert .plate{position:relative;display:block;width:100%;padding:0;margin:0;border:0;border-bottom:1px solid var(--gc-line);border-radius:0;background:#fff;overflow:hidden;cursor:inherit;flex:none}
+.cert .plate img{display:block;width:100%;height:auto}
+.cert.trf .plate{flex:1;min-height:260px}
+.cert.trf .plate img{position:absolute;inset:0;height:100%;object-fit:contain;object-position:50% 0}
+.cert.trf figcaption{flex:none}
+.cert figcaption{flex:1;padding:16px 18px 6px;font-size:.93rem;line-height:1.45;color:var(--muted)}
+.cert figcaption:last-child{padding-bottom:18px}
+.cert figcaption strong{display:block;font-family:var(--display);font-size:1.04rem;line-height:1.25;letter-spacing:-.01em;color:var(--ink);margin-bottom:5px}
+.cert .verify{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;margin:6px 18px 18px;padding:5px 13px;border:1.5px solid var(--gc-line);border-radius:999px;background:var(--chip-bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:.84rem;text-decoration:none}
+.cert .verify svg{width:15px;height:15px;flex:none;color:var(--ok)}
+.cert .verify:hover{border-color:var(--gc-line-hover);color:var(--navactive)}
+.plate::after,.shot::before{content:"";position:absolute;top:12px;inset-inline-end:12px;width:34px;height:34px;border-radius:50%;z-index:2;opacity:0;transform:scale(.85);transition:opacity .25s,transform .25s;
+  background:rgba(10,16,30,.6) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7'/%3E%3C/svg%3E") center/16px no-repeat;
+  border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.gcard:hover .plate::after,.gcard:hover.shot::before,.gcard:focus-visible.shot::before{opacity:1;transform:none}
+
+/* learning in practice */
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.shot{margin:0;position:relative;aspect-ratio:4/3;border:1px solid var(--gc-line);border-radius:18px;overflow:hidden}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+.shot .chip{position:absolute;top:12px;inset-inline-start:12px;z-index:2;padding:4px 12px;border-radius:999px;font-family:var(--display);font-weight:700;font-size:.78rem;color:#fff;background:rgba(10,16,30,.55);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.shot figcaption{position:absolute;inset:auto 12px 12px 12px;z-index:2;margin:0;padding:12px 15px;border-radius:13px;font-size:.96rem;line-height:1.42;color:#EEF3FB;
+  background:rgba(10,16,30,.5);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(14px) saturate(150%);backdrop-filter:blur(14px) saturate(150%)}
+
+/* focused card */
+html.fc-open{overflow:hidden}
+#fc{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--ink);overflow:hidden}
+#fc[open]{display:grid;place-items:center;padding:clamp(12px,4vw,40px)}
+#fc::backdrop{background:rgba(5,9,18,0);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);transition:background-color .35s,backdrop-filter .35s,-webkit-backdrop-filter .35s}
+#fc.on::backdrop{background:var(--scrim);-webkit-backdrop-filter:blur(12px) saturate(125%);backdrop-filter:blur(12px) saturate(125%)}
+.fcpanel{position:relative;display:flex;flex-direction:column;width:min(94vw,860px);max-height:calc(100vh - 2*clamp(12px,4vw,40px));max-height:calc(100dvh - 2*clamp(12px,4vw,40px));
+  border-radius:26px;border:1px solid var(--gc-line);background:var(--fc-bg);
+  -webkit-backdrop-filter:blur(30px) saturate(185%);backdrop-filter:blur(30px) saturate(185%);
+  box-shadow:0 40px 110px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.16);overflow:hidden;
+  opacity:0;transform:translate(var(--fx,0px),var(--fy,0px)) scale(var(--fs,.9));
+  transition:transform .46s cubic-bezier(.2,.8,.2,1),opacity .3s}
+#fc.on .fcpanel{opacity:1;transform:none}
+#fc.small .fcpanel{width:min(94vw,540px)}
+.fcbody{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.fcx{position:absolute;top:14px;inset-inline-end:14px;z-index:6;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.26);background:rgba(10,16,30,.58);color:#fff;font-size:1.35rem;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background-color .2s,color .2s}
+.fcx:hover{background:var(--accent);color:#1b1500;border-color:var(--accent)}
+.fcx:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.fcpanel,#fc::backdrop{transition:none}}
+
+/* the cloned card inside the focused view */
+.fcbody .card,.fcbody .stat,.fcbody .fact,.fcbody .steps li,.fcbody .also,.fcbody .cert,.fcbody .shot{
+  background:none;border:0;box-shadow:none;border-radius:0;transform:none;margin:0;aspect-ratio:auto;-webkit-backdrop-filter:none;backdrop-filter:none}
+.fcbody .steps{display:block;margin:0}
+.fcbody li{list-style:none}
+.fcbody .card{display:block}
+.fcbody .card .thumb{width:100%;aspect-ratio:2/1;border:0;border-bottom:1px solid var(--gc-line);border-radius:0;transform:none}
+.fcbody .card .body{padding:26px 30px 30px}
+.fcbody .card h3{font-size:2rem}
+.fcbody .card p{font-size:1.14rem}
+.fcbody .card .links{padding-top:22px}
+.fcbody .stat,.fcbody .fact{padding:58px 36px 46px;text-align:center}
+.fcbody .stat b,.fcbody .fact b{font-size:clamp(3.2rem,14vw,5.8rem);line-height:1;color:var(--navactive);text-align:center}
+.fcbody .stat span,.fcbody .fact span{display:block;max-width:30ch;margin:18px auto 0;font-size:1.22rem;line-height:1.45}
+.fcbody .steps li{padding:46px 38px 40px;font-size:1.2rem;line-height:1.55}
+.fcbody .steps li::before{width:46px;height:46px;font-size:1.3rem;margin-bottom:16px}
+.fcbody .steps b{font-size:1.6rem;margin-bottom:8px}
+.fcbody .also{display:block;padding:0}
+.fcbody .also img{width:100%;border:0;border-radius:0;display:block}
+.fcbody .also>div{padding:24px 30px 30px}
+.fcbody .also h3{font-size:1.7rem}
+.fcbody .cert{display:block}
+.fcbody .cert .plate{position:static;display:block;border:0;border-bottom:1px solid var(--gc-line);min-height:0}
+.fcbody .cert .plate::after{display:none}
+.fcbody .cert .plate img,.fcbody .cert>img{position:static;display:block;width:100%;height:auto;max-height:66vh;object-fit:contain;background:#fff}
+.fcbody .cert figcaption{padding:20px 28px 8px;font-size:1.05rem}
+.fcbody .cert figcaption strong{font-size:1.3rem}
+.fcbody .cert .verify{margin:8px 28px 26px}
+.fcbody .shot{display:block;position:relative}
+.fcbody .shot::before{display:none}
+.fcbody .shot img{width:100%;height:auto;max-height:70vh;object-fit:contain;background:rgba(0,0,0,.18)}
+.fcbody .shot figcaption{position:static;padding:18px 28px 24px;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--ink);font-size:1.08rem}
+.fcbody .fcimg{margin:0}
+.fcbody .fcimg img{display:block;width:100%;height:auto;max-height:72vh;object-fit:contain;border:0;border-radius:0;background:rgba(0,0,0,.16);transform:none;box-shadow:none}
+.fcbody .fcimg .pin{transform:none;box-shadow:none}
+.fcbody .fcimg figcaption{margin:0;padding:16px 26px 22px;font-size:1.02rem}
+
+@media (max-width:980px){.certs{grid-template-columns:1fr 1fr}.cert.trf{grid-row:auto;grid-column:1/-1}.cert.trf .plate{min-height:0;aspect-ratio:16/9}}
+@media (max-width:640px){.certs,.shots{grid-template-columns:1fr}.cert.trf{grid-column:auto}.shot figcaption{font-size:.92rem}}
+
+/* v7: live constellation background, progress bar, availability pill, reveal, toast */
+#stars{position:fixed;inset:0;width:100%;height:100%;max-width:none;z-index:-1;pointer-events:none;cursor:auto;border-radius:0;touch-action:auto}
+@media print{#stars,.progress,.toast{display:none}.rv{opacity:1!important;animation:none!important}}
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;pointer-events:none;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--link),var(--accent));box-shadow:0 0 12px rgba(242,182,50,.55)}
+html[dir="rtl"] .progress{transform-origin:100% 50%}
+
+.avail{display:inline-flex;align-items:center;gap:10px;margin:0 0 26px;padding:7px 16px 7px 13px;border-radius:999px;
+  font-family:var(--display);font-weight:600;font-size:.88rem;line-height:1.3;color:var(--ink);
+  background:var(--chip-bg);border:1px solid var(--gc-line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+html[dir="rtl"] .avail{padding:7px 13px 7px 16px}
+.avail i{position:relative;flex:none;width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.avail i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ok);opacity:.55;animation:avping 2.4s ease-out infinite}
+@keyframes avping{0%{transform:scale(1);opacity:.55}100%{transform:scale(3.2);opacity:0}}
+.hero .lede{margin-bottom:20px}
+
+/* scroll reveal: starts hidden only when scripting is running; transform is not held after the animation */
+.rv:not(.in){opacity:0}
+.rv.in{animation:rise .75s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:var(--d,0ms)}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+.copybtn{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.copybtn svg{width:16px;height:16px;flex:none}
+.toast{position:fixed;left:50%;bottom:max(26px,env(safe-area-inset-bottom,0px));z-index:90;transform:translate(-50%,16px);opacity:0;visibility:hidden;
+  padding:10px 18px;border-radius:999px;font-family:var(--display);font-weight:700;font-size:.92rem;color:var(--ink);
+  background:var(--fc-bg);border:1px solid var(--gc-line);box-shadow:var(--gc-shadow-hover);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  transition:opacity .25s,transform .3s,visibility .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.ielts.rank{grid-template-columns:minmax(260px,560px) 1fr}
+@media (max-width:820px){.ielts.rank{grid-template-columns:1fr}.ielts.rank figure{max-width:none}}
+@media (prefers-reduced-motion:reduce){.rv.in{animation:none}.avail i::after{animation:none}.toast{transition:none}}
 </style>
 </head>
 <body>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="frieze" viewBox="0 0 1200 60" preserveAspectRatio="xMidYMid meet">
+<line x1="0" y1="30" x2="1200" y2="30" stroke="currentColor" stroke-width="1" opacity=".35"/>
+<g opacity=".9"><rect x="213.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="240.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="240.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="240.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="240.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 240.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M300.0 22 L308.0 30 L300.0 38 L292.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="333.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="360.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="360.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="360.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="360.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 360.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M420.0 22 L428.0 30 L420.0 38 L412.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="453.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="480.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="480.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="480.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="480.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 480.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M540.0 22 L548.0 30 L540.0 38 L532.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="573.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="600.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="600.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="600.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="600.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 600.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M660.0 22 L668.0 30 L660.0 38 L652.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="693.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="720.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="720.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="720.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="720.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 720.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M780.0 22 L788.0 30 L780.0 38 L772.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="813.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="840.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="840.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="840.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="840.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 840.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+<path d="M900.0 22 L908.0 30 L900.0 38 L892.0 30 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+<g opacity=".9"><rect x="933.0" y="3" width="54" height="54" fill="var(--bg, #0F1626)" stroke="none"/><circle cx="960.0" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="960.0" cy="30" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+<circle cx="960.0" cy="30" r="2.2" fill="currentColor"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(0.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(30.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(60.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(90.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(120.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(150.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(180.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(210.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(240.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(270.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(300.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/>
+<ellipse cx="960.0" cy="16.4" rx="3.7" ry="6.6" transform="rotate(330.0 960.0 30)" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+</symbol></svg>
+<div class="backdrop" aria-hidden="true"><svg viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.4" focusable="false">
+<rect x="109.0" y="110" width="22" height="78"/>
+<line x1="112.7" y1="114" x2="112.7" y2="184" opacity=".45"/>
+<line x1="116.3" y1="114" x2="116.3" y2="184" opacity=".45"/>
+<line x1="120.0" y1="114" x2="120.0" y2="184" opacity=".45"/>
+<line x1="123.7" y1="114" x2="123.7" y2="184" opacity=".45"/>
+<line x1="127.3" y1="114" x2="127.3" y2="184" opacity=".45"/>
+<path d="M103.0 188 Q120.0 176 137.0 188 L141.0 210 L99.0 210 Z"/>
+<rect x="105.0" y="100" width="30" height="10"/>
+<path d="M105.0 100 L95.0 82 L145.0 82 L135.0 100"/>
+<circle cx="97.0" cy="78" r="8"/><circle cx="97.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="143.0" cy="78" r="8"/><circle cx="143.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="95.0" y="60" width="50" height="8"/>
+<rect x="229.0" y="110" width="22" height="78"/>
+<line x1="232.7" y1="114" x2="232.7" y2="184" opacity=".45"/>
+<line x1="236.3" y1="114" x2="236.3" y2="184" opacity=".45"/>
+<line x1="240.0" y1="114" x2="240.0" y2="184" opacity=".45"/>
+<line x1="243.7" y1="114" x2="243.7" y2="184" opacity=".45"/>
+<line x1="247.3" y1="114" x2="247.3" y2="184" opacity=".45"/>
+<path d="M223.0 188 Q240.0 176 257.0 188 L261.0 210 L219.0 210 Z"/>
+<rect x="225.0" y="100" width="30" height="10"/>
+<path d="M225.0 100 L215.0 82 L265.0 82 L255.0 100"/>
+<circle cx="217.0" cy="78" r="8"/><circle cx="217.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="263.0" cy="78" r="8"/><circle cx="263.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="215.0" y="60" width="50" height="8"/>
+<rect x="349.0" y="110" width="22" height="78"/>
+<line x1="352.7" y1="114" x2="352.7" y2="184" opacity=".45"/>
+<line x1="356.3" y1="114" x2="356.3" y2="184" opacity=".45"/>
+<line x1="360.0" y1="114" x2="360.0" y2="184" opacity=".45"/>
+<line x1="363.7" y1="114" x2="363.7" y2="184" opacity=".45"/>
+<line x1="367.3" y1="114" x2="367.3" y2="184" opacity=".45"/>
+<path d="M343.0 188 Q360.0 176 377.0 188 L381.0 210 L339.0 210 Z"/>
+<rect x="345.0" y="100" width="30" height="10"/>
+<path d="M345.0 100 L335.0 82 L385.0 82 L375.0 100"/>
+<circle cx="337.0" cy="78" r="8"/><circle cx="337.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="383.0" cy="78" r="8"/><circle cx="383.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="335.0" y="60" width="50" height="8"/>
+<rect x="469.0" y="110" width="22" height="78"/>
+<line x1="472.7" y1="114" x2="472.7" y2="184" opacity=".45"/>
+<line x1="476.3" y1="114" x2="476.3" y2="184" opacity=".45"/>
+<line x1="480.0" y1="114" x2="480.0" y2="184" opacity=".45"/>
+<line x1="483.7" y1="114" x2="483.7" y2="184" opacity=".45"/>
+<line x1="487.3" y1="114" x2="487.3" y2="184" opacity=".45"/>
+<path d="M463.0 188 Q480.0 176 497.0 188 L501.0 210 L459.0 210 Z"/>
+<rect x="465.0" y="100" width="30" height="10"/>
+<path d="M465.0 100 L455.0 82 L505.0 82 L495.0 100"/>
+<circle cx="457.0" cy="78" r="8"/><circle cx="457.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="503.0" cy="78" r="8"/><circle cx="503.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="455.0" y="60" width="50" height="8"/>
+<rect x="589.0" y="110" width="22" height="78"/>
+<line x1="592.7" y1="114" x2="592.7" y2="184" opacity=".45"/>
+<line x1="596.3" y1="114" x2="596.3" y2="184" opacity=".45"/>
+<line x1="600.0" y1="114" x2="600.0" y2="184" opacity=".45"/>
+<line x1="603.7" y1="114" x2="603.7" y2="184" opacity=".45"/>
+<line x1="607.3" y1="114" x2="607.3" y2="184" opacity=".45"/>
+<path d="M583.0 188 Q600.0 176 617.0 188 L621.0 210 L579.0 210 Z"/>
+<rect x="585.0" y="100" width="30" height="10"/>
+<path d="M585.0 100 L575.0 82 L625.0 82 L615.0 100"/>
+<circle cx="577.0" cy="78" r="8"/><circle cx="577.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="623.0" cy="78" r="8"/><circle cx="623.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="575.0" y="60" width="50" height="8"/>
+<rect x="709.0" y="110" width="22" height="78"/>
+<line x1="712.7" y1="114" x2="712.7" y2="184" opacity=".45"/>
+<line x1="716.3" y1="114" x2="716.3" y2="184" opacity=".45"/>
+<line x1="720.0" y1="114" x2="720.0" y2="184" opacity=".45"/>
+<line x1="723.7" y1="114" x2="723.7" y2="184" opacity=".45"/>
+<line x1="727.3" y1="114" x2="727.3" y2="184" opacity=".45"/>
+<path d="M703.0 188 Q720.0 176 737.0 188 L741.0 210 L699.0 210 Z"/>
+<rect x="705.0" y="100" width="30" height="10"/>
+<path d="M705.0 100 L695.0 82 L745.0 82 L735.0 100"/>
+<circle cx="697.0" cy="78" r="8"/><circle cx="697.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="743.0" cy="78" r="8"/><circle cx="743.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="695.0" y="60" width="50" height="8"/>
+<rect x="829.0" y="110" width="22" height="78"/>
+<line x1="832.7" y1="114" x2="832.7" y2="184" opacity=".45"/>
+<line x1="836.3" y1="114" x2="836.3" y2="184" opacity=".45"/>
+<line x1="840.0" y1="114" x2="840.0" y2="184" opacity=".45"/>
+<line x1="843.7" y1="114" x2="843.7" y2="184" opacity=".45"/>
+<line x1="847.3" y1="114" x2="847.3" y2="184" opacity=".45"/>
+<path d="M823.0 188 Q840.0 176 857.0 188 L861.0 210 L819.0 210 Z"/>
+<rect x="825.0" y="100" width="30" height="10"/>
+<path d="M825.0 100 L815.0 82 L865.0 82 L855.0 100"/>
+<circle cx="817.0" cy="78" r="8"/><circle cx="817.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="863.0" cy="78" r="8"/><circle cx="863.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="815.0" y="60" width="50" height="8"/>
+<rect x="949.0" y="110" width="22" height="78"/>
+<line x1="952.7" y1="114" x2="952.7" y2="184" opacity=".45"/>
+<line x1="956.3" y1="114" x2="956.3" y2="184" opacity=".45"/>
+<line x1="960.0" y1="114" x2="960.0" y2="184" opacity=".45"/>
+<line x1="963.7" y1="114" x2="963.7" y2="184" opacity=".45"/>
+<line x1="967.3" y1="114" x2="967.3" y2="184" opacity=".45"/>
+<path d="M943.0 188 Q960.0 176 977.0 188 L981.0 210 L939.0 210 Z"/>
+<rect x="945.0" y="100" width="30" height="10"/>
+<path d="M945.0 100 L935.0 82 L985.0 82 L975.0 100"/>
+<circle cx="937.0" cy="78" r="8"/><circle cx="937.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="983.0" cy="78" r="8"/><circle cx="983.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="935.0" y="60" width="50" height="8"/>
+<rect x="1069.0" y="110" width="22" height="78"/>
+<line x1="1072.7" y1="114" x2="1072.7" y2="184" opacity=".45"/>
+<line x1="1076.3" y1="114" x2="1076.3" y2="184" opacity=".45"/>
+<line x1="1080.0" y1="114" x2="1080.0" y2="184" opacity=".45"/>
+<line x1="1083.7" y1="114" x2="1083.7" y2="184" opacity=".45"/>
+<line x1="1087.3" y1="114" x2="1087.3" y2="184" opacity=".45"/>
+<path d="M1063.0 188 Q1080.0 176 1097.0 188 L1101.0 210 L1059.0 210 Z"/>
+<rect x="1065.0" y="100" width="30" height="10"/>
+<path d="M1065.0 100 L1055.0 82 L1105.0 82 L1095.0 100"/>
+<circle cx="1057.0" cy="78" r="8"/><circle cx="1057.0" cy="78" r="3.5" opacity=".6"/>
+<circle cx="1103.0" cy="78" r="8"/><circle cx="1103.0" cy="78" r="3.5" opacity=".6"/>
+<rect x="1055.0" y="60" width="50" height="8"/>
+<line x1="0" y1="210" x2="1200" y2="210"/>
+<line x1="72.0" y1="46" x2="1128.0" y2="46" opacity=".6"/><line x1="72.0" y1="52" x2="1128.0" y2="52" opacity=".35"/>
+</svg></div>
 <nav aria-label="Main" class="glass"><div class="wrap navin">
 <a class="me" data-t="0" href="#top">Erfan Khadiv</a>
 <a data-t="1" href="#research">Research</a><a data-t="2" href="#projects">Projects</a><a data-t="3" href="#skills">Skills</a><a data-t="4" href="#education">Education</a><a data-t="5" href="#experience">Experience</a><a data-t="6" href="#contact">Contact</a>
@@ -307,9 +736,11 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 <div>
 <h1><span data-t="7">Erfan</span><span data-t="8">Khadiv</span></h1>
 <p class="lede" data-t="9" style="max-width:34ch">Computer engineering graduate interested in algorithms, software and artificial intelligence.</p>
+<p class="avail"><i aria-hidden="true"></i><span data-t="132">Looking for a master's place in computer science</span></p>
 <div class="cta">
 <a class="btn fill" data-t="10" href="#research">See my research</a>
 <a class="btn" href="https://github.com/ErfanKhadiv" rel="noopener" target="_blank">GitHub</a>
+<a class="btn" data-t="137" href="assets/Khadiv_Erfan_CV.pdf" download="Erfan_Khadiv_CV.pdf">Download CV</a>
 </div>
 </div>
 <div class="map">
@@ -323,9 +754,10 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 <div class="mapbtns"><button data-t="21" id="rerun" type="button">Run again</button><button data-t="22" id="reset" type="button">Remove my cities</button></div>
 </div>
 </header>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="research">
 <h2 data-t="23">Research: HBALS</h2>
-<p class="rlede" data-t="24">A hybrid Bees Algorithm with adaptive local search, which I designed for the Traveling Salesman Problem. It was my bachelor's final project, and I am the sole author of the manuscript submitted to <em>Evolutionary Intelligence</em> (Springer).</p>
+<p class="rlede" data-t="24">A hybrid Bees Algorithm with adaptive local search, which I designed for the Traveling Salesman Problem. It was my bachelor's final project. I am the sole author of the manuscript, and I am now improving the article with the aim of getting it published in a peer-reviewed journal.</p>
 <div class="cta"><a class="btn fill" data-t="25" href="https://github.com/ErfanKhadiv/HBALS-TSP" rel="noopener" target="_blank">Code, data and paper</a></div>
 <div class="two">
 <div>
@@ -371,6 +803,7 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 <div><h3 data-t="56">Also: Li-Fi research report</h3><p data-t="57">A 19-reference report on Light Fidelity for the Research Methods and Presentation course. It covers modulation methods (OOK, VPPM, OFDM, CSK) and uses in healthcare, aviation and underwater communication.</p><div class="cta"><a class="btn" data-t="58" href="https://github.com/ErfanKhadiv/LiFi-Report" rel="noopener" target="_blank">Read the report</a></div></div>
 </div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="about">
 <div class="grid">
 <div class="side"><h2 data-t="59">About</h2></div>
@@ -382,6 +815,7 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 </div>
 </div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="projects">
 <div class="sechead"><h2 data-t="67">Selected projects</h2><p data-t="68">Code is public on GitHub. Demos run in your browser.</p></div>
 <div class="cards"><article class="card"><img alt="Workfolio project thumbnail" class="thumb" loading="lazy" src="assets/img/t_workfolio.jpg"/><div class="body"><h3>Workfolio</h3><div class="kind" data-t="69">Web app · resume builder</div><p data-t="70">A browser-based resume builder in vanilla JavaScript, HTML and CSS, with five customizable templates, a live preview and export to PDF, Word, Excel and text. The AI Job Match tool takes a pasted job description and returns a match score, missing skills and tailoring suggestions.</p><ul class="tags"><li>JavaScript</li><li>HTML5</li><li>CSS3</li><li>AI Job Match</li></ul><div class="links"><a data-t="71" href="https://erfankhadiv.github.io/Workfolio/" rel="noopener" target="_blank">Live demo</a><a data-t="72" href="https://github.com/ErfanKhadiv/Workfolio" rel="noopener" target="_blank">Code</a></div></div></article>
@@ -389,6 +823,7 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 <article class="card"><img alt="CS50AI problem sets project thumbnail" class="thumb" loading="lazy" src="assets/img/t_cs50ai.jpg"/><div class="body"><h3 data-t="75">CS50AI problem sets</h3><div class="kind" data-t="76">Harvard CS50's Introduction to AI with Python</div><p data-t="77">Q-learning for Nim, k-nearest-neighbours for a shopping predictor, crossword generation as a constraint satisfaction problem with AC-3 and backtracking, CFG-based sentence parsing, and a convolutional neural network for traffic sign images.</p><ul class="tags"><li>Python</li><li>Q-learning</li><li>CSP</li><li>NLP</li><li>CNN (TensorFlow/Keras)</li></ul><div class="links"><a data-t="72" href="https://github.com/ErfanKhadiv/CS50AI" rel="noopener" target="_blank">Code</a></div></div></article>
 <article class="card"><img alt="Python Fundamentals project thumbnail" class="thumb" loading="lazy" src="assets/img/t_pyfund.jpg"/><div class="body"><h3 data-t="78">Python Fundamentals</h3><div class="kind" data-t="79">Practice projects</div><p data-t="80">Four small applications: a library management system with JSON storage, a password manager, a software company system in object-oriented design, and a NumPy analysis of monthly sales.</p><ul class="tags"><li>Python</li><li>OOP</li><li>NumPy</li><li>JSON</li></ul><div class="links"><a data-t="72" href="https://github.com/ErfanKhadiv/python-fundamentals" rel="noopener" target="_blank">Code</a></div></div></article></div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="skills">
 <div class="grid">
 <div class="side"><h2 data-t="3">Skills</h2></div>
@@ -404,6 +839,7 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 </dl>
 </div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="education">
 <h2 data-t="4">Education</h2>
 <div style="margin-top:28px">
@@ -415,10 +851,19 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 <div class="facts" style="margin-top:20px">
 <div class="fact"><b>18.05</b><span data-t="95">GPA out of 20 (152 credits)</span></div>
 <div class="fact"><b data-t="96">4th</b><span data-t="97">rank among graduates</span></div>
-<div class="fact"><b>19.7<small class="of">/20</small></b><span data-t="98">average in key computer science courses</span></div>
+<div class="fact"><b>19.7<small class="of">/20</small></b><span data-t="98">average in key computer science courses (in 6 courses)</span></div>
 </div>
 </div>
 <figure style="margin:0"><img alt="Faculty of Engineering building, Islamic Azad University, Ardabil Branch" loading="lazy" src="assets/img/faculty.jpg"/><figcaption class="cap" data-t="99">Faculty of Engineering, Islamic Azad University, Ardabil Branch</figcaption></figure>
+</div>
+<div class="sub" data-t="136">Official record</div>
+<div class="ielts rank">
+<figure class="cert"><button class="plate" aria-label="Enlarge alumni rank certificate (personal numbers and QR codes blurred)" data-full="assets/img/cert_rank_blurred.jpg" type="button"><img alt="Certificate of Alumni Rank from Islamic Azad University, Ardabil Branch, showing a GPA of 18.05 and a rank of 4. National ID, date of birth, father's name, document and tracking numbers and QR codes are blurred." loading="lazy" src="assets/img/cert_rank_blurred.jpg"/></button><figcaption data-t="138"><strong>Alumni Rank Certificate</strong>Islamic Azad University, Ardabil Branch · 13 October 2026 · certified English translation</figcaption></figure>
+<div>
+<h3 data-t="139">Ranked 4th among graduates</h3>
+<p data-t="140">The university certified a GPA of 18.05 out of 20 over 152 credits and a rank of 4 among the graduates of the second semester of the 2025–2026 academic year. It was issued on 13 October 2026; this is the certified English translation of the Persian original.</p>
+<p class="note" data-t="141">Personal numbers and QR codes are blurred for privacy.</p>
+</div>
 </div>
 <div class="sub" data-t="100">English</div>
 <div class="ielts">
@@ -442,20 +887,24 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 </div>
 </div>
 <div class="sub" data-t="105">Certificates</div>
-<div class="certs"><figure><button aria-label="Enlarge certificate: CS50 Introduction to AI with Python" data-full="assets/img/cert_CS50AI.jpg" type="button"><img alt="Certificate: CS50 Introduction to AI with Python" loading="lazy" src="assets/img/cert_CS50AI.jpg"/></button><figcaption data-t="106"><strong>CS50 Introduction to AI with Python</strong>Harvard · May 2025 · twelve projects</figcaption></figure><figure><button aria-label="Enlarge certificate: CS50x Introduction to Computer Science" data-full="assets/img/cert_CS50x.jpg" type="button"><img alt="Certificate: CS50x Introduction to Computer Science" loading="lazy" src="assets/img/cert_CS50x.jpg"/></button><figcaption data-t="107"><strong>CS50x Introduction to Computer Science</strong>Harvard · May 2024 · ten problem sets and a final project</figcaption></figure><figure><button aria-label="Enlarge certificate: CS50P Introduction to Programming with Python" data-full="assets/img/cert_CS50P.jpg" type="button"><img alt="Certificate: CS50P Introduction to Programming with Python" loading="lazy" src="assets/img/cert_CS50P.jpg"/></button><figcaption data-t="108"><strong>CS50P Introduction to Programming with Python</strong>Harvard · October 2024 · nine problem sets and a final project</figcaption></figure><figure><button aria-label="Enlarge certificate: Network Plus and Practical Networking Fundamentals" data-full="assets/img/cert_fara.jpg" type="button"><img alt="Certificate: Network Plus and Practical Networking Fundamentals" loading="lazy" src="assets/img/cert_fara.jpg"/></button><figcaption data-t="109"><strong>Network Plus and Practical Networking Fundamentals</strong>FaraDars · December 2025 · ID 5987D551</figcaption></figure></div>
-<p data-t="110" style="font-size:.98rem;color:var(--muted);margin:14px 0 0">Verify online: <a href="https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb" rel="noopener" target="_blank">CS50AI</a>, <a href="https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce" rel="noopener" target="_blank">CS50x</a>, <a href="https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181" rel="noopener" target="_blank">CS50P</a>, <a href="https://faradars.org/verify/5987D551?lang=en" rel="noopener" target="_blank">FaraDars</a>.</p>
-<div class="sub" data-t="111">Learning in practice</div>
-<div class="pair">
-<figure><img alt="Laptop on a lap in the university campus green space, running CS50 problem set checks" loading="lazy" src="assets/img/cs50_campus.jpg"/><figcaption class="cap" data-t="112">Working through CS50 problem sets in the campus green space between classes.</figcaption></figure>
-<figure><img alt="Monitor showing a code editor next to the CS50P lecture video" loading="lazy" src="assets/img/cs50_lecture.jpg"/><figcaption class="cap" data-t="113">Following the CS50P lectures with my editor open beside the course.</figcaption></figure>
+<div class="certs">
+<figure class="cert trf"><button class="plate" aria-label="Enlarge IELTS Test Report Form (personal numbers blurred)" data-full="assets/img/ielts_trf_blurred.jpg" type="button"><img alt="IELTS Academic Test Report Form with Erfan Khadiv's photo; candidate number, date of birth and form number are blurred" loading="lazy" src="assets/img/ielts_trf_blurred.jpg"/></button><figcaption data-t="125"><strong>IELTS Test Report Form</strong>Academic, 8.0 overall · personal numbers blurred</figcaption></figure>
+<figure class="cert"><button class="plate" aria-label="Enlarge certificate: CS50 Introduction to AI with Python" data-full="assets/img/cert_CS50AI.jpg" type="button"><img alt="Certificate: CS50 Introduction to AI with Python" loading="lazy" src="assets/img/cert_CS50AI.jpg"/></button><figcaption data-t="106"><strong>CS50 Introduction to AI with Python</strong>Harvard · May 2025 · twelve projects</figcaption><a class="verify" href="https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l7 2.7v5.6c0 4.5-2.9 8.1-7 9.9-4.1-1.8-7-5.4-7-9.9V5.5z"/><path d="M8.6 12l2.5 2.5 4.4-4.9"/></svg><span data-t="126">Verify online</span></a></figure>
+<figure class="cert"><button class="plate" aria-label="Enlarge certificate: CS50x Introduction to Computer Science" data-full="assets/img/cert_CS50x.jpg" type="button"><img alt="Certificate: CS50x Introduction to Computer Science" loading="lazy" src="assets/img/cert_CS50x.jpg"/></button><figcaption data-t="107"><strong>CS50x Introduction to Computer Science</strong>Harvard · May 2024 · ten problem sets and a final project</figcaption><a class="verify" href="https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l7 2.7v5.6c0 4.5-2.9 8.1-7 9.9-4.1-1.8-7-5.4-7-9.9V5.5z"/><path d="M8.6 12l2.5 2.5 4.4-4.9"/></svg><span data-t="126">Verify online</span></a></figure>
+<figure class="cert"><button class="plate" aria-label="Enlarge certificate: CS50P Introduction to Programming with Python" data-full="assets/img/cert_CS50P.jpg" type="button"><img alt="Certificate: CS50P Introduction to Programming with Python" loading="lazy" src="assets/img/cert_CS50P.jpg"/></button><figcaption data-t="108"><strong>CS50P Introduction to Programming with Python</strong>Harvard · October 2024 · nine problem sets and a final project</figcaption><a class="verify" href="https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l7 2.7v5.6c0 4.5-2.9 8.1-7 9.9-4.1-1.8-7-5.4-7-9.9V5.5z"/><path d="M8.6 12l2.5 2.5 4.4-4.9"/></svg><span data-t="126">Verify online</span></a></figure>
+<figure class="cert"><button class="plate" aria-label="Enlarge certificate: Network Plus and Practical Networking Fundamentals" data-full="assets/img/cert_fara.jpg" type="button"><img alt="Certificate: Network Plus and Practical Networking Fundamentals" loading="lazy" src="assets/img/cert_fara.jpg"/></button><figcaption data-t="109"><strong>Network Plus and Practical Networking Fundamentals</strong>FaraDars · December 2025 · ID 5987D551</figcaption><a class="verify" href="https://faradars.org/verify/5987D551?lang=en" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l7 2.7v5.6c0 4.5-2.9 8.1-7 9.9-4.1-1.8-7-5.4-7-9.9V5.5z"/><path d="M8.6 12l2.5 2.5 4.4-4.9"/></svg><span data-t="126">Verify online</span></a></figure>
 </div>
-<div class="pair" style="margin-top:16px">
-<figure><img alt="A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class" loading="lazy" src="assets/img/lab_scope.jpg"/><figcaption class="cap" data-t="114">Electrical Circuits Laboratory class: reading a signal on the oscilloscope.</figcaption></figure>
-<figure><img alt="A breadboard circuit with two oscilloscope probes attached" loading="lazy" src="assets/img/lab_breadboard.jpg"/><figcaption class="cap" data-t="115">The breadboard circuit with the two probes attached, in the same class.</figcaption></figure>
+<div class="sub" data-t="111">Learning in practice</div>
+<div class="shots">
+<figure class="shot"><img alt="Laptop on a lap in the university campus green space, running CS50 problem set checks" loading="lazy" src="assets/img/cs50_campus.jpg"/><span class="chip" data-t="130">CS50</span><figcaption data-t="112">Working through CS50 problem sets in the campus green space between classes.</figcaption></figure>
+<figure class="shot"><img alt="Monitor showing a code editor next to the CS50P lecture video" loading="lazy" src="assets/img/cs50_lecture.jpg"/><span class="chip" data-t="130">CS50</span><figcaption data-t="113">Following the CS50P lectures with my editor open beside the course.</figcaption></figure>
+<figure class="shot"><img alt="A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class" loading="lazy" src="assets/img/lab_scope.jpg"/><span class="chip" data-t="131">Circuits lab</span><figcaption data-t="114">Electrical Circuits Laboratory class: reading a signal on the oscilloscope.</figcaption></figure>
+<figure class="shot"><img alt="A breadboard circuit with two oscilloscope probes attached" loading="lazy" src="assets/img/lab_breadboard.jpg"/><span class="chip" data-t="131">Circuits lab</span><figcaption data-t="115">The breadboard circuit with the two probes attached, in the same class.</figcaption></figure>
 </div>
 </div>
 </div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section id="experience">
 <h2 data-t="5">Experience</h2>
 <div style="margin-top:28px">
@@ -473,12 +922,13 @@ html[dir="rtl"] td.ok{direction:ltr;text-align:left}
 </div>
 </div>
 </section>
+<div class="frieze" aria-hidden="true"><svg viewBox="0 0 1200 60" focusable="false"><use href="#frieze"/></svg></div>
 <section class="contact" id="contact">
 <h2 data-t="122">Let's talk.</h2>
 <div id="contactlinks"></div>
 <p class="loc" data-t="123">Based in Astara, Iran.</p>
 </section>
-<dialog id="lb"><img alt="Certificate enlarged"/></dialog>
+<dialog id="fc" aria-label="Image viewer"><div class="fcpanel"><button type="button" class="fcx" aria-label="Close">×</button><div class="fcbody"></div></div></dialog>
 <footer>© <span id="yr"></span> <span data-t="0">Erfan Khadiv</span></footer>
 </div>
 
@@ -490,7 +940,8 @@ const LINKS=[
   {label:'GitHub',url:'https://github.com/ErfanKhadiv'},
   {label:'LinkedIn',url:'https://www.linkedin.com/in/erfan-khadiv-777a66279/'},
   {label:'X',url:'https://x.com/ErfanKhadiv'},
-  {label:'Telegram',url:'https://t.me/ErfanKhadiv'}
+  {label:'Telegram',url:'https://t.me/ErfanKhadiv'},
+  {label:'CV (PDF)',fa:'رزومه (PDF)',url:'assets/Khadiv_Erfan_CV.pdf'}
 ];
 const box=document.getElementById('contactlinks'),linkEls=[];
 LINKS.filter(l=>l.url&&!l.url.includes('YOUR-')).forEach((l,i)=>{
@@ -668,17 +1119,106 @@ addEventListener('langchange',()=>{setYear();linkEls.forEach(([a,l])=>{a.textCon
   select('eil51');
 })();
 
-/* Certificate viewer */
+/* Glass cards: spotlight on hover and a focused view on click */
 (function(){
-  const lb=document.getElementById('lb'),im=lb.querySelector('img');
-  document.querySelectorAll('.certs button').forEach(b=>b.addEventListener('click',()=>{im.src=b.dataset.full;im.alt=b.querySelector('img').alt;lb.showModal()}));
-  lb.addEventListener('click',()=>lb.close());
+  const dlg=document.getElementById('fc'),panel=dlg.querySelector('.fcpanel'),body=dlg.querySelector('.fcbody'),xb=dlg.querySelector('.fcx'),root=document.documentElement;
+  const still=matchMedia('(prefers-reduced-motion: reduce)');
+  const TYPES=[['.card','card'],['.stat','stat'],['.steps li','step'],['.also','also'],['.fact','fact'],['.cert','cert'],['.shot','shot']];
+  const SMALL={stat:1,fact:1,step:1};
+  let opener=null,closing=false;
+  TYPES.forEach(([sel,t])=>document.querySelectorAll(sel).forEach(el=>{
+    el.classList.add('gcard');el.dataset.fc=t;el.tabIndex=0;el.setAttribute('aria-haspopup','dialog');
+    el.querySelectorAll('button.plate').forEach(b=>b.tabIndex=-1);
+  }));
+  document.querySelectorAll('section img').forEach(i=>{
+    if(i.closest('.gcard'))return;
+    i.tabIndex=0;i.setAttribute('role','button');i.dataset.fc='img';
+  });
+  const strip=n=>{['data-t','id','tabindex','aria-haspopup','data-fc','role'].forEach(a=>n.removeAttribute(a));n.classList&&n.classList.remove('rv','in')};
+  function build(el){
+    const t=el.dataset.fc;let node;
+    if(t==='img'){
+      const fig=el.closest('figure');
+      node=(fig||el).cloneNode(true);
+      if(!fig){const w=document.createElement('figure');w.appendChild(node);node=w}
+      node.classList.add('fcimg');
+    }else if(t==='step'){
+      node=document.createElement('ol');node.className='steps';
+      node.style.counterReset='s '+[...el.parentNode.children].indexOf(el);
+      node.appendChild(el.cloneNode(true));
+    }else node=el.cloneNode(true);
+    [node,...node.querySelectorAll('*')].forEach(strip);
+    node.classList.remove('gcard');
+    node.querySelectorAll('.gcard').forEach(n=>n.classList.remove('gcard'));
+    node.querySelectorAll('img').forEach(i=>i.removeAttribute('loading'));
+    node.querySelectorAll('button[data-full]').forEach(b=>{const i=b.querySelector('img');i.src=b.dataset.full;b.replaceWith(i)});
+    return node;
+  }
+  function aim(el){
+    const r=el.getBoundingClientRect();
+    const w=panel.offsetWidth||1;
+    panel.style.setProperty('--fx',(r.left+r.width/2-innerWidth/2)+'px');
+    panel.style.setProperty('--fy',(r.top+r.height/2-innerHeight/2)+'px');
+    panel.style.setProperty('--fs',Math.max(.4,Math.min(.96,r.width/w)));
+  }
+  function open(el){
+    if(dlg.open||closing)return;
+    opener=el;const t=el.dataset.fc;
+    body.replaceChildren(build(el));
+    dlg.classList.toggle('small',!!SMALL[t]);
+    root.classList.add('fc-open');
+    dlg.showModal();body.scrollTop=0;
+    aim(el);
+    if(still.matches)dlg.classList.add('on');
+    else{void panel.offsetWidth;requestAnimationFrame(()=>dlg.classList.add('on'))}
+    xb.focus({preventScroll:true});
+  }
+  function close(){
+    if(!dlg.open||closing)return;closing=true;
+    if(opener&&document.contains(opener))aim(opener);
+    dlg.classList.remove('on');
+    const done=()=>{dlg.close();root.classList.remove('fc-open');body.replaceChildren();closing=false;if(opener&&document.contains(opener))opener.focus({preventScroll:true})};
+    if(still.matches)done();else setTimeout(done,340);
+  }
+  document.addEventListener('click',e=>{
+    if(dlg.contains(e.target)||e.target.closest('a'))return;
+    if(String(getSelection()))return;
+    const el=e.target.closest('.gcard,[data-fc="img"]');
+    if(el)open(el);
+  });
+  document.addEventListener('keydown',e=>{
+    if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.gcard,[data-fc="img"]')){e.preventDefault();open(e.target)}
+  });
+  dlg.addEventListener('cancel',e=>{e.preventDefault();close()});
+  dlg.addEventListener('click',e=>{if(!panel.contains(e.target))close()});
+  xb.addEventListener('click',close);
+  addEventListener('pointermove',e=>{
+    const c=e.target.closest&&e.target.closest('.gcard');if(!c)return;
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  },{passive:true});
 })();
 
 /* Theme (dark by default) and language (English / Persian) */
 (function(){
-  const FA=["عرفان خدیو", "پژوهش", "پروژه‌ها", "مهارت‌ها", "تحصیلات", "تجربه", "تماس", "عرفان", "خدیو", "فارغ‌التحصیل مهندسی کامپیوتر، علاقه‌مند به الگوریتم، نرم‌افزار و هوش مصنوعی.", "پژوهش من را ببینید", "تکرار", "طول", "بهترین مقدار شناخته‌شده", "بالاتر از بهترین مقدار شناخته‌شده", "بهترین در این نشست", "<i class=\"city\"><\/i>شهر", "<i class=\"city add\"><\/i>شهری که شما اضافه کردید", "<i class=\"bee\"><\/i>زنبور", "<span class=\"ln\" style=\"width:20px;height:3px;border-radius:2px;display:inline-block\"><\/span>بهترین مسیر تا اینجا", "یک نمونهٔ معیار انتخاب کنید و حل زندهٔ آن را با HBALS تماشا کنید، یا روی نقشه بزنید و شهرهای خودتان را اضافه کنید. این برنامه برگردان جاوااسکریپتی کد پایتون در <a href=\"https://github.com/ErfanKhadiv/HBALS-TSP\" rel=\"noopener\" target=\"_blank\">مخزن من<\/a> است. <a href=\"#research\">طرز کار آن<\/a>. نمونه‌ها از TSPLIB (Reinelt، 1991) هستند.", "اجرای دوباره", "حذف شهرهای من", "پژوهش: HBALS", "یک الگوریتم زنبور هیبریدی با جست‌وجوی محلی تطبیقی که برای مسئلهٔ فروشندهٔ دوره‌گرد طراحی کرده‌ام. این پروژهٔ پایانی کارشناسی من بود و من تنها نویسندهٔ مقاله‌ای هستم که به <em>Evolutionary Intelligence<\/em> (Springer) ارسال شده است.", "کد، داده و مقاله", "مسئله", "مجموعه‌ای از شهرها داده شده است؛ کوتاه‌ترین مسیری را پیدا کنید که از هر شهر دقیقاً یک بار بگذرد و به نقطهٔ شروع برگردد. این مسئله NP-سخت است، بنابراین برای ورودی‌های بزرگ‌تر، هدف عملی پیدا کردن سریع یک مسیر بسیار خوب است، نه اثبات بهینه بودن آن.", "الگوریتم زنبور استاندارد ممکن است کند همگرا شود یا در بهینه‌های محلی گیر کند. پرسش من این بود که آیا کنترل تطبیقی همسایگی و جست‌وجوی محلی می‌تواند آن را بهتر کند، بی‌آنکه جمعیت از کاوش بازبماند.", "خواندن انیمیشن", "<b>نقطهٔ سفید:<\/b> یک شهر.", "<b>نقطهٔ زرد:<\/b> یک زنبور که روی بهترین مسیرِ پیدا‌شده تا اینجا پرواز می‌کند.", "<b>خط:<\/b> بهترین مسیر تا اینجا. شمارنده‌ها تکرار و طول آن را نشان می‌دهند.", "در خود الگوریتم، هر زنبور یک مسیر کاندیدا است. زنبورها نزدیک بهترین مسیرهایی که می‌شناسند جست‌وجو می‌کنند و پیشاهنگ‌ها مسیرهای تصادفی تازه را امتحان می‌کنند. انیمیشن، جست‌وجوی واقعی را در پس‌زمینه اجرا می‌کند و از نقطه‌های زرد استفاده می‌کند تا بتوانید بهترین مسیر را دنبال کنید.", "HBALS چگونه کار می‌کند", "<b>شروع<\/b>جمعیتی از 20 مسیر: نیمی با روش نزدیک‌ترین همسایه ساخته می‌شوند و نیمی تصادفی‌اند.", "<b>رتبه‌بندی<\/b>همهٔ مسیرها بر اساس طول کل مرتب می‌شوند.", "<b>جایگاه‌های نخبه<\/b>3 مسیر برتر هرکدام 8 گونه تولید می‌کنند که با 2-opt و گاهی 3-opt بهبود می‌یابند.", "<b>جایگاه‌های منتخب<\/b>مسیرهای بعدی، تا مجموعاً 12 جایگاه، هرکدام 4 گونه با جست‌وجوی سبک‌تر تولید می‌کنند.", "<b>پیشاهنگ‌ها<\/b>مسیرهای تصادفی تازه جمعیت را پر می‌کنند تا جست‌وجو به کاوش ادامه دهد.", "<b>تطبیق و توقف<\/b>تا وقتی پیشرفت ادامه دارد همسایگی جست‌وجو کوچک می‌شود و پس از 3 تکرار بدون پیشرفت گسترده‌تر می‌شود. پس از 20 تکرار بدون بهبود متوقف می‌شود.", "نتایج", "6 از 6", "نمونه‌ای که HBALS در آن‌ها کوتاه‌ترین بهترین مسیر را میان پنج الگوریتم مقایسه‌شده داشت", "بهترین مسیرها به‌طور میانگین کوتاه‌تر از الگوریتم زنبور پایه (از 15.3% تا 68.0%)", "نمونه‌ای که به بهترین جواب شناخته‌شده رسیدند: eil51، berlin52، st70", "میانگین فاصله تا بهترین مسیر شناخته‌شده در هر شش نمونه", "نمونهٔ TSPLIB", "شهرها", "بهترین شناخته‌شده", "بهترین HBALS", "میانگین فاصله (%)", "اجرای زنده", "20 اجرای مستقل برای هر الگوریتم، حداکثر 300 تکرار. الگوریتم‌های مبنا: الگوریتم زنبور، بهینه‌سازی کلونی مورچگان، الگوریتم ژنتیک و بهینه‌سازی ازدحام ذرات. علامت ✓ یعنی بهترین مسیر با بهترین مسیر شناخته‌شده برابر است.", "آزمون فریدمن تفاوت معناداری میان الگوریتم‌ها نشان می‌دهد (p &lt; 0.001). در مقایسه با الگوریتم زنبور و الگوریتم ژنتیک، این اختلاف معنادار است (آزمون Nemenyi: p = 0.009 و 0.0001). در مقایسه با کلونی مورچگان و ازدحام ذرات معنادار نیست (p = 0.809 و 0.183)، چون فقط شش نمونه آزمایش شد. برخی روش‌های منتشرشدهٔ الگوریتم زنبور در نمونه‌های بزرگ‌تر به بهترین مسیرهای شناخته‌شده نزدیک‌ترند. پیاده‌سازی کامل، مجموعه‌داده‌ها و نتایج با مجوز MIT متن‌باز هستند.", "berlin52 با 52 شهر: HBALS در یک اجرا (تنظیم سریع) در تکرار 20 به بهترین طول شناخته‌شده، یعنی 7,542، رسید.", "همچنین: گزارش پژوهشی Li-Fi", "گزارشی با 19 منبع دربارهٔ Light Fidelity برای درس روش تحقیق و ارائه. این گزارش روش‌های مدولاسیون (OOK، VPPM، OFDM، CSK) و کاربردها در سلامت، هوانوردی و ارتباطات زیر آب را پوشش می‌دهد.", "خواندن گزارش", "دربارهٔ من", "من فارغ‌التحصیل مهندسی کامپیوتر هستم و پایه‌ای قوی در الگوریتم، برنامه‌نویسی، شبکه‌های کامپیوتری و هوش مصنوعی دارم.", "HBALS را طراحی کرده‌ام، با React و جاوااسکریپت برنامهٔ وب می‌سازم و مسائلی را دوست دارم که راه روشنی برای سنجیدن بهتر شدن پاسخ دارند.", "قصد دارم تحصیل در مقطع کارشناسی ارشد علوم و مهندسی کامپیوتر را ادامه دهم.", "هوش مصنوعی و یادگیری ماشین", "الگوریتم‌ها و بهینه‌سازی ترکیبیاتی", "بهینه‌سازی ابتکاری و فراابتکاری", "ارضای قیود و جست‌وجو", "پروژه‌های منتخب", "کد در GitHub عمومی است. دموها در مرورگر شما اجرا می‌شوند.", "برنامهٔ وب · رزومه‌ساز", "رزومه‌ساز مبتنی بر مرورگر با جاوااسکریپت، HTML و CSS ساده، با پنج قالب قابل‌شخصی‌سازی، پیش‌نمایش زنده و خروجی PDF، Word، Excel و متن. ابزار AI Job Match یک شرح شغلی چسبانده‌شده را می‌گیرد و امتیاز تطابق، مهارت‌های کم‌داشته و پیشنهادهای متناسب‌سازی را برمی‌گرداند.", "دموی زنده", "کد", "برنامهٔ وب · فرانت‌اند فروشگاه اینترنتی", "فرانت‌اند یک فروشگاه اینترنتی چندصفحه‌ای با React، با مسیریابی سمت کلاینت، صفحهٔ محصول، جست‌وجو و سبد خریدی که در مرورگر ذخیره می‌شود. به دو زبان فارسی و انگلیسی، راست‌به‌چپ و چپ‌به‌راست کار می‌کند. رابط آن از یک فروشگاه ایرانی موجود الهام گرفته شده و برای یادگیری ساخته شده است.", "تمرین‌های CS50AI", "مقدمه‌ای بر هوش مصنوعی با پایتون، CS50 هاروارد", "یادگیری Q برای بازی Nim، الگوریتم k نزدیک‌ترین همسایه (k-NN) برای پیش‌بینی خرید، تولید جدول کلمات متقاطع به‌صورت مسئلهٔ ارضای قیود با AC-3 و بازگشت به عقب، تجزیهٔ جمله بر پایهٔ CFG و یک شبکهٔ عصبی کانولوشنی برای تصاویر تابلوهای راهنمایی.", "مبانی پایتون", "پروژه‌های تمرینی", "چهار برنامهٔ کوچک: سامانهٔ مدیریت کتابخانه با ذخیره‌سازی JSON، مدیر گذرواژه، سامانهٔ یک شرکت نرم‌افزاری با طراحی شیءگرا و تحلیل فروش ماهانه با NumPy.", "برنامه‌نویسی", "هوش مصنوعی و الگوریتم‌ها", "بهینه‌سازی ابتکاری و فراابتکاری، الگوریتم زنبور، جست‌وجوی محلی، ارضای قیود، الگوریتم‌های جست‌وجو، یادگیری Q، k-NN، شبکه‌های عصبی کانولوشنی (TensorFlow/Keras)", "کتابخانه‌ها و ابزارها", "وب", "پایگاه داده", "شبکه", "TCP/IP، مسیریابی، VLAN، سوییچ‌های Cisco، VPN، DNS، DHCP", "زبان‌ها", "فارسی (زبان مادری)، انگلیسی (پیشرفته)", "در حال حاضر", "در حال یادگیری یادگیری ماشین و عمیق‌تر کردن دانش هوش مصنوعی‌ام هستم و برای انتشار مقالهٔ پژوهشی‌ام تلاش می‌کنم.", "کارشناسی مهندسی کامپیوتر", "دانشگاه آزاد اسلامی، واحد اردبیل، ایران · مهر 1401 – تیر 1405", "معدل از 20 (152 واحد)", "چهارم", "رتبه در میان فارغ‌التحصیلان", "میانگین در دروس کلیدی علوم کامپیوتر", "دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "زبان انگلیسی", "مرکز آزمون IELTS<br/>بریتیش کانسیل", "وان، ترکیه، 13 شهریور 1405، کمی پیش از آزمون. تابلوی مشخص‌شده، مرکز آزمون IELTS بریتیش کانسیل است.", "آیلتس آکادمیک، نمرهٔ کلی 8.0", "در 13 شهریور 1405 در مرکز آزمون بریتیش کانسیل در وان ترکیه در این آزمون شرکت کردم.", "گواهینامه‌ها", "<strong>مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)<\/strong>هاروارد · اردیبهشت 1404 · دوازده پروژه", "<strong>مقدمه‌ای بر علوم کامپیوتر (CS50x)<\/strong>هاروارد · اردیبهشت 1403 · ده مجموعه تمرین و یک پروژهٔ پایانی", "<strong>مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)<\/strong>هاروارد · مهر 1403 · نه مجموعه تمرین و یک پروژهٔ پایانی", "<strong>Network Plus و مبانی عملی شبکه<\/strong>فرادرس · آذر 1404 · شناسه 5987D551", "تأیید آنلاین: <a href=\"https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb\" rel=\"noopener\" target=\"_blank\">CS50AI<\/a>، <a href=\"https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce\" rel=\"noopener\" target=\"_blank\">CS50x<\/a>، <a href=\"https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181\" rel=\"noopener\" target=\"_blank\">CS50P<\/a>، <a href=\"https://faradars.org/verify/5987D551?lang=en\" rel=\"noopener\" target=\"_blank\">فرادرس<\/a>.", "یادگیری در عمل", "کار روی تمرین‌های CS50 در فضای سبز دانشگاه، میان کلاس‌ها.", "تماشای درس‌های CS50P با ویرایشگر باز در کنار دوره.", "کلاس آزمایشگاه مدارهای الکتریکی: خواندن یک سیگنال روی اسیلوسکوپ.", "مدار روی بردبورد با دو پراب متصل، در همان کلاس.", "در محل کارآموزی: یک کابینت شبکه با سوییچ‌ها و پچ‌پنل‌ها.", "تابستانی در بندر", "کارآموز فناوری اطلاعات و شبکه · سازمان بنادر و دریانوردی ایران، آستارا · تابستان 1404 · 120 ساعت", "پیش از این کارآموزی، شبکه‌ها چیزی بودند که روی کاغذ می‌کشیدم و در تمرین‌های آزمایشگاهی پیکربندی می‌کردم. در بندر آستارا، شبکه یعنی کابینت، کابل و آدم‌هایی که می‌خواستند همه‌چیز بی‌دردسر کار کند.", "روی تجهیزات واقعی کار کردم: سوییچ‌ها و پچ‌پنل‌ها، VLAN، VPN، DNS و DHCP. یاد گرفتم که عیب‌یابی بیشتر صبر است و دانستن اینکه پرسش خوب بعدی چیست، و بیش از آنچه انتظار داشتم از آن لذت بردم.", "کار در بندر تجربه‌ای ویژه بود. جایی است که همیشه در حرکت است و شبکه بی‌صدا بخش بزرگی از آن را کنار هم نگه می‌دارد. این تجربه باعث شد به سامانه‌هایی اهمیت بدهم که مردم به آن‌ها تکیه می‌کنند بی‌آنکه هرگز به آن‌ها فکر کنند.", "بیایید صحبت کنیم.", "ساکن آستارا، ایران."];
-  const ATTR={"Main": "اصلی", "Choose a dataset": "انتخاب مجموعه‌داده", "Animated map where the HBALS algorithm searches for the shortest route through the cities of the selected dataset. White dots are cities and yellow dots are bees. Click or tap to add a city; press Enter to add a random one.": "نقشهٔ متحرکی که در آن الگوریتم HBALS کوتاه‌ترین مسیر عبور از شهرهای مجموعه‌دادهٔ انتخاب‌شده را جست‌وجو می‌کند. نقطه‌های سفید شهر و نقطه‌های زرد زنبور هستند. برای افزودن شهر کلیک کنید یا بزنید؛ برای افزودن یک شهر تصادفی Enter را فشار دهید.", "Legend": "راهنما", "Back to top": "بازگشت به بالا", "HBALS summary graphic showing the berlin52 tour and convergence curve": "تصویر خلاصهٔ HBALS شامل مسیر berlin52 و منحنی همگرایی", "Li-Fi research report thumbnail": "تصویر بندانگشتی گزارش پژوهشی Li-Fi", "Workfolio project thumbnail": "تصویر بندانگشتی پروژهٔ Workfolio", "Kouman project thumbnail": "تصویر بندانگشتی پروژهٔ Kouman", "CS50AI problem sets project thumbnail": "تصویر بندانگشتی پروژهٔ تمرین‌های CS50AI", "Python Fundamentals project thumbnail": "تصویر بندانگشتی پروژهٔ مبانی پایتون", "Faculty of Engineering building, Islamic Azad University, Ardabil Branch": "ساختمان دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "Erfan Khadiv holding his passport in front of the British Council IELTS test centre in Van, Turkey, just before his exam": "عرفان خدیو با گذرنامه در دست، مقابل مرکز آزمون IELTS بریتیش کانسیل در وان ترکیه، درست پیش از آزمون", "Enlarge certificate: CS50 Introduction to AI with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Certificate: CS50 Introduction to AI with Python": "گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Enlarge certificate: CS50x Introduction to Computer Science": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Certificate: CS50x Introduction to Computer Science": "گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Enlarge certificate: CS50P Introduction to Programming with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Certificate: CS50P Introduction to Programming with Python": "گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Enlarge certificate: Network Plus and Practical Networking Fundamentals": "بزرگ‌نمایی گواهینامه: Network Plus و مبانی عملی شبکه", "Certificate: Network Plus and Practical Networking Fundamentals": "گواهینامه: Network Plus و مبانی عملی شبکه", "Laptop on a lap in the university campus green space, running CS50 problem set checks": "لپ‌تاپ روی پا در فضای سبز دانشگاه، در حال اجرای بررسی‌های تمرین CS50", "Monitor showing a code editor next to the CS50P lecture video": "نمایشگر با ویرایشگر کد در کنار ویدیوی درس CS50P", "A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class": "موج سینوسی روی اسیلوسکوپ GW GOS-652G در کلاس آزمایشگاه مدارهای الکتریکی", "A breadboard circuit with two oscilloscope probes attached": "مداری روی بردبورد با دو پراب اسیلوسکوپ متصل", "Erfan Khadiv in a Ports and Maritime Organization safety vest working on a network cabinet": "عرفان خدیو با جلیقهٔ ایمنی سازمان بنادر و دریانوردی در حال کار روی یک کابینت شبکه", "Certificate enlarged": "گواهینامهٔ بزرگ‌نمایی‌شده"};
+  const FA=["عرفان خدیو", "پژوهش", "پروژه‌ها", "مهارت‌ها", "تحصیلات", "تجربه", "تماس", "عرفان", "خدیو", "فارغ‌التحصیل مهندسی کامپیوتر، علاقه‌مند به الگوریتم، نرم‌افزار و هوش مصنوعی.", "پژوهش من را ببینید", "تکرار", "طول", "بهترین مقدار شناخته‌شده", "بالاتر از بهترین مقدار شناخته‌شده", "بهترین در این نشست", "<i class=\"city\"><\/i>شهر", "<i class=\"city add\"><\/i>شهری که شما اضافه کردید", "<i class=\"bee\"><\/i>زنبور", "<span class=\"ln\" style=\"width:20px;height:3px;border-radius:2px;display:inline-block\"><\/span>بهترین مسیر تا اینجا", "یک نمونهٔ معیار انتخاب کنید و حل زندهٔ آن را با HBALS تماشا کنید، یا روی نقشه بزنید و شهرهای خودتان را اضافه کنید. این برنامه برگردان جاوااسکریپتی کد پایتون در <a href=\"https://github.com/ErfanKhadiv/HBALS-TSP\" rel=\"noopener\" target=\"_blank\">مخزن من<\/a> است. <a href=\"#research\">طرز کار آن<\/a>. نمونه‌ها از TSPLIB (Reinelt، 1991) هستند.", "اجرای دوباره", "حذف شهرهای من", "پژوهش: HBALS", "یک الگوریتم زنبور هیبریدی با جست‌وجوی محلی تطبیقی که برای مسئلهٔ فروشندهٔ دوره‌گرد طراحی کرده‌ام. این پروژهٔ پایانی کارشناسی من بود. من تنها نویسندهٔ این مقاله هستم و اکنون آن را بهبود می‌دهم، با هدف انتشار آن در یک نشریهٔ علمی معتبر.", "کد، داده و مقاله", "مسئله", "مجموعه‌ای از شهرها داده شده است؛ کوتاه‌ترین مسیری را پیدا کنید که از هر شهر دقیقاً یک بار بگذرد و به نقطهٔ شروع برگردد. این مسئله NP-سخت است، بنابراین برای ورودی‌های بزرگ‌تر، هدف عملی پیدا کردن سریع یک مسیر بسیار خوب است، نه اثبات بهینه بودن آن.", "الگوریتم زنبور استاندارد ممکن است کند همگرا شود یا در بهینه‌های محلی گیر کند. پرسش من این بود که آیا کنترل تطبیقی همسایگی و جست‌وجوی محلی می‌تواند آن را بهتر کند، بی‌آنکه جمعیت از کاوش بازبماند.", "خواندن انیمیشن", "<b>نقطهٔ سفید:<\/b> یک شهر.", "<b>نقطهٔ زرد:<\/b> یک زنبور که روی بهترین مسیرِ پیدا‌شده تا اینجا پرواز می‌کند.", "<b>خط:<\/b> بهترین مسیر تا اینجا. شمارنده‌ها تکرار و طول آن را نشان می‌دهند.", "در خود الگوریتم، هر زنبور یک مسیر کاندیدا است. زنبورها نزدیک بهترین مسیرهایی که می‌شناسند جست‌وجو می‌کنند و پیشاهنگ‌ها مسیرهای تصادفی تازه را امتحان می‌کنند. انیمیشن، جست‌وجوی واقعی را در پس‌زمینه اجرا می‌کند و از نقطه‌های زرد استفاده می‌کند تا بتوانید بهترین مسیر را دنبال کنید.", "HBALS چگونه کار می‌کند", "<b>شروع<\/b>جمعیتی از 20 مسیر: نیمی با روش نزدیک‌ترین همسایه ساخته می‌شوند و نیمی تصادفی‌اند.", "<b>رتبه‌بندی<\/b>همهٔ مسیرها بر اساس طول کل مرتب می‌شوند.", "<b>جایگاه‌های نخبه<\/b>3 مسیر برتر هرکدام 8 گونه تولید می‌کنند که با 2-opt و گاهی 3-opt بهبود می‌یابند.", "<b>جایگاه‌های منتخب<\/b>مسیرهای بعدی، تا مجموعاً 12 جایگاه، هرکدام 4 گونه با جست‌وجوی سبک‌تر تولید می‌کنند.", "<b>پیشاهنگ‌ها<\/b>مسیرهای تصادفی تازه جمعیت را پر می‌کنند تا جست‌وجو به کاوش ادامه دهد.", "<b>تطبیق و توقف<\/b>تا وقتی پیشرفت ادامه دارد همسایگی جست‌وجو کوچک می‌شود و پس از 3 تکرار بدون پیشرفت گسترده‌تر می‌شود. پس از 20 تکرار بدون بهبود متوقف می‌شود.", "نتایج", "6 از 6", "نمونه‌ای که HBALS در آن‌ها کوتاه‌ترین بهترین مسیر را میان پنج الگوریتم مقایسه‌شده داشت", "بهترین مسیرها به‌طور میانگین کوتاه‌تر از الگوریتم زنبور پایه (از 15.3% تا 68.0%)", "نمونه‌ای که به بهترین جواب شناخته‌شده رسیدند: eil51، berlin52، st70", "میانگین فاصله تا بهترین مسیر شناخته‌شده در هر شش نمونه", "نمونهٔ TSPLIB", "شهرها", "بهترین شناخته‌شده", "بهترین HBALS", "میانگین فاصله (%)", "اجرای زنده", "20 اجرای مستقل برای هر الگوریتم، حداکثر 300 تکرار. الگوریتم‌های مبنا: الگوریتم زنبور، بهینه‌سازی کلونی مورچگان، الگوریتم ژنتیک و بهینه‌سازی ازدحام ذرات. علامت ✓ یعنی بهترین مسیر با بهترین مسیر شناخته‌شده برابر است.", "آزمون فریدمن تفاوت معناداری میان الگوریتم‌ها نشان می‌دهد (p &lt; 0.001). در مقایسه با الگوریتم زنبور و الگوریتم ژنتیک، این اختلاف معنادار است (آزمون Nemenyi: p = 0.009 و 0.0001). در مقایسه با کلونی مورچگان و ازدحام ذرات معنادار نیست (p = 0.809 و 0.183)، چون فقط شش نمونه آزمایش شد. برخی روش‌های منتشرشدهٔ الگوریتم زنبور در نمونه‌های بزرگ‌تر به بهترین مسیرهای شناخته‌شده نزدیک‌ترند. پیاده‌سازی کامل، مجموعه‌داده‌ها و نتایج با مجوز MIT متن‌باز هستند.", "berlin52 با 52 شهر: HBALS در یک اجرا (تنظیم سریع) در تکرار 20 به بهترین طول شناخته‌شده، یعنی 7,542، رسید.", "همچنین: گزارش پژوهشی Li-Fi", "گزارشی با 19 منبع دربارهٔ Light Fidelity برای درس روش تحقیق و ارائه. این گزارش روش‌های مدولاسیون (OOK، VPPM، OFDM، CSK) و کاربردها در سلامت، هوانوردی و ارتباطات زیر آب را پوشش می‌دهد.", "خواندن گزارش", "دربارهٔ من", "من فارغ‌التحصیل مهندسی کامپیوتر هستم و پایه‌ای قوی در الگوریتم، برنامه‌نویسی، شبکه‌های کامپیوتری و هوش مصنوعی دارم.", "HBALS را طراحی کرده‌ام، با React و جاوااسکریپت برنامهٔ وب می‌سازم و مسائلی را دوست دارم که راه روشنی برای سنجیدن بهتر شدن پاسخ دارند.", "قصد دارم تحصیل در مقطع کارشناسی ارشد علوم و مهندسی کامپیوتر را ادامه دهم.", "هوش مصنوعی و یادگیری ماشین", "الگوریتم‌ها و بهینه‌سازی ترکیبیاتی", "بهینه‌سازی ابتکاری و فراابتکاری", "ارضای قیود و جست‌وجو", "پروژه‌های منتخب", "کد در GitHub عمومی است. دموها در مرورگر شما اجرا می‌شوند.", "برنامهٔ وب · رزومه‌ساز", "رزومه‌ساز مبتنی بر مرورگر با جاوااسکریپت، HTML و CSS ساده، با پنج قالب قابل‌شخصی‌سازی، پیش‌نمایش زنده و خروجی PDF، Word، Excel و متن. ابزار AI Job Match یک شرح شغلی چسبانده‌شده را می‌گیرد و امتیاز تطابق، مهارت‌های کم‌داشته و پیشنهادهای متناسب‌سازی را برمی‌گرداند.", "دموی زنده", "کد", "برنامهٔ وب · فرانت‌اند فروشگاه اینترنتی", "فرانت‌اند یک فروشگاه اینترنتی چندصفحه‌ای با React، با مسیریابی سمت کلاینت، صفحهٔ محصول، جست‌وجو و سبد خریدی که در مرورگر ذخیره می‌شود. به دو زبان فارسی و انگلیسی، راست‌به‌چپ و چپ‌به‌راست کار می‌کند. رابط آن از یک فروشگاه ایرانی موجود الهام گرفته شده و برای یادگیری ساخته شده است.", "تمرین‌های CS50AI", "مقدمه‌ای بر هوش مصنوعی با پایتون، CS50 هاروارد", "یادگیری Q برای بازی Nim، الگوریتم k نزدیک‌ترین همسایه (k-NN) برای پیش‌بینی خرید، تولید جدول کلمات متقاطع به‌صورت مسئلهٔ ارضای قیود با AC-3 و بازگشت به عقب، تجزیهٔ جمله بر پایهٔ CFG و یک شبکهٔ عصبی کانولوشنی برای تصاویر تابلوهای راهنمایی.", "مبانی پایتون", "پروژه‌های تمرینی", "چهار برنامهٔ کوچک: سامانهٔ مدیریت کتابخانه با ذخیره‌سازی JSON، مدیر گذرواژه، سامانهٔ یک شرکت نرم‌افزاری با طراحی شیءگرا و تحلیل فروش ماهانه با NumPy.", "برنامه‌نویسی", "هوش مصنوعی و الگوریتم‌ها", "بهینه‌سازی ابتکاری و فراابتکاری، الگوریتم زنبور، جست‌وجوی محلی، ارضای قیود، الگوریتم‌های جست‌وجو، یادگیری Q، k-NN، شبکه‌های عصبی کانولوشنی (TensorFlow/Keras)", "کتابخانه‌ها و ابزارها", "وب", "پایگاه داده", "شبکه", "TCP/IP، مسیریابی، VLAN، سوییچ‌های Cisco، VPN، DNS، DHCP", "زبان‌ها", "فارسی (زبان مادری)، انگلیسی (پیشرفته)", "در حال حاضر", "در حال یادگیری یادگیری ماشین و عمیق‌تر کردن دانش هوش مصنوعی‌ام هستم و برای انتشار مقالهٔ پژوهشی‌ام تلاش می‌کنم.", "کارشناسی مهندسی کامپیوتر", "دانشگاه آزاد اسلامی، واحد اردبیل، ایران · مهر 1401 – تیر 1405", "معدل از 20 (152 واحد)", "چهارم", "رتبه در میان فارغ‌التحصیلان", "میانگین در دروس کلیدی علوم کامپیوتر (در 6 درس)", "دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "زبان انگلیسی", "مرکز آزمون IELTS<br/>بریتیش کانسیل", "وان، ترکیه، 13 شهریور 1405، کمی پیش از آزمون. تابلوی مشخص‌شده، مرکز آزمون IELTS بریتیش کانسیل است.", "آیلتس آکادمیک، نمرهٔ کلی 8.0", "در 13 شهریور 1405 در مرکز آزمون بریتیش کانسیل در وان ترکیه در این آزمون شرکت کردم.", "گواهینامه‌ها", "<strong>مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)<\/strong>هاروارد · اردیبهشت 1404 · دوازده پروژه", "<strong>مقدمه‌ای بر علوم کامپیوتر (CS50x)<\/strong>هاروارد · اردیبهشت 1403 · ده مجموعه تمرین و یک پروژهٔ پایانی", "<strong>مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)<\/strong>هاروارد · مهر 1403 · نه مجموعه تمرین و یک پروژهٔ پایانی", "<strong>Network Plus و مبانی عملی شبکه<\/strong>فرادرس · آذر 1404 · شناسه 5987D551", "تأیید آنلاین: <a href=\"https://cs50.harvard.edu/certificates/9e71c885-9c88-4aac-b8ba-20a179bae8cb\" rel=\"noopener\" target=\"_blank\">CS50AI<\/a>، <a href=\"https://cs50.harvard.edu/certificates/3835220d-6f71-4f6c-9d8c-5ad0eb337dce\" rel=\"noopener\" target=\"_blank\">CS50x<\/a>، <a href=\"https://cs50.harvard.edu/certificates/6ebb727f-4a0e-4de2-a4bb-f447d2843181\" rel=\"noopener\" target=\"_blank\">CS50P<\/a>، <a href=\"https://faradars.org/verify/5987D551?lang=en\" rel=\"noopener\" target=\"_blank\">فرادرس<\/a>.", "یادگیری در عمل", "کار روی تمرین‌های CS50 در فضای سبز دانشگاه، میان کلاس‌ها.", "تماشای درس‌های CS50P با ویرایشگر باز در کنار دوره.", "کلاس آزمایشگاه مدارهای الکتریکی: خواندن یک سیگنال روی اسیلوسکوپ.", "مدار روی بردبورد با دو پراب متصل، در همان کلاس.", "در محل کارآموزی: یک کابینت شبکه با سوییچ‌ها و پچ‌پنل‌ها.", "تابستانی در بندر", "کارآموز فناوری اطلاعات و شبکه · سازمان بنادر و دریانوردی ایران، آستارا · تابستان 1404 · 120 ساعت", "پیش از این کارآموزی، شبکه‌ها چیزی بودند که روی کاغذ می‌کشیدم و در تمرین‌های آزمایشگاهی پیکربندی می‌کردم. در بندر آستارا، شبکه یعنی کابینت، کابل و آدم‌هایی که می‌خواستند همه‌چیز بی‌دردسر کار کند.", "روی تجهیزات واقعی کار کردم: سوییچ‌ها و پچ‌پنل‌ها، VLAN، VPN، DNS و DHCP. یاد گرفتم که عیب‌یابی بیشتر صبر است و دانستن اینکه پرسش خوب بعدی چیست، و بیش از آنچه انتظار داشتم از آن لذت بردم.", "کار در بندر تجربه‌ای ویژه بود. جایی است که همیشه در حرکت است و شبکه بی‌صدا بخش بزرگی از آن را کنار هم نگه می‌دارد. این تجربه باعث شد به سامانه‌هایی اهمیت بدهم که مردم به آن‌ها تکیه می‌کنند بی‌آنکه هرگز به آن‌ها فکر کنند.", "بیایید صحبت کنیم.", "ساکن آستارا، ایران."];
+  FA[125]="<strong>برگهٔ گزارش آزمون آیلتس (TRF)<\/strong>آکادمیک، نمرهٔ کلی 8.0 · شماره‌های شخصی محو شده‌اند";
+  FA[126]="تأیید آنلاین";
+  FA[130]="CS50";
+  FA[131]="آزمایشگاه مدار";
+  FA[132]="به‌دنبال ادامه تحصیل در کارشناسی ارشد علوم کامپیوتر";
+  FA[133]="کپی ایمیل";
+  FA[134]="کپی شد";
+  FA[135]="ایمیل کپی شد";
+  const ATTR={"Enlarge IELTS Test Report Form (personal numbers blurred)": "بزرگ‌نمایی برگهٔ گزارش آزمون IELTS (شماره‌های شخصی محو شده‌اند)", "IELTS Academic Test Report Form with Erfan Khadiv's photo; candidate number, date of birth and form number are blurred": "برگهٔ گزارش آزمون آیلتس آکادمیک با عکس عرفان خدیو؛ شمارهٔ داوطلب، تاریخ تولد و شمارهٔ برگه محو شده‌اند", "Main": "اصلی", "Choose a dataset": "انتخاب مجموعه‌داده", "Animated map where the HBALS algorithm searches for the shortest route through the cities of the selected dataset. White dots are cities and yellow dots are bees. Click or tap to add a city; press Enter to add a random one.": "نقشهٔ متحرکی که در آن الگوریتم HBALS کوتاه‌ترین مسیر عبور از شهرهای مجموعه‌دادهٔ انتخاب‌شده را جست‌وجو می‌کند. نقطه‌های سفید شهر و نقطه‌های زرد زنبور هستند. برای افزودن شهر کلیک کنید یا بزنید؛ برای افزودن یک شهر تصادفی Enter را فشار دهید.", "Legend": "راهنما", "Back to top": "بازگشت به بالا", "HBALS summary graphic showing the berlin52 tour and convergence curve": "تصویر خلاصهٔ HBALS شامل مسیر berlin52 و منحنی همگرایی", "Li-Fi research report thumbnail": "تصویر بندانگشتی گزارش پژوهشی Li-Fi", "Workfolio project thumbnail": "تصویر بندانگشتی پروژهٔ Workfolio", "Kouman project thumbnail": "تصویر بندانگشتی پروژهٔ Kouman", "CS50AI problem sets project thumbnail": "تصویر بندانگشتی پروژهٔ تمرین‌های CS50AI", "Python Fundamentals project thumbnail": "تصویر بندانگشتی پروژهٔ مبانی پایتون", "Faculty of Engineering building, Islamic Azad University, Ardabil Branch": "ساختمان دانشکدهٔ مهندسی، دانشگاه آزاد اسلامی، واحد اردبیل", "Erfan Khadiv holding his passport in front of the British Council IELTS test centre in Van, Turkey, just before his exam": "عرفان خدیو با گذرنامه در دست، مقابل مرکز آزمون IELTS بریتیش کانسیل در وان ترکیه، درست پیش از آزمون", "Enlarge certificate: CS50 Introduction to AI with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Certificate: CS50 Introduction to AI with Python": "گواهینامه: مقدمه‌ای بر هوش مصنوعی با پایتون (CS50)", "Enlarge certificate: CS50x Introduction to Computer Science": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Certificate: CS50x Introduction to Computer Science": "گواهینامه: مقدمه‌ای بر علوم کامپیوتر (CS50x)", "Enlarge certificate: CS50P Introduction to Programming with Python": "بزرگ‌نمایی گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Certificate: CS50P Introduction to Programming with Python": "گواهینامه: مقدمه‌ای بر برنامه‌نویسی با پایتون (CS50P)", "Enlarge certificate: Network Plus and Practical Networking Fundamentals": "بزرگ‌نمایی گواهینامه: Network Plus و مبانی عملی شبکه", "Certificate: Network Plus and Practical Networking Fundamentals": "گواهینامه: Network Plus و مبانی عملی شبکه", "Laptop on a lap in the university campus green space, running CS50 problem set checks": "لپ‌تاپ روی پا در فضای سبز دانشگاه، در حال اجرای بررسی‌های تمرین CS50", "Monitor showing a code editor next to the CS50P lecture video": "نمایشگر با ویرایشگر کد در کنار ویدیوی درس CS50P", "A sine wave on a GW GOS-652G oscilloscope during the Electrical Circuits Laboratory class": "موج سینوسی روی اسیلوسکوپ GW GOS-652G در کلاس آزمایشگاه مدارهای الکتریکی", "A breadboard circuit with two oscilloscope probes attached": "مداری روی بردبورد با دو پراب اسیلوسکوپ متصل", "Erfan Khadiv in a Ports and Maritime Organization safety vest working on a network cabinet": "عرفان خدیو با جلیقهٔ ایمنی سازمان بنادر و دریانوردی در حال کار روی یک کابینت شبکه", "Certificate enlarged": "گواهینامهٔ بزرگ‌نمایی‌شده"};
+  FA[136]="سوابق رسمی";
+  FA[137]="دانلود رزومه";
+  FA[138]="<strong>گواهی رتبه دانش‌آموختگان<\/strong>دانشگاه آزاد اسلامی، واحد اردبیل · 21 مهر 1405 · ترجمهٔ رسمی انگلیسی";
+  FA[139]="رتبهٔ چهارم در میان فارغ‌التحصیلان";
+  FA[140]="دانشگاه معدل کل 18.05 از 20 در 152 واحد و رتبهٔ 4 را در میان فارغ‌التحصیلان نیمسال دوم سال تحصیلی 1404-1405 گواهی کرده است. این گواهی در 21 مهر 1405 صادر شده و آنچه می‌بینید ترجمهٔ رسمی انگلیسی متن فارسی آن است.";
+  FA[141]="برای حفظ حریم خصوصی، شماره‌های شخصی و کدهای QR محو شده‌اند.";
+  ATTR["Enlarge alumni rank certificate (personal numbers and QR codes blurred)"]="بزرگ‌نمایی گواهی رتبه دانش‌آموختگان (شماره‌های شخصی و کدهای QR محو شده‌اند)";
+  ATTR["Certificate of Alumni Rank from Islamic Azad University, Ardabil Branch, showing a GPA of 18.05 and a rank of 4. National ID, date of birth, father's name, document and tracking numbers and QR codes are blurred."]="گواهی رتبه دانش‌آموختگان دانشگاه آزاد اسلامی، واحد اردبیل، با معدل کل 18.05 و رتبهٔ 4. کد ملی، تاریخ تولد، نام پدر، شمارهٔ سند و شمارهٔ پیگیری و کدهای QR محو شده‌اند.";
   const root=document.documentElement;
   const tb=document.getElementById('themebtn'),lg=document.getElementById('langbtn');
   const save=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
@@ -750,6 +1290,135 @@ addEventListener('langchange',()=>{setYear();linkEls.forEach(([a,l])=>{a.textCon
   const upd=()=>b.classList.toggle('show',window.scrollY>500);
   addEventListener('scroll',upd,{passive:true});upd();
   b.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+})();
+</script>
+<script>
+/* v7 features: constellation background, scroll progress, reveal on scroll, copy email */
+(function(){
+  const root=document.documentElement;
+  const calm=matchMedia('(prefers-reduced-motion: reduce)');
+  const isFa=()=>root.lang==='fa';
+
+  /* ---- live constellation: drifting stars that link up like a tour; they lean toward the pointer ---- */
+  const cv=document.getElementById('stars'),g=cv.getContext('2d');
+  let W=0,H=0,K=1,stars=[],shoot=null,nextShoot=0,mx=-9999,my=-9999,sy=0,raf=0,pal;
+  const small=()=>innerWidth<700;
+  function palette(){
+    const light=root.getAttribute('data-theme')==='light';
+    pal=light?{star:'18,32,58',warm:'179,107,0',link:'27,95,168',a:.55,l:.13}
+             :{star:'214,226,248',warm:'242,182,50',link:'125,179,240',a:.9,l:.15};
+  }
+  function build(){
+    K=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+    cv.width=W*K;cv.height=H*K;g.setTransform(K,0,0,K,0,0);
+    const n=Math.round(Math.min(small()?46:120,W*H/11000));
+    stars=Array.from({length:n},()=>{const z=.25+Math.random()*.75;
+      return{x:Math.random()*W,y:Math.random()*H,z,r:.5+z*1.25,vx:(Math.random()-.5)*.16*z,vy:(Math.random()-.5)*.16*z,
+             ph:Math.random()*6.28,tw:.6+Math.random()*1.4,warm:Math.random()<.14}});
+  }
+  function frame(t){
+    g.clearRect(0,0,W,H);
+    const dark=root.getAttribute('data-theme')!=='light',LD=small()?105:140,PD=170;
+    /* position of each star, with a slow depth-based scroll parallax */
+    for(const s of stars){
+      if(!calm.matches){s.x+=s.vx;s.y+=s.vy;
+        if(s.x<-20)s.x=W+20;else if(s.x>W+20)s.x=-20;
+        if(s.y<-20)s.y=H+20;else if(s.y>H+20)s.y=-20}
+      let py=(s.y-sy*.12*s.z)%(H+40);if(py<-20)py+=H+40;
+      s.px=s.x;s.py=py;
+      const dx=mx-s.px,dy=my-s.py,d=Math.hypot(dx,dy);
+      s.near=d<PD?1-d/PD:0;
+      if(s.near&&!calm.matches){s.x+=dx/d*.35*s.near*s.z;s.y+=dy/d*.35*s.near*s.z}
+    }
+    /* links between close stars */
+    g.lineWidth=1;
+    for(let i=0;i<stars.length;i++){const a=stars[i];
+      for(let j=i+1;j<stars.length;j++){const b=stars[j];
+        const dx=a.px-b.px;if(dx>LD||dx<-LD)continue;
+        const dy=a.py-b.py;if(dy>LD||dy<-LD)continue;
+        const d=Math.hypot(dx,dy);if(d>LD)continue;
+        g.strokeStyle='rgba('+pal.link+','+((1-d/LD)*pal.l*Math.min(a.z,b.z)*1.3).toFixed(3)+')';
+        g.beginPath();g.moveTo(a.px,a.py);g.lineTo(b.px,b.py);g.stroke();
+      }
+      if(a.near){g.strokeStyle='rgba('+pal.warm+','+(a.near*.32).toFixed(3)+')';g.beginPath();g.moveTo(a.px,a.py);g.lineTo(mx,my);g.stroke()}
+    }
+    /* the stars themselves */
+    for(const s of stars){
+      const tw=calm.matches?1:.55+.45*Math.sin(t*.001*s.tw+s.ph);
+      const al=(pal.a*s.z*tw*(1+s.near*.8)).toFixed(3),c=s.warm?pal.warm:pal.star;
+      g.fillStyle='rgba('+c+','+Math.min(al,1)+')';
+      g.beginPath();g.arc(s.px,s.py,s.r*(1+s.near*.6),0,6.2832);g.fill();
+      if(s.z>.8&&dark){g.fillStyle='rgba('+c+','+(al*.12).toFixed(3)+')';g.beginPath();g.arc(s.px,s.py,s.r*4,0,6.2832);g.fill()}
+    }
+    /* an occasional shooting star */
+    if(!calm.matches){
+      if(!shoot&&t>nextShoot){const a=.35+Math.random()*.4;
+        shoot={x:Math.random()*W*.8,y:Math.random()*H*.4,vx:Math.cos(a)*9,vy:Math.sin(a)*9,life:0};}
+      if(shoot){shoot.x+=shoot.vx;shoot.y+=shoot.vy;shoot.life++;
+        const f=Math.max(0,1-shoot.life/70),tx=shoot.x-shoot.vx*9,ty=shoot.y-shoot.vy*9;
+        const gr=g.createLinearGradient(shoot.x,shoot.y,tx,ty);
+        gr.addColorStop(0,'rgba('+pal.warm+','+(.85*f).toFixed(3)+')');gr.addColorStop(1,'rgba('+pal.warm+',0)');
+        g.strokeStyle=gr;g.lineWidth=1.6;g.beginPath();g.moveTo(shoot.x,shoot.y);g.lineTo(tx,ty);g.stroke();
+        if(shoot.life>70||shoot.x>W+60||shoot.y>H+60){shoot=null;nextShoot=t+7000+Math.random()*9000}}
+    }
+    if(!calm.matches)raf=requestAnimationFrame(frame);
+  }
+  function start(){cancelAnimationFrame(raf);palette();build();nextShoot=performance.now()+3500;
+    if(calm.matches){frame(0)}else raf=requestAnimationFrame(frame)}
+  addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){mx=e.clientX;my=e.clientY}},{passive:true});
+  document.addEventListener('pointerleave',()=>{mx=my=-9999});
+  addEventListener('scroll',()=>{sy=scrollY;updateProgress();if(calm.matches)frame(0)},{passive:true});
+  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(start,150)});
+  addEventListener('themechange',()=>{palette();if(calm.matches)frame(0)});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(!calm.matches){cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}});
+  calm.addEventListener&&calm.addEventListener('change',start);
+
+  /* ---- reading progress ---- */
+  const prog=document.getElementById('prog');
+  function updateProgress(){
+    const m=document.documentElement.scrollHeight-innerHeight;
+    prog.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0).toFixed(4)+')';
+  }
+  addEventListener('resize',updateProgress);
+
+  /* ---- reveal on scroll (runs once per element; nothing is hidden if scripting or IntersectionObserver is missing) ---- */
+  if('IntersectionObserver' in window&&!calm.matches){
+    const sel='section h2,.sechead p,.cards .card,.stats .stat,.steps li,.certs .cert,.shots .shot,.facts .fact,.skill,.fig,.tw,.also,.exp,.degree,.ielts,.two>div,.key,.cred li,.sub';
+    const els=[...document.querySelectorAll(sel)];
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      e.target.classList.add('in');io.unobserve(e.target);
+      setTimeout(()=>e.target.classList.remove('rv','in'),1200);
+    }),{rootMargin:'0px 0px -8% 0px',threshold:.06});
+    els.forEach(el=>{
+      const sibs=el.parentElement?[...el.parentElement.children].filter(c=>c.matches(sel)):[];
+      el.style.setProperty('--d',Math.min(sibs.indexOf(el),5)*70+'ms');
+      el.classList.add('rv');io.observe(el);
+    });
+  }
+
+  /* ---- copy email ---- */
+  const toast=document.getElementById('toast'),box=document.getElementById('contactlinks');
+  let tt;
+  function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),2000)}
+  const mail=(document.querySelector('#contactlinks a[href^="mailto:"]')||{}).href;
+  if(box&&mail){
+    const addr=mail.replace(/^mailto:/,'');
+    const b=document.createElement('button');b.type='button';b.className='btn copybtn';
+    const lab=()=>isFa()?'کپی ایمیل':'Copy email';
+    const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>';
+    const paint=()=>{b.innerHTML=ico+'<span>'+lab()+'</span>'};paint();
+    b.addEventListener('click',async()=>{
+      let ok=false;
+      try{await navigator.clipboard.writeText(addr);ok=true}catch(e){
+        try{const t=document.createElement('textarea');t.value=addr;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();ok=document.execCommand('copy');t.remove()}catch(_){}}
+      say(ok?(isFa()?'ایمیل کپی شد':'Email address copied'):addr);
+    });
+    box.appendChild(b);
+    addEventListener('langchange',paint);
+  }
+
+  start();updateProgress();
 })();
 </script>
 </body>

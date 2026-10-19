@@ -45,6 +45,15 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 - Dark mode by default, with a light mode toggle that is remembered
 - English / Persian switch with a full right-to-left layout
 - Frosted-glass menu that highlights the section you are viewing
+- Frosted-glass cards, with a soft spotlight that follows the pointer on hover
+- Click any card or photo to open it as a focused glass card; Esc, the close button or a click outside closes it
+- Certificates and "Learning in practice" laid out as framed cards with verify links and captions
+- Downloadable CV (PDF) from the hero and the contact section
+- University alumni rank certificate shown as a zoomable card, with personal numbers and QR codes blurred inside the image file
+- Live constellation background: drifting stars that link up like a route, lean toward the pointer, and are crossed by an occasional shooting star (static when reduced motion is on, paused in hidden tabs)
+- Reading-progress bar at the top of the page
+- Status pill in the hero, a copy-email button in the contact section, and a gentle reveal as sections scroll into view
+- Structured data (schema.org Person) and a canonical link for search engines
 - Back-to-top button
 - Live, interactive HBALS demo on real TSPLIB benchmark instances
 - Responsive layout and keyboard-friendly controls
@@ -54,6 +63,7 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 ```
 index.html          the whole page (styles, content and scripts)
 assets/img/         thumbnails, certificates and photos
+assets/Khadiv_Erfan_CV.pdf   the downloadable CV
 docs/screenshots/   preview images used in this README and in link previews
 icon.svg, favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png   site icons
 .nojekyll           tells GitHub Pages to serve the files as they are
