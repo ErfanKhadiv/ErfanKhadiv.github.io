@@ -32,7 +32,7 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 ## Sections
 
 - **Hero:** name, a short tagline and the live HBALS map.
-- **Research:** the HBALS project, what it solves and how it performed.
+- **Research:** the HBALS project, what it solves and how it performed, plus the Li-Fi report and my Bee Algorithm presentation (with a PDF to open).
 - **About:** a short introduction and areas of interest.
 - **Projects:** selected work with demos and code.
 - **Skills:** languages, tools and topics.
@@ -56,6 +56,8 @@ At the top of the page, an animated map runs HBALS, my Traveling Salesman Proble
 - Structured data (schema.org Person) and a canonical link for search engines
 - Back-to-top button
 - Live, interactive HBALS demo on real TSPLIB benchmark instances
+- Phone-friendly menu: a compact top bar with a collapsible menu (closes on tap, outside click or Esc)
+- Bee Algorithm presentation with slide previews and the full PDF (`assets/docs/`)
 - Responsive layout and keyboard-friendly controls
 
 ## Project structure
