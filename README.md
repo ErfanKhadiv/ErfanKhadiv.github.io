@@ -1,91 +1,105 @@
-<div align="center">
+# Erfan Khadiv, Portfolio
 
-# Erfan Khadiv, portfolio
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Languages](https://img.shields.io/badge/Languages-English%20%7C%20Persian%20(RTL)-blue)
+![Theme](https://img.shields.io/badge/Theme-Dark%20%7C%20Light-lightgrey)
+![Hosting](https://img.shields.io/badge/Hosting-GitHub%20Pages-brightgreen)
 
-Computer engineering graduate interested in algorithms, software and artificial intelligence.
+Personal portfolio of Erfan Khadiv, a computer engineering graduate interested in algorithms, software and artificial intelligence. It is a single static page built with plain HTML, CSS and a little JavaScript, with no framework, build step or dependencies to install. The site is available in **English and Persian (right-to-left)** and in **dark and light mode**. At the top of the page, an animated map runs HBALS, my Traveling Salesman Problem algorithm, live in the browser.
 
-[![Live demo](https://img.shields.io/badge/Live_demo-erfankhadiv.github.io-F2B632?style=for-the-badge&logo=githubpages&logoColor=0F1626&labelColor=0F1626)](https://erfankhadiv.github.io/)
-[![GitHub](https://img.shields.io/badge/GitHub-ErfanKhadiv-0F1626?style=for-the-badge&logo=github)](https://github.com/ErfanKhadiv)
+**[Visit the site: erfankhadiv.github.io](https://erfankhadiv.github.io/)**
 
-<a href="https://erfankhadiv.github.io/">
-  <img src="docs/screenshots/Dark_Mode_En.png" alt="Portfolio hero section in dark mode" width="860">
-</a>
+[![Portfolio hero section in dark mode](docs/screenshots/Dark_Mode_En.png)](https://erfankhadiv.github.io/)
 
-</div>
+## Contents
 
-## About this site
-
-A personal portfolio built as one static page: plain HTML, CSS and a little JavaScript. There is no framework, no build step and nothing to install. It is available in **English and Persian (right-to-left)** and in **dark and light mode**.
-
-At the top of the page, an animated map runs HBALS, my Traveling Salesman Problem algorithm, live in the browser.
+- [Preview](#preview)
+- [Sections](#sections)
+- [Features](#features)
+- [Concepts and skills covered](#concepts-and-skills-covered)
+- [Project structure](#project-structure)
+- [Setup and running](#setup-and-running)
+- [Deployment](#deployment)
+- [Related projects](#related-projects)
+- [License](#license)
 
 ## Preview
 
 | Dark mode | Light mode |
-|---|---|
-| ![Dark mode](docs/screenshots/Dark_Mode_En.png) | ![Light mode](docs/screenshots/Light_Mode_En.png) |
+| --- | --- |
+| [![Dark mode](docs/screenshots/Dark_Mode_En.png)](docs/screenshots/Dark_Mode_En.png) | [![Light mode](docs/screenshots/Light_Mode_En.png)](docs/screenshots/Light_Mode_En.png) |
 
 | Persian (RTL) |
-|---|
-| ![Persian version](docs/screenshots/Dark_Mode_Fa.png) |
+| --- |
+| [![Persian version](docs/screenshots/Dark_Mode_Fa.png)](docs/screenshots/Dark_Mode_Fa.png) |
 
 ## Sections
 
-- **Hero:** name, a short tagline and the live HBALS map.
-- **Research:** the HBALS project, what it solves and how it performed, plus the Li-Fi report and my Bee Algorithm presentation (with a PDF to open).
-- **About:** a short introduction and areas of interest.
-- **Projects:** selected work with demos and code.
-- **Skills:** languages, tools and topics.
-- **Education:** degree, IELTS and certificates.
-- **Experience:** an internship story.
-- **Contact:** ways to get in touch.
+| Section | What it contains |
+| --- | --- |
+| Hero | Name, a short tagline and the live HBALS map |
+| Research | The HBALS project: what it solves and how it performed |
+| About | A short introduction and areas of interest |
+| Projects | Selected work with demos and code |
+| Skills | Languages, tools and topics |
+| Education | Degree, IELTS and certificates |
+| Experience | An internship story |
+| Contact | Ways to get in touch |
 
 ## Features
 
-- Dark mode by default, with a light mode toggle that is remembered
+- Dark mode by default, with a light mode toggle that is remembered between visits
 - English / Persian switch with a full right-to-left layout
 - Frosted-glass menu that highlights the section you are viewing
-- Frosted-glass cards, with a soft spotlight that follows the pointer on hover
-- Click any card or photo to open it as a focused glass card; Esc, the close button or a click outside closes it
-- Certificates and "Learning in practice" laid out as framed cards with verify links and captions
-- Downloadable CV (PDF) from the hero and the contact section
-- University alumni rank certificate shown as a zoomable card, with personal numbers and QR codes blurred inside the image file
-- Live constellation background: drifting stars that link up like a route, lean toward the pointer, and are crossed by an occasional shooting star (static when reduced motion is on, paused in hidden tabs)
-- Reading-progress bar at the top of the page
-- Status pill in the hero, a copy-email button in the contact section, and a gentle reveal as sections scroll into view
-- Structured data (schema.org Person) and a canonical link for search engines
 - Back-to-top button
-- Live, interactive HBALS demo on real TSPLIB benchmark instances
-- Phone-friendly menu: a compact top bar with a collapsible menu (closes on tap, outside click or Esc)
-- Bee Algorithm presentation with slide previews and the full PDF (`assets/docs/`)
+- Live, interactive HBALS demo running on real TSPLIB benchmark instances
 - Responsive layout and keyboard-friendly controls
+
+## Concepts and skills covered
+
+- **Front-end fundamentals:** semantic HTML, CSS theming, vanilla JavaScript, no build tooling
+- **Internationalization:** bilingual content with a full right-to-left layout for Persian
+- **Interaction design:** dark and light themes, scroll-aware navigation, responsive and keyboard-friendly controls
+- **Algorithms in the browser:** a live metaheuristic (HBALS) solving Traveling Salesman Problem instances, with animated visualization
+- **Tools:** HTML5, CSS3, JavaScript, GitHub Pages
 
 ## Project structure
 
 ```
-index.html          the whole page (styles, content and scripts)
-assets/img/         thumbnails, certificates and photos
-assets/Khadiv_Erfan_CV.pdf   the downloadable CV
-docs/screenshots/   preview images used in this README and in link previews
-icon.svg, favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png   site icons
-.nojekyll           tells GitHub Pages to serve the files as they are
+ErfanKhadiv.github.io/
+├── index.html              # the whole page: styles, content and scripts
+├── assets/
+│   └── img/                # thumbnails, certificates and photos
+├── docs/
+│   └── screenshots/        # preview images used in this README
+├── icon.svg                # site icons
+├── favicon.ico
+├── apple-touch-icon.png
+├── icon-192.png
+├── icon-512.png
+├── .nojekyll               # tells GitHub Pages to serve the files as they are
+└── README.md
 ```
 
-## Run locally
+## Setup and running
 
-Open `index.html` in a browser, or run:
+No installation is needed. Open `index.html` in a browser, or serve the folder locally:
 
-```bash
+```
+git clone https://github.com/ErfanKhadiv/ErfanKhadiv.github.io.git
+cd ErfanKhadiv.github.io
 python3 -m http.server
 ```
 
-then visit `http://localhost:8000`.
+Then visit `http://localhost:8000`.
 
-## Deploy
+## Deployment
 
-Hosted with GitHub Pages: Settings → Pages → Deploy from a branch → `main` / root.
+The site is hosted with GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / root**.
 
-## Related
+## Related projects
 
 - [HBALS-TSP](https://github.com/ErfanKhadiv/HBALS-TSP): code, data and paper for the algorithm shown on the site.
 
