@@ -1,90 +1,46 @@
-# Erfan Khadiv — Personal Portfolio
+# Erfan Khadiv
 
-Personal portfolio of Erfan Khadiv, a Computer Engineering graduate building toward AI research, with interests in algorithms, combinatorial optimisation, machine learning and software development.
+**Computer Engineering Graduate | Building Toward AI Research | Optimization & Machine Learning**
 
-**[Visit the portfolio](https://erfankhadiv.github.io/)** · **[Official HBALS research website](https://erfankhadiv.github.io/HBALS-TSP/)** · **[GitHub](https://github.com/ErfanKhadiv)** · **[LinkedIn](https://www.linkedin.com/in/erfan-khadiv-777a66279/)**
+Computer Engineering graduate with a strong foundation in algorithms, programming and computer networks, and a particular interest in optimization and machine learning. I enjoy problems where progress can be measured clearly, and I build software projects alongside independent research.
 
-## Portfolio focus
+- 🧪 Sole author of **HBALS v2**, a hybrid metaheuristic for the Travelling Salesman Problem
+- 📄 Author of a critical review on **Li-Fi (Light Fidelity)**
+- 🎓 B.Sc. Computer Engineering · GPA **18.05/20** · certified graduate rank **4th**
+- 🗣️ IELTS Academic **8.0** · Persian (native) · English (advanced)
+- 🚀 Preparing for graduate study and deeper work in AI research
 
-The personal site is intentionally an overview rather than a second copy of the full HBALS research lab. It introduces the author and links to the dedicated HBALS v2 website for the complete method, benchmark tables, statistical analysis, ablation, saved convergence data, interactive demo and reproducibility materials.
+## Portfolio & research
 
-## Profile highlights
+- **[Personal portfolio](https://erfankhadiv.github.io/)** — education, skills, projects, experience and contact
+- **[Official HBALS v2 research website](https://erfankhadiv.github.io/HBALS-TSP/)** — method, benchmark results, statistical analysis, ablation, saved convergence curves and interactive demo
+- **[HBALS-TSP repository](https://github.com/ErfanKhadiv/HBALS-TSP)** — implementation, data and experiment results
+- **[HBALS v2 preprint](https://doi.org/10.5281/zenodo.23621275)** — submitted to *Croatian Operational Research Review*; preprint not peer reviewed
+- **[Li-Fi critical review](https://doi.org/10.5281/zenodo.23898313)** — submitted to *Wireless Personal Communications* (Springer) on 4 November 2026; preprint not peer reviewed
 
-- B.Sc. Computer Engineering, Islamic Azad University, Ardabil Branch
-- GPA: **18.05/20** · certified graduate rank: **4th**
-- Average across six core CS courses: **19.7/20**
-- IELTS Academic: **8.0** (L 8.5 · R 9.0 · W 7.0 · S 6.5)
-- Sole-author preprints: HBALS v2 (TSP optimisation) and a critical Li-Fi review
-- 120-hour IT and networking internship at the Ports and Maritime Organization of Iran
+## Research interests
 
-## Research
-
-### HBALS v2
-
-A Hybrid Bees Algorithm with 2-opt Local Search for the Travelling Salesman Problem. The v2 study covers 15 TSPLIB instances, equal move-evaluation budgets, six comparison methods on the main set, a seven-variant ablation, non-parametric statistical testing and independent run-by-run verification.
-
-Across the 12 main instances, HBALS achieved the best average rank (**1.25 of six**) and a mean gap of **0.299%** to the best-known solutions. It was significantly better than four comparison methods after Holm correction; its overall difference from ILS-2opt was not statistically significant. The preprint is not peer reviewed; the manuscript was submitted to *Croatian Operational Research Review*.
-
-- [Official HBALS research website](https://erfankhadiv.github.io/HBALS-TSP/)
-- [Source code and experiment data](https://github.com/ErfanKhadiv/HBALS-TSP)
-- [Zenodo preprint](https://doi.org/10.5281/zenodo.23621275)
-
-### Li-Fi critical review
-
-A sole-authored review of Li-Fi operating principles, modulation, standards and performance claims. The Zenodo preprint was submitted to *Wireless Personal Communications* (Springer) on 4 November 2026; it has not yet been peer reviewed.
-
-- [Zenodo preprint](https://doi.org/10.5281/zenodo.23898313)
-- [GitHub report](https://github.com/ErfanKhadiv/LiFi-Report)
+`Machine Learning` · `Combinatorial Optimization` · `Metaheuristics` · `Constraint Satisfaction & Search`
 
 ## Selected projects
 
-- **Workfolio:** browser-based resume builder with five templates, live preview and an on-device AI job-matching tool.
-- **CS50AI:** implementations of all twelve problem sets from Harvard's Introduction to AI with Python.
-- **Kouman:** bilingual Persian/English e-commerce front end built with React, React Router and Vite.
-- **Python fundamentals:** small applications covering JSON persistence, OOP and NumPy analysis.
+| Project | Summary | Technologies |
+| --- | --- | --- |
+| [HBALS-TSP](https://github.com/ErfanKhadiv/HBALS-TSP) | Hybrid Bees Algorithm with 2-opt local search; equal-budget comparison, ablation and reproducible experiments | Python |
+| [CS50AI](https://github.com/ErfanKhadiv/CS50AI) | Problem sets in search, logic, probability, CSP, Q-learning, CNNs and language parsing | Python, TensorFlow/Keras |
+| [Workfolio](https://github.com/ErfanKhadiv/Workfolio) | Browser-based resume builder with five templates and an on-device job-matching tool | JavaScript, HTML, CSS |
+| [Kouman](https://github.com/ErfanKhadiv/Kouman) | Bilingual e-commerce front end with routing, search and cart | React, React Router, Vite |
+| [LiFi-Report](https://github.com/ErfanKhadiv/LiFi-Report) | Technical report and critical review of optical wireless communication | Research & technical writing |
 
-## Site features
+## Skills
 
-- English and Persian language switch, including RTL layout
-- Dark and light themes
-- Responsive single-page layout
-- Research gateway to the dedicated HBALS website
-- Selected projects, education, academic highlights, skills and networking experience
-- Downloadable two-page CV
-- Handwritten signature in the copyright footer
+- **Programming:** Python, C, JavaScript, SQL
+- **AI & algorithms:** metaheuristic/local-search optimization, constraint satisfaction, search, Q-learning, k-NN, CNNs
+- **Research methods:** equal-budget benchmarking, ablation, Friedman/Wilcoxon tests, Holm correction, reproducible research
+- **Tools:** Git, GitHub, NumPy, Pandas, TensorFlow/Keras
+- **Web:** React, React Router, Vite, HTML, CSS, PostgreSQL
+- **Networking:** TCP/IP, routing, VLAN, Cisco switches, VPN, DNS, DHCP
 
-## Project structure
+## Certifications
 
-```text
-ErfanKhadiv.github.io/
-├── index.html
-├── assets/
-│   ├── Khadiv_Erfan_CV.pdf
-│   ├── docs/
-│   │   └── Bee_Algorithm_Presentation.pdf
-│   └── img/
-│       ├── erfan-signature-gold.png
-│       ├── research/
-│       │   ├── hbals-v2-ablation.png
-│       │   ├── hbals-v2-anytime.png
-│       │   └── hbals-v2-boxplots.png
-│       └── ...
-├── icon.svg
-├── favicon.ico
-├── README.md
-└── .nojekyll
-```
-
-## Run locally
-
-No build step is required. Open `index.html` directly or serve the folder with a static HTTP server:
-
-```bash
-python -m http.server 8000
-```
-
-Then visit `http://localhost:8000/`.
-
-## Deployment
-
-The site is designed for GitHub Pages from the repository root (`/`). Commit the updated files to the `main` branch and keep the Pages source set to **Deploy from a branch → main → /(root)**.
+Harvard CS50x · Harvard CS50P · Harvard CS50AI · FaraDars Network+ and Practical Networking Fundamentals
